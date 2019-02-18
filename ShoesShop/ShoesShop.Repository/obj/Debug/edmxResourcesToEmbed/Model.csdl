@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TblCategory">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Categories" FromRole="TblCategories" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="TblCustomerLevel">
+    <Key>
+      <PropertyRef Name="LevelId" />
+    </Key>
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LevelPoint" Type="Int32" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TblCustomers" Relationship="Self.FK_Customers_CustomerLevels" FromRole="TblCustomerLevels" ToRole="TblCustomers" />
+  </EntityType>
+  <EntityType Name="TblCustomer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Guid" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LevelId" Type="Int32" Nullable="false" />
+    <Property Name="Point" Type="Double" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TblCustomerLevel" Relationship="Self.FK_Customers_CustomerLevels" FromRole="TblCustomers" ToRole="TblCustomerLevels" />
+    <NavigationProperty Name="tblOrders" Relationship="Self.FK_Orders_Customers" FromRole="TblCustomers" ToRole="tblOrders" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblEmployees" Relationship="Self.FK_Employees_Department" FromRole="tblDepartment" ToRole="tblEmployees" />
+  </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Guid" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblDepartment" Relationship="Self.FK_Employees_Department" FromRole="tblEmployees" ToRole="tblDepartment" />
+    <NavigationProperty Name="tblOrder" Relationship="Self.FK_Orders_Employees" FromRole="tblEmployees" ToRole="tblOrders" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Employees" FromRole="tblEmployees" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="TblImageStore">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ObjectId" Type="Guid" Nullable="false" />
+    <Property Name="ImageName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ImageByte" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.FK_TblImageStore_Product" FromRole="TblImageStore" ToRole="tblProducts" />
+    <NavigationProperty Name="tblSuppliers" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="TblImageStore" ToRole="tblSuppliers" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Guid" Nullable="false" />
+    <Property Name="CustomerId" Type="Guid" Nullable="false" />
+    <Property Name="EmployeeId" Type="Guid" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TblCustomer" Relationship="Self.FK_Orders_Customers" FromRole="tblOrders" ToRole="TblCustomers" />
+    <NavigationProperty Name="tblEmployee" Relationship="Self.FK_Orders_Employees" FromRole="tblOrders" ToRole="tblEmployees" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_Orders_OrderDetails" FromRole="tblOrders" ToRole="tblOrderDetails" />
+    <NavigationProperty Name="tblOrderStatu" Relationship="Self.FK_Orders_Statues" FromRole="tblOrders" ToRole="tblOrderStatus" />
+  </EntityType>
+  <EntityType Name="tblOrderStatu">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblOrders" Relationship="Self.FK_Orders_Statues" FromRole="tblOrderStatus" ToRole="tblOrders" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SupplierId" Type="Guid" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="ViewCounts" Type="Int32" />
+    <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="UnitsInStock" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TblCategory" Relationship="Self.FK_Products_Categories" FromRole="tblProducts" ToRole="TblCategories" />
+    <NavigationProperty Name="tblEmployee" Relationship="Self.FK_Products_Employees" FromRole="tblProducts" ToRole="tblEmployees" />
+    <NavigationProperty Name="TblImageStores" Relationship="Self.FK_TblImageStore_Product" FromRole="tblProducts" ToRole="TblImageStore" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="tblProducts" ToRole="tblOrderDetails" />
+    <NavigationProperty Name="tblProductsStatu" Relationship="Self.FK_Products_Statues" FromRole="tblProducts" ToRole="tblProductsStatus" />
+    <NavigationProperty Name="tblSupplier" Relationship="Self.FK_Products_Suppliers" FromRole="tblProducts" ToRole="tblSuppliers" />
+  </EntityType>
+  <EntityType Name="tblProductsStatu">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Statues" FromRole="tblProductsStatus" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="tblSupplier">
+    <Key>
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="SupplierId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ImageId" Type="Int32" />
+    <NavigationProperty Name="TblImageStore" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="tblSuppliers" ToRole="TblImageStore" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Suppliers" FromRole="tblSuppliers" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="tblOrderDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="UnitPrice" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Discount" />
+      <PropertyRef Name="IsDeleted" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedOn" />
+    </Key>
+    <Property Name="OrderId" Type="Guid" Nullable="false" />
+    <Property Name="ProductId" Type="Guid" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int16" Nullable="false" />
+    <Property Name="Discount" Type="Single" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblOrder" Relationship="Self.FK_Orders_OrderDetails" FromRole="tblOrderDetails" ToRole="tblOrders" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.FK_OrderDetails_Products" FromRole="tblOrderDetails" ToRole="tblProducts" />
+  </EntityType>
+  <Association Name="FK_Products_Categories">
+    <End Role="TblCategories" Type="Self.TblCategory" Multiplicity="1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblCategories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_CustomerLevels">
+    <End Role="TblCustomerLevels" Type="Self.TblCustomerLevel" Multiplicity="1" />
+    <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblCustomerLevels">
+        <PropertyRef Name="LevelId" />
+      </Principal>
+      <Dependent Role="TblCustomers">
+        <PropertyRef Name="LevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customers">
+    <End Role="TblCustomers" Type="Self.TblCustomer" Multiplicity="1" />
+    <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblCustomers">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="tblOrders">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employees_Department">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
+    <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="tblEmployees">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees">
+    <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tblOrders">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Employees">
+    <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblImageStore_Product">
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="TblImageStore" Type="Self.TblImageStore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProducts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TblImageStore">
+        <PropertyRef Name="ObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSuppliers_ImageStore">
+    <End Role="TblImageStore" Type="Self.TblImageStore" Multiplicity="0..1" />
+    <End Role="tblSuppliers" Type="Self.tblSupplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblImageStore">
+        <PropertyRef Name="ImageId" />
+      </Principal>
+      <Dependent Role="tblSuppliers">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_OrderDetails">
+    <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrders">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Statues">
+    <End Role="tblOrderStatus" Type="Self.tblOrderStatu" Multiplicity="1" />
+    <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrderStatus">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="tblOrders">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Products">
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProducts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Statues">
+    <End Role="tblProductsStatus" Type="Self.tblProductsStatu" Multiplicity="1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProductsStatus">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Suppliers">
+    <End Role="tblSuppliers" Type="Self.tblSupplier" Multiplicity="1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSuppliers">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TblCategories" EntityType="Self.TblCategory" />
+    <EntitySet Name="TblCustomerLevels" EntityType="Self.TblCustomerLevel" />
+    <EntitySet Name="TblCustomers" EntityType="Self.TblCustomer" />
+    <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="TblImageStores" EntityType="Self.TblImageStore" />
+    <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+    <EntitySet Name="tblOrderStatus" EntityType="Self.tblOrderStatu" />
+    <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+    <EntitySet Name="tblProductsStatus" EntityType="Self.tblProductsStatu" />
+    <EntitySet Name="tblSuppliers" EntityType="Self.tblSupplier" />
+    <EntitySet Name="tblOrderDetails" EntityType="Self.tblOrderDetail" />
+    <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+      <End Role="TblCategories" EntitySet="TblCategories" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_CustomerLevels" Association="Self.FK_Customers_CustomerLevels">
+      <End Role="TblCustomerLevels" EntitySet="TblCustomerLevels" />
+      <End Role="TblCustomers" EntitySet="TblCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+      <End Role="TblCustomers" EntitySet="TblCustomers" />
+      <End Role="tblOrders" EntitySet="tblOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employees_Department" Association="Self.FK_Employees_Department">
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+      <End Role="tblEmployees" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
+      <End Role="tblEmployees" EntitySet="tblEmployees" />
+      <End Role="tblOrders" EntitySet="tblOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Employees" Association="Self.FK_Products_Employees">
+      <End Role="tblEmployees" EntitySet="tblEmployees" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblImageStore_Product" Association="Self.FK_TblImageStore_Product">
+      <End Role="tblProducts" EntitySet="tblProducts" />
+      <End Role="TblImageStore" EntitySet="TblImageStores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="Self.FK_tblSuppliers_ImageStore">
+      <End Role="TblImageStore" EntitySet="TblImageStores" />
+      <End Role="tblSuppliers" EntitySet="tblSuppliers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
+      <End Role="tblOrders" EntitySet="tblOrders" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Statues" Association="Self.FK_Orders_Statues">
+      <End Role="tblOrderStatus" EntitySet="tblOrderStatus" />
+      <End Role="tblOrders" EntitySet="tblOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+      <End Role="tblProducts" EntitySet="tblProducts" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Statues" Association="Self.FK_Products_Statues">
+      <End Role="tblProductsStatus" EntitySet="tblProductsStatus" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+      <End Role="tblSuppliers" EntitySet="tblSuppliers" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

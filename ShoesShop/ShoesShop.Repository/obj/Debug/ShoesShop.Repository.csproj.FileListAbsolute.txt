@@ -1,0 +1,12 @@
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\ShoesShop.Repository.dll.config
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\ShoesShop.Repository.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\ShoesShop.Repository.pdb
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\EntityFramework.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\EntityFramework.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\obj\Debug\ShoesShop.Repository.csprojAssemblyReference.cache
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\obj\Debug\ShoesShop.Repository.csproj.CoreCompileInputs.cache
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\obj\Debug\ShoesShop.Repository.csproj.CopyComplete
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\obj\Debug\ShoesShop.Repository.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Repository\obj\Debug\ShoesShop.Repository.pdb

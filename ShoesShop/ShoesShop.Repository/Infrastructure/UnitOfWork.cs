@@ -13,6 +13,7 @@ namespace ShoesShop.Repository.Infrastructure
         public UnitOfWork()
         {
             _dbContext = new StoreManagementEntities();
+            _dbContext.SaveChanges();
         }
 
         public DbContext Db
@@ -20,6 +21,7 @@ namespace ShoesShop.Repository.Infrastructure
             get { return _dbContext; }
         }
 
+     
         public void Dispose()
         {
         }

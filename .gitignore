@@ -5,3 +5,7 @@
 /ShoesShop/.vs/ShoesShop/v15/Server/sqlite3
 /ShoesShop/ShoesShop.BLL
 /ShoesShop/.vs
+/ShoesShop/ShoesShop.Repository/bin/Debug
+/ShoesShop/ShoesShop.Model/bin/Debug
+/ShoesShop/ShoesShop.Mvc/obj/Debug
+/shoesShop/ShoesShop.Model/obj

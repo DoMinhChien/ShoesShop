@@ -10,9 +10,9 @@ namespace ShoesShop.Mvc.Controllers
     public class ProductController : Controller
     {
        private  readonly IProductBLL productBLL;
-        public ProductController(IProductBLL productBLL)
+        public ProductController(IProductBLL _productBLL)
         {
-            productBLL = productBLL;
+            productBLL = _productBLL;
         }
         // GET: Product
         public ActionResult Index()
