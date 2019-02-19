@@ -1,6 +1,7 @@
 ﻿using ShoesShop.BLL.Interfaces;
 using ShoesShop.Model;
 using ShoesShop.Mvc.Inputs;
+using ShoesShop.Mvc.Outputs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,26 @@ namespace ShoesShop.Mvc.Controllers
     public class ProductController : Controller
     {
        private  readonly IProductBLL productBLL;
-        public ProductController(IProductBLL _productBLL)
+        private readonly ISupplierBLL supplierBLL;
+        private readonly ICategoryBLL categoryBLL;
+        public ProductController(IProductBLL _productBLL, ISupplierBLL _supplierBLL, ICategoryBLL _categoryBLL)
         {
             productBLL = _productBLL;
+            supplierBLL = _supplierBLL;
+            categoryBLL = _categoryBLL;
         }
         // GET: Product
         public ActionResult Index()
         {
             var model = productBLL.GetListProduct();
+            return View(model);
+        }
+
+        public ActionResult EditProduct(Guid productId)
+        {
+            var model =productBLL.GetProductDetail(productId);
+            ViewBag.Categories = categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
+            ViewBag.Suppliers = supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();
             return View(model);
         }
 

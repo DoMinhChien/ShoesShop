@@ -18,7 +18,8 @@ namespace ShoesShop.Mvc.Infrastructure
                                                  .ForMember(dst => dst.CreatedOn,s=>s.MapFrom(src=> DateTime.Now))
                                                  .ForMember(dst => dst.StatusId, s=>s.MapFrom(src=> 1))
                                                  .ForMember(dst => dst.Id,s=>s.MapFrom(src=> Guid.NewGuid()));
-                                                 
+            CreateMap<tblProduct, ProductModel>();
+            
                 
         }
         public static void RegisterMapping()

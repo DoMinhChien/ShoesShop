@@ -28,7 +28,7 @@
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
-                                
+
 
                                         <th data-field="name" data-editable="true">Name</th>
                                         <th data-field="email" data-editable="true">Category</th>
@@ -45,7 +45,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr id="row_@item.Id">
-                                            
+
 
                                             <td>@item.Name</td>
                                             <td>@item.CategoryName</td>
@@ -57,7 +57,7 @@
                                             <td>@item.UnitsInStock</td>
                                             <td>@item.ModifiedOn</td>
                                             <td class="datatable-ct">
-                                                <a> <span class="mg-5"><i class="fa fa-pencil"></i></span></a>
+                                                <a href="@Url.Action("EditProduct","Product", new {productId = item.Id })" > <span class="mg-5"><i class="fa fa-pencil"></i></span></a>
                                                 <a onclick="DeleteProduct('@item.Id')" href="#"><span class="mg-5"><i class="fa fa-trash"></i></span></a>
                                             </td>
                                         </tr>
@@ -73,143 +73,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="productModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">New Product</h3>
-            </div>
-            <div class="modal-body" id="employeeModalBody">
-                <div class="sparkline12-graph">
-                    <div class="input-knob-dial-wrap">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="Name" id="txtName">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Category</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="floatleft">
-
-                                        <select class="select2_Category " id="dropdownCategory">
-                                          
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Description</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="Description" id="txtDescription">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Supplier</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <div class="floatleft">
-
-                                            <select class="select2_Supplier" id="dropdownSupplier">
-                                               
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Quantity</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <input type="number" class="form-control" placeholder="" min="0" id="txtQuantity">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Status</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class=" mg-b-22">
-                                        <button class="btn btn-xs floatleft">Active</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Price/Unit</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" data-mask="$ 999.99" placeholder="" id="txtPrice">
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                     
-                        <div class="row">
-                            <div class="col-lg-8">
-                            </div>
-                            <div class="col-lg-4 txt-align-r">
-                                <a class="btn btn-success mg-5" href="#" onclick="InsertProduct()">Submit</a>
-                                <a class="btn btn-default" href="#" data-dismiss="modal">Cancel</a>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
-
-</div>
+@Html.Partial("_ModalInsertProduct")
 <script src="~/Scripts/apps/Product/ProductJS.js"></script>
+

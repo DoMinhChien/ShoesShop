@@ -465,6 +465,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_HorizontalMenu.cshtml" />
     <Content Include="Views\Shared\_MobileMenu.cshtml" />
+    <Content Include="Views\Product\_ModalInsertProduct.cshtml" />
+    <Content Include="Views\Product\EditProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
