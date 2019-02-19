@@ -12,7 +12,7 @@
                 <div class="sparkline13-list shadow-reset">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Projects <span class="table-project-n">Data</span> Table</h1>
+                            <h1>Products List</h1>
                             <div class="sparkline13-outline-icon">
                                 <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
                                 <span><i class="fa fa-wrench"></i></span>
@@ -23,21 +23,18 @@
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
                             <div id="toolbar">
-                                <select class="form-control">
-                                    <option value="">Export Basic</option>
-                                    <option value="all">Export All</option>
-                                    <option value="selected">Export Selected</option>
-                                </select>
+                                <a class="btn btn-primary" onclick="ShowProductModal()" href="#"><span><i class="fa fa-plus"></i></span>&nbsp;New</a>
                             </div>
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
                                         <th data-field="state" data-checkbox="true"></th>
-                                        <th data-field="id">ID</th>
+
                                         <th data-field="name" data-editable="true">Name</th>
                                         <th data-field="email" data-editable="true">Category</th>
                                         <th data-field="phone" data-editable="true">Supplier</th>
                                         <th data-field="company" data-editable="true">Quantity</th>
+                                        <th data-field="company" data-editable="true">Views</th>
                                         <th data-field="complete">Price</th>
                                         <th data-field="task" data-editable="true">Unit In Stock</th>
                                         <th data-field="date" data-editable="true">Modified On</th>
@@ -47,19 +44,21 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="row_@item.Id">
                                             <td></td>
-                                            <td>@item.Id</td>
+
                                             <td>@item.Name</td>
                                             <td>@item.CategoryName</td>
                                             <td>@item.SupplierName</td>
-                                            <td>@item.Quantity</td>
 
+                                            <td>@item.Quantity</td>
+                                            <td>@item.ViewCounts</td>
                                             <td>@item.UnitPrice</td>
                                             <td>@item.UnitsInStock</td>
                                             <td>@item.ModifiedOn</td>
                                             <td class="datatable-ct">
-                                                <i class="fa fa-check"></i>
+                                                <a> <span class="mg-5"><i class="fa fa-pencil"></i></span></a>
+                                                <a onclick="DeleteProduct('@item.Id')" href="#"><span class="mg-5"><i class="fa fa-trash"></i></span></a>
                                             </td>
                                         </tr>
                                     }
@@ -73,3 +72,159 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="productModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">New Product</h3>
+            </div>
+            <div class="modal-body" id="employeeModalBody">
+                <div class="sparkline12-graph">
+                    <div class="input-knob-dial-wrap">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <input type="text" class="form-control" placeholder="Name" id="txtName">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="floatleft">
+
+                                        <select class="select2_demo_3 ">
+                                            <option>Select</option>
+                                            <option value="Bahamas">Bahamas</option>
+                                            <option value="Bahrain">Bahrain</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="Barbados">Barbados</option>
+                                            <option value="Belarus">Belarus</option>
+                                            <option value="Belgium">Belgium</option>
+                                            <option value="Belize">Belize</option>
+                                            <option value="Benin">Benin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Description</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <input type="text" class="form-control" placeholder="Description">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Supplier</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <div class="floatleft">
+
+                                            <select class="select2_demo_3 ">
+                                                <option>Select</option>
+                                                <option value="Bahamas">Bahamas</option>
+                                                <option value="Bahrain">Bahrain</option>
+                                                <option value="Bangladesh">Bangladesh</option>
+                                                <option value="Barbados">Barbados</option>
+                                                <option value="Belarus">Belarus</option>
+                                                <option value="Belgium">Belgium</option>
+                                                <option value="Belize">Belize</option>
+                                                <option value="Benin">Benin</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Quantity</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <input type="number" class="form-control" placeholder="" min="0" id="txtQuantity">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Status</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class=" mg-b-22">
+                                        <button class="btn btn-white btn-xs">Active</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="input-mask-title">
+                                    <label>Category</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="floatleft">
+
+                                    <select class="select2_demo_3 ">
+                                        <option>Select</option>
+                                        <option value="Bahamas">Bahamas</option>
+                                        <option value="Bahrain">Bahrain</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Barbados">Barbados</option>
+                                        <option value="Belarus">Belarus</option>
+                                        <option value="Belgium">Belgium</option>
+                                        <option value="Belize">Belize</option>
+                                        <option value="Benin">Benin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                     
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+<script src="~/Scripts/apps/Product/ProductJS.js"></script>

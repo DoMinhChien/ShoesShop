@@ -87,6 +87,11 @@ namespace ShoesShop.Repository.Infrastructure
             return dbSet.Any(whereCondition);
         }
 
+        public T GetById(Guid entity)
+        {
+            return dbSet.Find(entity);
+        }
+
         //--------------Exra generic methods--------------------------------
 
         public T SingleOrDefaultOrderBy(Expression<Func<T, bool>> whereCondition, Expression<Func<T, int>> orderBy, string direction)

@@ -21,6 +21,13 @@ namespace ShoesShop.Mvc.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public JsonResult DeleteProduct(Guid productId)
+        {
+            bool result = productBLL.DeleteProduct(productId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
@@ -71,26 +78,8 @@ namespace ShoesShop.Mvc.Controllers
             }
         }
 
-        // GET: Product/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
 
-        // POST: Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
