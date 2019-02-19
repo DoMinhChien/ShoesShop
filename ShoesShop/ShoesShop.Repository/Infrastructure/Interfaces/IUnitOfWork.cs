@@ -15,5 +15,7 @@ namespace ShoesShop.Repository.Infrastructure
         /// </summary>
         DbContext Db { get; }
 
+        void SaveChanges();
+
     }
 }

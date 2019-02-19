@@ -28,7 +28,7 @@
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
-                                        <th data-field="state" data-checkbox="true"></th>
+                                
 
                                         <th data-field="name" data-editable="true">Name</th>
                                         <th data-field="email" data-editable="true">Category</th>
@@ -45,7 +45,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr id="row_@item.Id">
-                                            <td></td>
+                                            
 
                                             <td>@item.Name</td>
                                             <td>@item.CategoryName</td>
@@ -106,16 +106,8 @@
                                 <div class="col-lg-9">
                                     <div class="floatleft">
 
-                                        <select class="select2_demo_3 ">
-                                            <option>Select</option>
-                                            <option value="Bahamas">Bahamas</option>
-                                            <option value="Bahrain">Bahrain</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="Barbados">Barbados</option>
-                                            <option value="Belarus">Belarus</option>
-                                            <option value="Belgium">Belgium</option>
-                                            <option value="Belize">Belize</option>
-                                            <option value="Benin">Benin</option>
+                                        <select class="select2_Category " id="dropdownCategory">
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -131,7 +123,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="Description">
+                                        <input type="text" class="form-control" placeholder="Description" id="txtDescription">
 
                                     </div>
                                 </div>
@@ -146,16 +138,8 @@
                                     <div class="input-mark-inner mg-b-22">
                                         <div class="floatleft">
 
-                                            <select class="select2_demo_3 ">
-                                                <option>Select</option>
-                                                <option value="Bahamas">Bahamas</option>
-                                                <option value="Bahrain">Bahrain</option>
-                                                <option value="Bangladesh">Bangladesh</option>
-                                                <option value="Barbados">Barbados</option>
-                                                <option value="Belarus">Belarus</option>
-                                                <option value="Belgium">Belgium</option>
-                                                <option value="Belize">Belize</option>
-                                                <option value="Benin">Benin</option>
+                                            <select class="select2_Supplier" id="dropdownSupplier">
+                                               
                                             </select>
                                         </div>
 
@@ -186,37 +170,38 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class=" mg-b-22">
-                                        <button class="btn btn-white btn-xs">Active</button>
+                                        <button class="btn btn-xs floatleft">Active</button>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="input-mask-title">
-                                    <label>Category</label>
+                            <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    <div class="input-mask-title">
+                                        <label>Price/Unit</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-mark-inner mg-b-22">
+                                        <input type="text" class="form-control" data-mask="$ 999.99" placeholder="" id="txtPrice">
+                                   
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-9">
-                                <div class="floatleft">
-
-                                    <select class="select2_demo_3 ">
-                                        <option>Select</option>
-                                        <option value="Bahamas">Bahamas</option>
-                                        <option value="Bahrain">Bahrain</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="Barbados">Barbados</option>
-                                        <option value="Belarus">Belarus</option>
-                                        <option value="Belgium">Belgium</option>
-                                        <option value="Belize">Belize</option>
-                                        <option value="Benin">Benin</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                         </div>
                      
-
+                        <div class="row">
+                            <div class="col-lg-8">
+                            </div>
+                            <div class="col-lg-4 txt-align-r">
+                                <a class="btn btn-success mg-5" href="#" onclick="InsertProduct()">Submit</a>
+                                <a class="btn btn-default" href="#" data-dismiss="modal">Cancel</a>
+                            </div>
+                           
+                        </div>
                     </div>
                 </div>
             </div>

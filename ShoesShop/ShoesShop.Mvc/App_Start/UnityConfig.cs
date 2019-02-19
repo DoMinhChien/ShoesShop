@@ -18,6 +18,8 @@ namespace ShoesShop.Mvc
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IProductBLL, ProductBLL>();
+            container.RegisterType<ICategoryBLL, CategoryBLL>();
+            container.RegisterType<ISupplierBLL, SupplierBLL>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

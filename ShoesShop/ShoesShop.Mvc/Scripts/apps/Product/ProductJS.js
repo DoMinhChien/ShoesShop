@@ -1,4 +1,6 @@
-﻿var DeleteProduct = function (productId) {
+﻿
+
+var DeleteProduct = function (productId) {
     const swalWithBootstrapButtons = Swal.mixin({
         confirmButtonClass: 'btn btn-success btn-mg-10',
         cancelButtonClass: 'btn btn-danger',
@@ -18,10 +20,10 @@
             $.ajax({
                 type: "Post",
                 url: "/Product/DeleteProduct",
-                data: {productId:productId},
+                data: { productId: productId },
                 success: function (result) {
 
-                    if (result ) {
+                    if (result) {
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
                             'Product has been deleted.',
@@ -38,22 +40,48 @@
 
                 }
 
-            })
+            });
             
-        } else if (
-            // Read more about handling dismissals
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-            );
-        }
+        } 
     });
 
 };
+var InsertProduct = function () {
+    var Input = GetFormData();
+    $.ajax({
+        type: "Post",
+        url: "/Product/InsertProduct",
+        data: { Input: Input },
+        success: function (result) {
 
+            if (result) {
+                Swal.fire(
+                    'Sucessfully!','',
+                    'success'
+                ).then((isConfirm) => {
+                    if (isConfirm.value) {
+                        window.location = "/Product/Index";
+                    }
+                });
+
+            }
+
+        }
+
+    });
+};
 var ShowProductModal = function () {
     $('#productModal').modal("show");
+};
+
+function GetFormData() {
+    var model = {};
+    model.Name = $('#txtName').val();
+    model.CategoryId = $('#dropdownCategory').val();
+    model.SupplierId = $('#dropdownSupplier').val();
+    model.Description = $('#txtDescription').val();
+    model.Quantity = $('#txtQuantity').val();
+    model.UnitPrice = $('#txtQuantity').val();
+
+    return model;
 }

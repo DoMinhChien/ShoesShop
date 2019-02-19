@@ -1,4 +1,6 @@
 ﻿using ShoesShop.BLL.Interfaces;
+using ShoesShop.Model;
+using ShoesShop.Mvc.Inputs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,55 +30,16 @@ namespace ShoesShop.Mvc.Controllers
             bool result = productBLL.DeleteProduct(productId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        // GET: Product/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Product/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult InsertProduct(ProductInput Input)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var model = AutoMapper.Mapper.Map<ProductModel>(Input);
+            bool result = productBLL.InsertProduct(model);
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
-
-        // GET: Product/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Product/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+     
 
        
 

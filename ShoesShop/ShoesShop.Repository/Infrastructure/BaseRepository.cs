@@ -44,7 +44,7 @@ namespace ShoesShop.Repository.Infrastructure
         public virtual T Insert(T entity)
         {
             dynamic obj = dbSet.Add(entity);
-            this._unitOfWork.Db.SaveChanges();
+          //  this._unitOfWork.Db.SaveChanges();
             return obj;
 
         }
@@ -53,7 +53,7 @@ namespace ShoesShop.Repository.Infrastructure
         {
             dbSet.Attach(entity);
             _unitOfWork.Db.Entry(entity).State = EntityState.Modified;
-            this._unitOfWork.Db.SaveChanges();
+           // this._unitOfWork.Db.SaveChanges();
 
 
         }
@@ -65,7 +65,7 @@ namespace ShoesShop.Repository.Infrastructure
                 dbSet.Attach(entity);
                 _unitOfWork.Db.Entry(entity).State = EntityState.Modified;
             }
-            this._unitOfWork.Db.SaveChanges();
+           // this._unitOfWork.Db.SaveChanges();
         }
 
         public void Delete(Expression<Func<T, bool>> whereCondition)
@@ -79,7 +79,7 @@ namespace ShoesShop.Repository.Infrastructure
                 }
                 dbSet.Remove(entity);
             }
-            this._unitOfWork.Db.SaveChanges();
+       //     this._unitOfWork.Db.SaveChanges();
         }
 
         public bool Exists(Expression<Func<T, bool>> whereCondition)
