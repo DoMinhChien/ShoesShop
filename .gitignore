@@ -3,7 +3,8 @@
 ################################################################################
 
 /ShoesShop/.vs/ShoesShop/v15/Server/sqlite3
-/ShoesShop/ShoesShop.BLL
+/ShoesShop/ShoesShop.BLL/bin/Debug
+/ShoesShop/ShoesShop.BLL/obj/Debug
 /ShoesShop/.vs
 /ShoesShop/ShoesShop.Repository/bin/Debug
 /ShoesShop/ShoesShop.Model/bin/Debug
