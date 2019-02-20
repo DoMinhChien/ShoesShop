@@ -85,3 +85,27 @@ function GetFormData() {
 
     return model;
 }
+var UpdateProduct = function () {
+    var Input = GetFormData();
+    $.ajax({
+        type: "Post",
+        url: "/Product/UpdateProduct",
+        data: { Input: Input },
+        success: function (result) {
+
+            if (result) {
+                Swal.fire(
+                    'Sucessfully!', '',
+                    'success'
+                ).then((isConfirm) => {
+                    if (isConfirm.value) {
+                        window.location = "/Product/Index";
+                    }
+                });
+
+            }
+
+        }
+
+    });
+};

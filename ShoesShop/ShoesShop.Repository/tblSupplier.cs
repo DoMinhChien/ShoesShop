@@ -33,7 +33,7 @@ namespace ShoesShop.Repository
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ImageId { get; set; }
     
-        public virtual TblImageStore TblImageStore { get; set; }
+        public virtual tblImageStore tblImageStore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblProduct> tblProducts { get; set; }
     }

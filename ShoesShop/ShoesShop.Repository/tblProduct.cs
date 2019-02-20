@@ -17,7 +17,8 @@ namespace ShoesShop.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblProduct()
         {
-            this.TblImageStores = new HashSet<TblImageStore>();
+            this.tblHistories = new HashSet<tblHistory>();
+            this.tblImageStores = new HashSet<tblImageStore>();
             this.tblOrderDetails = new HashSet<tblOrderDetail>();
         }
     
@@ -38,10 +39,12 @@ namespace ShoesShop.Repository
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual TblCategory TblCategory { get; set; }
+        public virtual tblCategory tblCategory { get; set; }
         public virtual tblEmployee tblEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblImageStore> TblImageStores { get; set; }
+        public virtual ICollection<tblHistory> tblHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblImageStore> tblImageStores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
         public virtual tblProductsStatu tblProductsStatu { get; set; }

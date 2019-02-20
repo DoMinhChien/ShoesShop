@@ -52,6 +52,13 @@ namespace ShoesShop.Mvc.Controllers
             bool result = productBLL.InsertProduct(model);
             return Json(result,JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult UpdateProduct(ProductInput Input)
+        {
+            var model = AutoMapper.Mapper.Map<ProductModel>(Input);
+            bool result = productBLL.UpdateProduct(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
      
 
        

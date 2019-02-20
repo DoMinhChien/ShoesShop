@@ -37,8 +37,8 @@ namespace ShoesShop.BLL
                 UnitsInStock = m.UnitsInStock,
                 ViewCounts = m.ViewCounts,
                 ModifiedOn = m.ModifiedOn.HasValue ? m.ModifiedOn.Value : (DateTime?)null,
-                ImageUrl = m.TblImageStores.Select(r => r.ImagePath).ToList(),
-                CategoryName = m.TblCategory.CategoryName,
+                ImageUrl = m.tblImageStores.Select(r => r.ImagePath).ToList(),
+                CategoryName = m.tblCategory.CategoryName,
                 SupplierName = m.tblSupplier.Name
             }).ToList();
 
@@ -76,5 +76,18 @@ namespace ShoesShop.BLL
 
         
         }
+
+        public bool UpdateProduct(ProductModel productModel)
+        {
+
+            var entity = productRepository.GetById(productModel.Id);
+            entity = AutoMapper.Mapper.Map<tblProduct>(productModel);
+
+            productRepository.Update(entity);
+            unitOfWork.SaveChanges();
+            return true;
+                
+        }
+
     }
 }

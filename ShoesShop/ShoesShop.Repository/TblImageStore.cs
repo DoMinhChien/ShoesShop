@@ -12,10 +12,10 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class TblImageStore
+    public partial class tblImageStore
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TblImageStore()
+        public tblImageStore()
         {
             this.tblSuppliers = new HashSet<tblSupplier>();
         }

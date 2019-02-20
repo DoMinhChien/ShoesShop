@@ -26,12 +26,14 @@ namespace ShoesShop.Repository
         }
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TblCategory> TblCategories { get; set; }
-        public virtual DbSet<TblCustomerLevel> TblCustomerLevels { get; set; }
-        public virtual DbSet<TblCustomer> TblCustomers { get; set; }
+        public virtual DbSet<tblCategory> tblCategories { get; set; }
+        public virtual DbSet<tblCustomerLevel> tblCustomerLevels { get; set; }
+        public virtual DbSet<tblCustomer> tblCustomers { get; set; }
         public virtual DbSet<tblDepartment> tblDepartments { get; set; }
         public virtual DbSet<tblEmployee> tblEmployees { get; set; }
-        public virtual DbSet<TblImageStore> TblImageStores { get; set; }
+        public virtual DbSet<tblHistory> tblHistories { get; set; }
+        public virtual DbSet<tblHistoryDetail> tblHistoryDetails { get; set; }
+        public virtual DbSet<tblImageStore> tblImageStores { get; set; }
         public virtual DbSet<tblOrder> tblOrders { get; set; }
         public virtual DbSet<tblOrderStatu> tblOrderStatus { get; set; }
         public virtual DbSet<tblProduct> tblProducts { get; set; }

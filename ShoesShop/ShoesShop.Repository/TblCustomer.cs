@@ -12,10 +12,10 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class TblCustomer
+    public partial class tblCustomer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TblCustomer()
+        public tblCustomer()
         {
             this.tblOrders = new HashSet<tblOrder>();
         }
@@ -32,7 +32,7 @@ namespace ShoesShop.Repository
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual TblCustomerLevel TblCustomerLevel { get; set; }
+        public virtual tblCustomerLevel tblCustomerLevel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblOrder> tblOrders { get; set; }
     }
