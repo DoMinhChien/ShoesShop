@@ -104,3 +104,12 @@ D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\Unity.Interception.Configuratio
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\Unity.RegistrationByConvention.pdb
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\Unity.ServiceLocation.pdb
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\EntityFramework.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\AutoMapper.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\EntityFramework.SqlServer.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\System.ValueTuple.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\ShoesShop.BLL.dll.config
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\ShoesShop.Model.dll.config
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\AutoMapper.pdb
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\AutoMapper.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\EntityFramework.SqlServer.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\System.ValueTuple.xml

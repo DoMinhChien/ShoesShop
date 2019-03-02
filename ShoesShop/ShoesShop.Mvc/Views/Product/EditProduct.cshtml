@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 txt-align-r ">
                             <div class="admin-comment-month project-details-action">
-                                <button class="btn btn-success mg-3" onclick="UpdateProduct()">Save</button>
+                                <button class="btn btn-success mg-3" onclick="UpdateProduct('@Model.Id')">Save</button>
                                 <button class="btn btn-danger mg-3">Cancel</button>
                                 <button class="btn btn-default mg-3">History</button>
                                 <button class="btn btn-warning mg-3">Return</button>
@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" placeholder="Description" id="txtQuantity" value="@Model.Quantity">
+                                            <input type="number" class="form-control"  id="txtQuantity" value="@Model.Quantity">
 
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" placeholder="Description" id="txtViewCount" value="@Model.ViewCounts" disabled>
+                                            <input type="text" class="form-control" id="txtViewCount" value="@Model.ViewCounts" disabled>
 
                                         </div>
                                     </div>

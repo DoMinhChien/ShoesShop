@@ -21,7 +21,7 @@ namespace ShoesShop.BLL
             categoryRepository = new CategoryRepository(unitOfWork);
         }      
 
-        public List<TblCategory> GetCategoryForMasterData()
+        public List<tblCategory> GetCategoryForMasterData()
         {
             return categoryRepository.GetAll(r => !r.IsDeleted).ToList();
         }

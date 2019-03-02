@@ -9,6 +9,6 @@ namespace ShoesShop.BLL.Interfaces
 {
     public interface ICategoryBLL
     {
-        List<TblCategory> GetCategoryForMasterData();
+        List<tblCategory> GetCategoryForMasterData();
     }
 }

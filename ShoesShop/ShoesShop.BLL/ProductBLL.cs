@@ -81,7 +81,13 @@ namespace ShoesShop.BLL
         {
 
             var entity = productRepository.GetById(productModel.Id);
-            entity = AutoMapper.Mapper.Map<tblProduct>(productModel);
+            //entity = AutoMapper.Mapper.Map<tblProduct>(productModel);
+            entity.Name = productModel.Name;
+            entity.Description = productModel.Description;
+            entity.CategoryId = productModel.CategoryId;
+            entity.SupplierId = productModel.SupplierId;
+            entity.Quantity = productModel.Quantity;
+            entity.UnitPrice = productModel.UnitPrice;
 
             productRepository.Update(entity);
             unitOfWork.SaveChanges();

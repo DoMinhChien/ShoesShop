@@ -30,6 +30,7 @@ namespace ShoesShop.Mvc.Controllers
 
         public ActionResult EditProduct(Guid productId)
         {
+
             var model =productBLL.GetProductDetail(productId);
             ViewBag.Categories = categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
             ViewBag.Suppliers = supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();

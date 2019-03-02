@@ -13,7 +13,9 @@ namespace ShoesShop.Mvc.Infrastructure
         // Config automatically mapping between 2 objects
         public AutoMapperConfig()
         {
-            CreateMap<ProductInput, ProductModel>();
+            CreateMap<ProductInput, ProductModel>()
+              
+                ;
             CreateMap<ProductModel, tblProduct>().ForMember(dst => dst.CreatedBy, s => s.MapFrom(src=> Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
                                                  .ForMember(dst => dst.CreatedOn,s=>s.MapFrom(src=> DateTime.Now))
                                                  .ForMember(dst => dst.StatusId, s=>s.MapFrom(src=> 1))

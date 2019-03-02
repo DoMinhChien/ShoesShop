@@ -3,13 +3,12 @@
 ################################################################################
 
 /ShoesShop/.vs/ShoesShop/v15/Server/sqlite3
-/ShoesShop/ShoesShop.BLL/bin/Debug
-/ShoesShop/ShoesShop.BLL/obj/Debug
+/ShoesShop/ShoesShop.BLL/bin
+/ShoesShop/ShoesShop.BLL/obj
 /ShoesShop/.vs
-/ShoesShop/ShoesShop.Repository/bin/Debug
-/ShoesShop/ShoesShop.Model/bin/Debug
-/ShoesShop/ShoesShop.Mvc/obj/Debug
+/ShoesShop/ShoesShop.Repository/bin
+/ShoesShop/ShoesShop.Model/bin
+/ShoesShop/ShoesShop.Mvc/obj
+/ShoesShop/ShoesShop.Mvc/bin
 /shoesShop/ShoesShop.Model/obj
-/ShoesShop/node_modules/sweetalert2
-/ShoesShop/ShoesShop.Model/obj/Debug
 /ShoesShop/ShoesShop.Mvc/bin

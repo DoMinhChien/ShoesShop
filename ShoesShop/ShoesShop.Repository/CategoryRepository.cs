@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoesShop.Repository
 {
-    public class CategoryRepository: BaseRepository<TblCategory>
+    public class CategoryRepository: BaseRepository<tblCategory>
     {
         public CategoryRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
     }

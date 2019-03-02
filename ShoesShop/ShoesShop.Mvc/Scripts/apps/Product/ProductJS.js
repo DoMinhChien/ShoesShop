@@ -74,7 +74,7 @@ var ShowProductModal = function () {
     $('#productModal').modal("show");
 };
 
-function GetFormData() {
+function GetFormData(Id) {
     var model = {};
     model.Name = $('#txtName').val();
     model.CategoryId = $('#dropdownCategory').val();
@@ -82,11 +82,12 @@ function GetFormData() {
     model.Description = $('#txtDescription').val();
     model.Quantity = $('#txtQuantity').val();
     model.UnitPrice = $('#txtQuantity').val();
-
+    model.Id = Id;
     return model;
 }
-var UpdateProduct = function () {
-    var Input = GetFormData();
+var UpdateProduct = function (ProductId) {
+    var Input = GetFormData(ProductId);
+    
     $.ajax({
         type: "Post",
         url: "/Product/UpdateProduct",
