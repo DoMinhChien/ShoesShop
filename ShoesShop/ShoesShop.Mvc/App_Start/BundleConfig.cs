@@ -22,11 +22,19 @@ namespace ShoesShop.Mvc
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
-
-
-
+                      "~/Content/CSS/style.css",
+                      "~/Content/CSS/responsive.css",
+                      "~/Content/CSS/adminpro-custon-icon.css",
+                      "~/Content/CSS/animate.css",
+                      "~/Content/CSS/bootstrap-editable.css",
+                      "~/Content/CSS/bootstrap-table.css",
+                      "~/Content/CSS/bootstrap.min.css",
+                      "~/Content/CSS/c3.min.css",
+                      "~/Content/CSS/font-awesome.min.css",
+                      "~/Content/CSS/jquery.mCustomScrollbar.min.css",
+                      "~/Content/CSS/meanmenu.min.css",
+                      "~/Content/CSS/normalize.css"
+                      ));
         }
     }
 }

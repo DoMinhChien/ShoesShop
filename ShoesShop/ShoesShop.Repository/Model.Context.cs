@@ -25,7 +25,6 @@ namespace ShoesShop.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblCategory> tblCategories { get; set; }
         public virtual DbSet<tblCustomerLevel> tblCustomerLevels { get; set; }
         public virtual DbSet<tblCustomer> tblCustomers { get; set; }

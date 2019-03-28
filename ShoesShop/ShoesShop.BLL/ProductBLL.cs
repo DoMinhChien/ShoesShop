@@ -89,6 +89,7 @@ namespace ShoesShop.BLL
             entity.Quantity = productModel.Quantity;
             entity.UnitPrice = productModel.UnitPrice;
 
+            entity.ModifiedOn = DateTime.UtcNow;
             productRepository.Update(entity);
             unitOfWork.SaveChanges();
             return true;

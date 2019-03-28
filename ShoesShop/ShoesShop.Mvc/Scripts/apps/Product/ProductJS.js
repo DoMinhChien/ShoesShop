@@ -81,7 +81,7 @@ function GetFormData(Id) {
     model.SupplierId = $('#dropdownSupplier').val();
     model.Description = $('#txtDescription').val();
     model.Quantity = $('#txtQuantity').val();
-    model.UnitPrice = $('#txtQuantity').val();
+    model.UnitPrice = $('#txtPrice').val();
     model.Id = Id;
     return model;
 }
