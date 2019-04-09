@@ -12,28 +12,28 @@ namespace ShoesShop.Mvc.Controllers
 {
     public class ProductController : Controller
     {
-       private  readonly IProductBLL productBLL;
-        private readonly ISupplierBLL supplierBLL;
-        private readonly ICategoryBLL categoryBLL;
-        public ProductController(IProductBLL _productBLL, ISupplierBLL _supplierBLL, ICategoryBLL _categoryBLL)
+       private  readonly IProductBLL _productBLL;
+        private readonly ISupplierBLL _supplierBLL;
+        private readonly ICategoryBLL _categoryBLL;
+        public ProductController(IProductBLL productBLL, ISupplierBLL supplierBLL, ICategoryBLL categoryBLL)
         {
-            productBLL = _productBLL;
-            supplierBLL = _supplierBLL;
-            categoryBLL = _categoryBLL;
+            _productBLL = productBLL;
+            _supplierBLL = supplierBLL;
+            _categoryBLL = categoryBLL;
         }
         // GET: Product
         public ActionResult Index()
         {
-            var model = productBLL.GetListProduct();
+            var model = _productBLL.GetListProduct();
             return View(model);
         }
 
         public ActionResult EditProduct(Guid productId)
         {
 
-            var model =productBLL.GetProductDetail(productId);
-            ViewBag.Categories = categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
-            ViewBag.Suppliers = supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();
+            var model =_productBLL.GetProductDetail(productId);
+            ViewBag.Categories = _categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
+            ViewBag.Suppliers = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();
             return View(model);
         }
 
@@ -41,7 +41,7 @@ namespace ShoesShop.Mvc.Controllers
         [HttpPost]
         public JsonResult DeleteProduct(Guid productId)
         {
-            bool result = productBLL.DeleteProduct(productId);
+            bool result = _productBLL.DeleteProduct(productId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -50,19 +50,27 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult InsertProduct(ProductInput Input)
         {
             var model = AutoMapper.Mapper.Map<ProductModel>(Input);
-            bool result = productBLL.InsertProduct(model);
+            bool result = _productBLL.InsertProduct(model);
             return Json(result,JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult UpdateProduct(ProductInput Input)
         {
             var model = AutoMapper.Mapper.Map<ProductModel>(Input);
-            bool result = productBLL.UpdateProduct(model);
+            bool result = _productBLL.UpdateProduct(model);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-     
+        
+        [HttpGet]
+        public JsonResult GetProducts()
+        {
+            var model = _productBLL.GetListProduct();
 
-       
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
 
     }

@@ -8,18 +8,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @Styles.Render("~/Content/css")
-    
+
+    <link href="~/Content/CSS/preloader-style.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body class="materialdesign">
 
     <!-- Header top area start-->
     <div class="wrapper-pro">
-        
+
         <div class="left-sidebar-pro">
             @Html.Partial("_LeftMenu")
         </div>
-  
+
         <div class="content-inner-all">
             <!-- Header top area start-->
             @Html.Partial("_HeaderTop")
@@ -33,11 +34,11 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         @*<div class="breadcome-heading">
-                                            <form role="search" class="">
-                                                <input type="text" placeholder="Search..." class="form-control">
-                                                <a href=""><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>*@
+                                                <form role="search" class="">
+                                                    <input type="text" placeholder="Search..." class="form-control">
+                                                    <a href=""><i class="fa fa-search"></i></a>
+                                                </form>
+                                            </div>*@
                                     </div>
                                     <div class="col-lg-6">
                                         <ul class="breadcome-menu">
@@ -111,6 +112,7 @@
 
     <script src="~/Scripts/jquery-2.2.4.js"></script>
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+ 
     <!-- bootstrap JS
         ============================================ -->
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -150,12 +152,11 @@
     <script src="~/Scripts/data-table/bootstrap-table-resizable.js"></script>
     <script src="~/Scripts/data-table/colResizable-1.5.source.js"></script>
     <script src="~/Scripts/data-table/bootstrap-table-export.js"></script>
+
+    
     <!-- main JS
         ============================================ -->
     <script src="~/Scripts/main.js"></script>
-
-    <script>
-
-    </script>
+    @Scripts.Render("~/Scripts/Common")
 </body>
 </html>

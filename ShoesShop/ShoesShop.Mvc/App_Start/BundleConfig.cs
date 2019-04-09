@@ -33,8 +33,13 @@ namespace ShoesShop.Mvc
                       "~/Content/CSS/font-awesome.min.css",
                       "~/Content/CSS/jquery.mCustomScrollbar.min.css",
                       "~/Content/CSS/meanmenu.min.css",
-                      "~/Content/CSS/normalize.css"
+                      "~/Content/CSS/normalize.css",
+                      "~/Content/CSS/buttons.css"
                       ));
+            bundles.Add(new ScriptBundle("~/Scripts/Common").Include(
+                      "~/Scripts/apps/Common/CommonGlobal.js",
+                       "~/Scripts/apps/Common/CommonEnum.js",
+                       "~/Scripts/moment/moment.js"));
         }
     }
 }

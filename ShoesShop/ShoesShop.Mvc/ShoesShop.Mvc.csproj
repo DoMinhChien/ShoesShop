@@ -184,11 +184,14 @@
     <Content Include="Content\CSS\bootstrap-editable.css" />
     <Content Include="Content\CSS\bootstrap-table.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
+    <Content Include="Content\CSS\buttons.css" />
     <Content Include="Content\CSS\c3.min.css" />
     <Content Include="Content\CSS\font-awesome.min.css" />
     <Content Include="Content\CSS\jquery.mCustomScrollbar.min.css" />
+    <Content Include="Content\CSS\KoGrid.css" />
     <Content Include="Content\CSS\meanmenu.min.css" />
     <Content Include="Content\CSS\normalize.css" />
+    <Content Include="Content\CSS\preloader-style.css" />
     <Content Include="Content\CSS\responsive.css" />
     <Content Include="Content\CSS\style.css" />
     <Content Include="Content\fonts\adminpro-icon.svg" />
@@ -213,10 +216,14 @@
     <Content Include="Content\img\notification\5.jpg" />
     <Content Include="Content\img\notification\6.jpg" />
     <Content Include="Content\img\profile\1.jpg" />
+    <Content Include="Content\img\reload.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\apps\Product\ProductJS.js" />
+    <Content Include="Scripts\apps\Common\CommonEnum.js" />
+    <Content Include="Scripts\apps\Common\CommonGlobal.js" />
+    <Content Include="Scripts\apps\Product\ko-product.js" />
+    <Content Include="Scripts\apps\Product\ProductModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\adminpro-icon.ttf" />
@@ -259,6 +266,11 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Scripts\jquery.meanmenu.js" />
+    <Content Include="Scripts\knockout\knockout-3.2.0.js" />
+    <Content Include="Scripts\knockout\knockout.validation.js" />
+    <Content Include="Scripts\knockout\koGrid-2.1.1.debug.js" />
+    <Content Include="Scripts\knockout\koGrid-2.1.1.js" />
+    <Content Include="Scripts\moment\moment.js" />
     <Content Include="Scripts\peity\jquery.peity.min.js" />
     <Content Include="Scripts\jquery.scrollUp.min.js" />
     <Content Include="Scripts\sparkline\jquery.sparkline.min.js" />
@@ -299,6 +311,8 @@
     <Content Include="Views\Shared\_ChatBox.cshtml" />
     <Content Include="Views\Shared\_LeftMenu.cshtml" />
     <Content Include="Views\Shared\_HeaderTop.cshtml" />
+    <Content Include="Views\Product\_Detail.cshtml" />
+    <Content Include="Views\Product\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
