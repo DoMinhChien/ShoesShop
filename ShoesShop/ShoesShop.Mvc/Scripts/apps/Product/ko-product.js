@@ -10,30 +10,26 @@
 };
 
 
-var ProductListViewModel = function (parent) {
+var ProductListViewModel = function (_parent) {
     var self = this;
-    self.parent = parent;
+    var parent = _parent;
     self.products = ko.observableArray([]);
 
     self.init = function () {
-        $.ajax({
-            type: "Get",
-            url: CommonEnum.API_URL.GetProduct,
-            //beforeSend: function () {
-            //    $('#loader').show();
-            //},
-            // data: { Input: Input },
-            success: function (result) {
-                self.products(result);
 
-            },
-            complete: function () {
-                $('#loader').hide();
-            }
-        });
+        CommonGlobal.connectServer("Get", null, CommonEnum.API_URL.GetProduct,
+            function (result) {
+                self.products(result);
+            });
     };
+
     self.ViewProduct = function (productId) {
-        self.parent.isViewDetail(true);
+        CommonGlobal.connectServer("Get", { productId: productId}, CommonEnum.API_URL.GetProductDetail,
+            function (data) {
+                parent.currentViewModel(new ProductModel(data, self));
+                parent.isViewDetail(true);
+            });
+        
     };
 
 

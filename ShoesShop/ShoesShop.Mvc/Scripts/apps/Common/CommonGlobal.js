@@ -2,6 +2,23 @@
 //    var CommonGlobal = {};
 //}
 var CommonGlobal = {
+    connectServer: function (type,param, url, callbackSuccess) {
+       
+        $.ajax({
+            type: type,
+            url: url,
+            beforeSend: function () {
+                $('#loader').show();
+            },
+            data: param,
+            success: function (data) {
+                callbackSuccess(data);
+            },
+            complete: function () {
+                $('#loader').hide();
+            }
+        });
+    },
     convertDateJSToClientDateTime: function (dateJs, format) {
         if (dateJs === null) {
             return '';

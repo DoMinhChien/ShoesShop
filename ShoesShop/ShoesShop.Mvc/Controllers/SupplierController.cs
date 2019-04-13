@@ -11,12 +11,12 @@ namespace ShoesShop.Mvc.Controllers
 {
     public class SupplierController : Controller
     {
-        private readonly ISupplierBLL supplierBLL;
+        private readonly ISupplierBLL _supplierBLL;
         
 
-        public SupplierController(ISupplierBLL _supplierBLL)
+        public SupplierController(ISupplierBLL supplierBLL)
         {
-            supplierBLL = _supplierBLL;
+            _supplierBLL = supplierBLL;
         }
         // GET: Supplier
         public ActionResult Index()
@@ -26,7 +26,7 @@ namespace ShoesShop.Mvc.Controllers
 
         public JsonResult GetSuppliers()
         {
-            var result = supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();
+            var result = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { Id = r.SupplierId, Name = r.Name }).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

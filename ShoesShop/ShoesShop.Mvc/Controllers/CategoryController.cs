@@ -10,10 +10,10 @@ namespace ShoesShop.Mvc.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryBLL categoryBLL;
-        public CategoryController(ICategoryBLL _categoryBLL)
+        private readonly ICategoryBLL _categoryBLL;
+        public CategoryController(ICategoryBLL categoryBLL)
         {
-            categoryBLL = _categoryBLL;
+            _categoryBLL = categoryBLL;
         }
         // GET: Category
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace ShoesShop.Mvc.Controllers
         }
         public JsonResult GetCategories()
         {
-            var result = categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
+            var result = _categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { Id = r.CategoryId, Name = r.CategoryName }).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

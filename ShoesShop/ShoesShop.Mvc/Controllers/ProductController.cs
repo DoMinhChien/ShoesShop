@@ -3,16 +3,14 @@ using ShoesShop.Model;
 using ShoesShop.Mvc.Inputs;
 using ShoesShop.Mvc.Outputs;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShoesShop.Mvc.Controllers
 {
     public class ProductController : Controller
     {
-       private  readonly IProductBLL _productBLL;
+        private readonly IProductBLL _productBLL;
         private readonly ISupplierBLL _supplierBLL;
         private readonly ICategoryBLL _categoryBLL;
         public ProductController(IProductBLL productBLL, ISupplierBLL supplierBLL, ICategoryBLL categoryBLL)
@@ -31,9 +29,7 @@ namespace ShoesShop.Mvc.Controllers
         public ActionResult EditProduct(Guid productId)
         {
 
-            var model =_productBLL.GetProductDetail(productId);
-            ViewBag.Categories = _categoryBLL.GetCategoryForMasterData().Select(r => new SelectedItemOutput { id = r.CategoryId, text = r.CategoryName }).ToList();
-            ViewBag.Suppliers = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { id = r.SupplierId, text = r.Name }).ToList();
+            var model = _productBLL.GetProductDetail(productId);
             return View(model);
         }
 
@@ -45,13 +41,22 @@ namespace ShoesShop.Mvc.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetProductDetail(Guid productId)
+        {
+            var data = _productBLL.GetProductDetail(productId);
+            var result = AutoMapper.Mapper.Map<ProductOutput>(data);
+            result.ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.CategoryId, Name =cat.CategoryName }).ToList();
+            result.ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup=> new SelectedItemOutput { Id = sup.SupplierId, Name = sup.Name }).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public JsonResult InsertProduct(ProductInput Input)
         {
             var model = AutoMapper.Mapper.Map<ProductModel>(Input);
             bool result = _productBLL.InsertProduct(model);
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult UpdateProduct(ProductInput Input)
@@ -60,7 +65,7 @@ namespace ShoesShop.Mvc.Controllers
             bool result = _productBLL.UpdateProduct(model);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
         [HttpGet]
         public JsonResult GetProducts()
         {
@@ -68,8 +73,6 @@ namespace ShoesShop.Mvc.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
 
