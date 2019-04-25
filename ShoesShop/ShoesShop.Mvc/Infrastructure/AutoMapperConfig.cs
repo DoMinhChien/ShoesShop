@@ -18,15 +18,31 @@ namespace ShoesShop.Mvc.Infrastructure
         }
         private void ConfigureMapperforEntity()
         {
-            CreateMap<ProductModel, tblProduct>().ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
-                                     .ForMember(dst => dst.CreatedOn, s => s.MapFrom(src => DateTime.Now))
-                                     .ForMember(dst => dst.StatusId, s => s.MapFrom(src => 1))
-                                     .ForMember(dst => dst.Id, s => s.MapFrom(src => Guid.NewGuid()));
+            CreateMap<ProductModel, Product>().ForMember(dst => dst.StatusId, s => s.MapFrom(src => 1));
+            CreateMap<CategoryModel, Category>()
+                                     .ForMember(dst => dst.Products,s=>s.MapFrom(src=>src.Products))
+                                     .ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
+                                     .ForMember(dst => dst.CreatedOn, s => s.MapFrom(src => DateTime.Now));
+
         }
+        private Guid CheckExistId (Guid Id)
+        {
+            if (Id == Guid.Empty)
+            {
+                Id = Guid.NewGuid();
+            }
+            return Id;  
+        }
+        
         private void ConfigureMapperforModel()
         {
-            CreateMap<tblProduct, ProductModel>();
+            CreateMap<Product, ProductModel>();
             CreateMap<ProductInput, ProductModel>();
+
+
+            CreateMap<Category, CategoryModel>().ForMember(dst=>dst.Products,s=>s.MapFrom(src=>src.Products));
+            CreateMap<CategoryInput, CategoryModel>();
+
         }
         private void ConfigureMapperforInput()
         {
@@ -35,6 +51,9 @@ namespace ShoesShop.Mvc.Infrastructure
         private void ConfigureMapperforOutput()
         {
             CreateMap<ProductModel, ProductOutput>();
+            CreateMap<CategoryModel, CategoryOutput>()
+                .ForMember(dst => dst.Products, s => s.MapFrom(src => src.Products));
+
         }
         public static void RegisterMapping()
         {

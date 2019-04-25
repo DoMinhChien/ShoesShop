@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoesShop.Repository
+namespace ShoesShop.Repository.Repo
 {
-    public class ProductRepository : BaseRepository<tblProduct>
+    public class ProductRepository : BaseRepository<Product>
     {
         public ProductRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 

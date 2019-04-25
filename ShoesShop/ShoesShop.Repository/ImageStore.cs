@@ -12,33 +12,27 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblEmployee
+    public partial class ImageStore
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblEmployee()
+        public ImageStore()
         {
-            this.tblProducts = new HashSet<tblProduct>();
+            this.Suppliers = new HashSet<Supplier>();
         }
     
-        public System.Guid EmployeeId { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string DisplayName { get; set; }
-        public System.DateTime HireDate { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public string ImageUrl { get; set; }
-        public string Email { get; set; }
-        public int DepartmentId { get; set; }
+        public int ImageId { get; set; }
+        public System.Guid objectId { get; set; }
+        public string ImageName { get; set; }
+        public byte[] ImageByte { get; set; }
+        public string ImagePath { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual tblDepartment tblDepartment { get; set; }
-        public virtual tblOrder tblOrder { get; set; }
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblProduct> tblProducts { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

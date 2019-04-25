@@ -25,19 +25,19 @@ namespace ShoesShop.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tblCategory> tblCategories { get; set; }
-        public virtual DbSet<tblCustomerLevel> tblCustomerLevels { get; set; }
-        public virtual DbSet<tblCustomer> tblCustomers { get; set; }
-        public virtual DbSet<tblDepartment> tblDepartments { get; set; }
-        public virtual DbSet<tblEmployee> tblEmployees { get; set; }
-        public virtual DbSet<tblHistory> tblHistories { get; set; }
-        public virtual DbSet<tblHistoryDetail> tblHistoryDetails { get; set; }
-        public virtual DbSet<tblImageStore> tblImageStores { get; set; }
-        public virtual DbSet<tblOrder> tblOrders { get; set; }
-        public virtual DbSet<tblOrderStatu> tblOrderStatus { get; set; }
-        public virtual DbSet<tblProduct> tblProducts { get; set; }
-        public virtual DbSet<tblProductsStatu> tblProductsStatus { get; set; }
-        public virtual DbSet<tblSupplier> tblSuppliers { get; set; }
-        public virtual DbSet<tblOrderDetail> tblOrderDetails { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerLevel> CustomerLevels { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<History> Histories { get; set; }
+        public virtual DbSet<HistoryDetail> HistoryDetails { get; set; }
+        public virtual DbSet<ImageStore> ImageStores { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

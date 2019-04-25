@@ -14,6 +14,7 @@ namespace ShoesShop.Mvc.Inputs
         public int CategoryId { get; set; }
         public Guid SupplierId { get; set; }
         public int Quantity { get; set; }
+        public int? ViewCounts { get; set; }
         public long UnitPrice { get; set; }
     }
 }

@@ -12,24 +12,22 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOrderStatu
+    public partial class History
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblOrderStatu()
+        public History()
         {
-            this.tblOrders = new HashSet<tblOrder>();
+            this.HistoryDetails = new HashSet<HistoryDetail>();
         }
     
-        public int StatusId { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> DisplayOrder { get; set; }
-        public bool IsDeleted { get; set; }
+        public int Id { get; set; }
+        public System.Guid ObjectId { get; set; }
         public System.Guid CreatedBy { get; set; }
-        public Nullable<System.Guid> ModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
-        public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public string Content { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblOrder> tblOrders { get; set; }
+        public virtual ICollection<HistoryDetail> HistoryDetails { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

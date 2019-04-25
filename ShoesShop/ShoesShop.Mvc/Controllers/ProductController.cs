@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 
+
 namespace ShoesShop.Mvc.Controllers
 {
     public class ProductController : Controller
@@ -35,18 +36,18 @@ namespace ShoesShop.Mvc.Controllers
 
 
         [HttpPost]
-        public JsonResult DeleteProduct(Guid productId)
+        public JsonResult DeleteProduct(Guid ProductId)
         {
-            bool result = _productBLL.DeleteProduct(productId);
+            bool result = _productBLL.DeleteProduct(ProductId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult GetProductDetail(Guid productId)
+        public JsonResult GetProductDetail(Guid ProductId)
         {
-            var data = _productBLL.GetProductDetail(productId);
+            var data = _productBLL.GetProductDetail(ProductId);
             var result = AutoMapper.Mapper.Map<ProductOutput>(data);
-            result.ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.CategoryId, Name =cat.CategoryName }).ToList();
+            result.ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.Id, Name =cat.Name }).ToList();
             result.ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup=> new SelectedItemOutput { Id = sup.SupplierId, Name = sup.Name }).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -70,11 +71,13 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult GetProducts()
         {
             var model = _productBLL.GetListProduct();
+            var ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.Id, Name = cat.Name }).ToList();
+            var ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup => new SelectedItemOutput { Id = sup.SupplierId, Name = sup.Name }).ToList();
 
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json( new {model = model, ListCategory = ListCategory,ListSupplier = ListSupplier}, JsonRequestBehavior.AllowGet);
         }
 
-
+        
 
     }
 }

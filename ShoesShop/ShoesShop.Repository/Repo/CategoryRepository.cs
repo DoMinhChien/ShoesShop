@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoesShop.Repository
+namespace ShoesShop.Repository.Repo
 {
-    public class SupplierRepository: BaseRepository<tblSupplier>
+    public class CategoryRepository: BaseRepository<Category>
     {
-        public SupplierRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        public CategoryRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
     }
 }

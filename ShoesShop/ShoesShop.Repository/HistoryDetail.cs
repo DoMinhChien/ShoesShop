@@ -12,15 +12,15 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblHistoryDetail
+    public partial class HistoryDetail
     {
         public int Id { get; set; }
-        public int HistoryId { get; set; }
+        public int historyId { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public bool IsDeleted { get; set; }
     
-        public virtual tblHistory tblHistory { get; set; }
+        public virtual History History { get; set; }
     }
 }

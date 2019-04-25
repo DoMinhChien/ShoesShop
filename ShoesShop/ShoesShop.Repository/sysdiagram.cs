@@ -12,27 +12,17 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblImageStore
+    public partial class sysdiagram
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblImageStore()
-        {
-            this.tblSuppliers = new HashSet<tblSupplier>();
-        }
-    
-        public int ImageId { get; set; }
-        public System.Guid ObjectId { get; set; }
-        public string ImageName { get; set; }
-        public byte[] ImageByte { get; set; }
-        public string ImagePath { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-    
-        public virtual tblProduct tblProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
     }
 }

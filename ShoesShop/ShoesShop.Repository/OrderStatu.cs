@@ -12,17 +12,17 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDepartment
+    public partial class OrderStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblDepartment()
+        public OrderStatu()
         {
-            this.tblEmployees = new HashSet<tblEmployee>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int DepartmentId { get; set; }
-        public string DepartmentName { get; set; }
-        public string Description { get; set; }
+        public int StatusId { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -30,6 +30,6 @@ namespace ShoesShop.Repository
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblEmployee> tblEmployees { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

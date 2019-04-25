@@ -12,28 +12,28 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOrder
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblOrder()
+        public Customer()
         {
-            this.tblOrderDetails = new HashSet<tblOrderDetail>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public System.Guid OrderId { get; set; }
-        public System.Guid CustomerId { get; set; }
-        public System.Guid EmployeeId { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int StatusId { get; set; }
+        public System.Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public int customerLevelId { get; set; }
+        public double Point { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual tblCustomer tblCustomer { get; set; }
-        public virtual tblEmployee tblEmployee { get; set; }
+        public virtual CustomerLevel CustomerLevel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
-        public virtual tblOrderStatu tblOrderStatu { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

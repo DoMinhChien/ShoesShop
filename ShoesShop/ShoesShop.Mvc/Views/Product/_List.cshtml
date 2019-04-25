@@ -7,20 +7,21 @@
                         <div class="main-sparkline13-hd">
                             <h1> Products</h1>
                             <div class="sparkline13-outline-icon">
-                                <button class="important-btn"><i class="fa big-icon fa-plus"></i> New Product</button>
+                                <button data-bind="click: InsertProduct" class="important-btn"><i class="fa big-icon fa-plus"></i> New Product</button>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright">
-                            <div id="toolbar">
+                        <div>
+                            @*<div id="toolbar">
                                 <select class="form-control">
                                     <option value="">Export Basic</option>
                                     <option value="all">Export All</option>
                                     <option value="selected">Export Selected</option>
                                 </select>
-                            </div>
-                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                            </div>*@
+                            <table id="table" class="table border-table txt-align-l" border="1">
                                 <thead>
                                     <tr>
                                         @*<th data-field="state" data-checkbox="true"></th>*@
@@ -43,12 +44,12 @@
                                         <td data-bind="text: Description"></td>
                                         <td data-bind="text: CategoryName"></td>
                                         <td data-bind="text: SupplierName"></td>
-                                        <td data-bind="text: Quantity"></td>s
+                                        <td data-bind="text: Quantity"></td>
                                         <td><span data-bind="text: UnitPrice"></span> $</td>
                                         <td data-bind="text: ViewCounts"></td>
                                         <td data-bind="text: CommonGlobal.convertDateJSToClientDateTime(ModifiedOn,'DD-MMM-YYYY')"></td>
-                                        <td data-bind="html: CommonGlobal.displayStatusInfo(StatusId)"></td>
-                                        <td class="datatable-ct">
+                                        <td class="datatable-ct txt-align-c" data-bind="html: CommonGlobal.displayStatusInfo(StatusId)"></td>
+                                        <td class="datatable-ct txt-align-c">
                                             <a href="" data-bind="click: $parent.ViewProduct.bind($parent, $data.Id)" class="standard-btn"><i class="fa big-icon fa-pencil "></i></a>
                                             @*<a href="" data-bind="click: $UserViewModel.parent.DeleteProduct.bind($parent, $data.Id)" class="dangerous-btn"><i class="fa big-icon fa-trash "></i></a>*@
                                         </td>

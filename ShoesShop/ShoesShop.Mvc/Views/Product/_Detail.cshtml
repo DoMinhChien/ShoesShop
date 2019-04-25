@@ -1,7 +1,7 @@
 ﻿
 <div class="project-details-area mg-b-15" data-bind="with :currentViewModel">
     <div class="container-fluid">
-        <div class="row"  >
+        <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="project-details-wrap shadow-reset custom-mg-pd-layout">
                     <div class="row">
@@ -13,21 +13,17 @@
                         </div>
                         <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 txt-align-r ">
                             <div class="admin-comment-month project-details-action">
-
-                                <button type="button" class="btn btn-custon-rounded-three btn-primary"><span class="adminpro-icon adminpro-informatio"></span> Edit</button>
-                                <button data-bind="click: SaveProduct" type="button" class="btn btn-custon-rounded-three btn-success"><span class="fa fa-save"></span> Save</button>
-                                <button type="button" class="btn btn-custon-rounded-three btn-warning"><span class="adminpro-icon adminpro-warning-danger"></span> Warning</button>
-                                <button type="button" class="btn btn-custon-rounded-three btn-danger"><span class="fa fa-times"></span> Delete</button>
-                                <button type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-undo"></span> Return</button>
-                                @*<button class="btn btn-success smg-3" data-bind="click: SaveProduct"><span><i class="fa fa-save"></i></span>&nbsp;Save</button>
-        <button class="btn btn-danger mg-3"><span><i class="fa fa-times"></i></span>&nbsp;Cancel</button>
-        <button class="btn btn-default mg-3"><span><i class="fa fa-history"></i></span>&nbsp;History</button>
-        <button class="btn btn-warning mg-3" data-bind="click: $root.ReturnToList"><span><i class="fa fa-undo"></i></span>&nbsp;Return</button>*@
+                                <button type="button" class="btn btn-custon-rounded-three btn-primary"><span class="fa fa-pencil"></span> Edit</button>
+                                <button data-bind="click: UpdateProduct" type="button" class="btn btn-custon-rounded-three btn-success"><span class="fa fa-save"></span> Save</button>
+                                <button type="button" class="btn btn-custon-rounded-three btn-warning"><span class="fa fa-times"></span> Cancel</button>
+                                <button data-bind="click: DeleteProduct.bind($data,Id)" type="button" class="btn btn-custon-rounded-three btn-danger"><span class="fa fa-times"></span> Delete</button>
+                                <button data-bind="click: ReturnToList.bind()" type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-history"></span> History</button>
+                                <button data-bind="click: ReturnToList.bind()" type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-undo"></span> Return</button>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
 
                             <div class="project-details-mg">
                                 <div class="row">
@@ -53,7 +49,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" placeholder="Description" id="txtDescription" data-bind="value : Description()">
+                                            <input type="text" class="form-control" placeholder="Description" id="txtDescription" data-bind="value : Description">
 
                                         </div>
                                     </div>
@@ -68,27 +64,27 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="number" class="form-control" id="txtQuantity" data-bind="value : Quantity()">
+                                            <input type="number" class="form-control" id="txtQuantity" data-bind="value : Quantity" min="0">
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="project-details-mg">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="input-mask-title">
-                                            <span><strong>Views:</strong></span>
+                            @*<div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="input-mask-title">
+                                                <span><strong>Views:</strong></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" id="txtViewCount" data-bind="value : ViewCounts()" disabled>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="input-mark-inner ">
+                                                <input type="text" class="form-control" id="txtViewCount" data-bind="value : ViewCounts" disabled>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>*@
                             <div class="project-details-mg">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -98,28 +94,39 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner mg-b-22">
-                                            <input type="text" class="form-control" data-mask="$ 999.99" placeholder="" id="txtPrice" data-bind="value : UnitPrice()">
+                                            <input type="text" class="form-control" data-mask="$ 999.99" placeholder="" id="txtPrice" data-bind="value : UnitPrice">
 
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="project-details-mg">
                                 <div class="row">
+
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                         <div class="project-details-st">
                                             <span><strong>Status:</strong></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="btn-group project-list-ad">
-                                            <button class="btn btn-white btn-xs">Active</button>
+                                        <div class="form-group">
+                                            <label class="switch">
+                                                <input type="checkbox" id="togBtn" @*data-bind="click : ToggleSwitch"*@>
+                                                <div class="slider round">
+                                                    <!--ADDED HTML -->
+
+                                                    <span class="off  big-icon">ON</span>
+                                                    <span class="on  big-icon">OFF</span>
+                                                    <!--END-->
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                             <div class="project-details-mg">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -129,7 +136,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="mg-b-7">
-                                            <select id="dropdownCategory" style="width: 100%;" data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an option...', allowClear: true }"></select>
+                                            <select id="dropdownCategory" style="width: 80%;" data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Category...', allowClear: false }"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +150,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="">
-                                            <select id="dropdownSupplier" style="width: 100%;" data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an option...', allowClear: true }"></select>
+                                            <select id="dropdownSupplier" style="width: 80%;" data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Supplier...', allowClear: false }"></select>
                                         </div>
                                     </div>
                                 </div>

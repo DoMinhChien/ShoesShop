@@ -12,25 +12,33 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCustomerLevel
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCustomerLevel()
+        public Employee()
         {
-            this.tblCustomers = new HashSet<tblCustomer>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int LevelId { get; set; }
-        public string Name { get; set; }
-        public int LevelPoint { get; set; }
-        public Nullable<int> DisplayOrder { get; set; }
+        public System.Guid Id { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string DisplayName { get; set; }
+        public System.DateTime HireDate { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string ImageUrl { get; set; }
+        public string Email { get; set; }
+        public int departmentId { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
+        public virtual Department Department { get; set; }
+        public virtual Order Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCustomer> tblCustomers { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

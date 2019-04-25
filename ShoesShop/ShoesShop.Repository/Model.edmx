@@ -5,24 +5,40 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="StoreManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tblCategories">
+        <EntityType Name="Category">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblCustomerLevels">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="LevelId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="15" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerLevelId" Type="int" Nullable="false" />
+          <Property Name="Point" Type="float" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LevelPoint" Type="int" Nullable="false" />
           <Property Name="DisplayOrder" Type="int" />
@@ -32,23 +48,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblCustomers">
-          <Key>
-            <PropertyRef Name="CustomerId" />
-          </Key>
-          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Phone" Type="nchar" MaxLength="15" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
-          <Property Name="LevelId" Type="int" Nullable="false" />
-          <Property Name="Point" Type="float" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ModifiedBy" Type="uniqueidentifier" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedOn" Type="datetime" />
-        </EntityType>
-        <EntityType Name="tblDepartment">
+        <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentId" />
           </Key>
@@ -61,11 +61,11 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblEmployees">
+        <EntityType Name="Employee">
           <Key>
-            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="EmployeeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -74,14 +74,14 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblHistory">
+        <EntityType Name="History">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -91,23 +91,23 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblHistoryDetail">
+        <EntityType Name="HistoryDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HistoryId" Type="int" Nullable="false" />
+          <Property Name="historyId" Type="int" Nullable="false" />
           <Property Name="OldValue" Type="nvarchar" MaxLength="500" />
           <Property Name="NewValue" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblImageStore">
+        <EntityType Name="ImageStore">
           <Key>
             <PropertyRef Name="ImageId" />
           </Key>
           <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="objectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ImageName" Type="nvarchar" MaxLength="1000" />
           <Property Name="ImageByte" Type="image" />
           <Property Name="ImagePath" Type="nvarchar" MaxLength="1000" />
@@ -117,12 +117,26 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblOrderDetails">
+        <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="customerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="employeeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
             <PropertyRef Name="UnitPrice" />
             <PropertyRef Name="Quantity" />
             <PropertyRef Name="Discount" />
@@ -130,8 +144,8 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
             <PropertyRef Name="CreatedBy" />
             <PropertyRef Name="CreatedOn" />
           </Key>
-          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ProductId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="orderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="productId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UnitPrice" Type="float" Nullable="false" />
           <Property Name="Quantity" Type="smallint" Nullable="false" />
           <Property Name="Discount" Type="real" Nullable="false" />
@@ -141,21 +155,7 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblOrders">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="EmployeeId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="StatusId" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ModifiedBy" Type="uniqueidentifier" />
-          <Property Name="ModifiedOn" Type="datetime" />
-        </EntityType>
-        <EntityType Name="tblOrderStatus">
+        <EntityType Name="OrderStatus">
           <Key>
             <PropertyRef Name="StatusId" />
           </Key>
@@ -168,15 +168,15 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblProducts">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="supplierId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
@@ -189,20 +189,7 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
-        <EntityType Name="tblProductsStatus">
-          <Key>
-            <PropertyRef Name="StatusId" />
-          </Key>
-          <Property Name="StatusId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DisplayOrder" Type="int" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ModifiedBy" Type="uniqueidentifier" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedOn" Type="datetime" />
-        </EntityType>
-        <EntityType Name="tblSuppliers">
+        <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierId" />
           </Key>
@@ -219,273 +206,272 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="ImageId" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
         <Association Name="FK_Customers_CustomerLevels">
-          <End Role="tblCustomerLevels" Type="Self.tblCustomerLevels" Multiplicity="1" />
-          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="*" />
+          <End Role="CustomerLevel" Type="Self.CustomerLevel" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCustomerLevels">
-              <PropertyRef Name="LevelId" />
+            <Principal Role="CustomerLevel">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblCustomers">
-              <PropertyRef Name="LevelId" />
+            <Dependent Role="Customer">
+              <PropertyRef Name="customerLevelId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Department">
-          <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
-          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblDepartment">
+            <Principal Role="Department">
               <PropertyRef Name="DepartmentId" />
             </Principal>
-            <Dependent Role="tblEmployees">
-              <PropertyRef Name="DepartmentId" />
+            <Dependent Role="Employee">
+              <PropertyRef Name="departmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_History_HistoryDetail">
-          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="1" />
-          <End Role="tblHistoryDetail" Type="Self.tblHistoryDetail" Multiplicity="*" />
+          <End Role="History" Type="Self.History" Multiplicity="1" />
+          <End Role="HistoryDetail" Type="Self.HistoryDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblHistory">
+            <Principal Role="History">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblHistoryDetail">
-              <PropertyRef Name="HistoryId" />
+            <Dependent Role="HistoryDetail">
+              <PropertyRef Name="historyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_History_Product">
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="1" />
-          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblHistory">
+            <Dependent Role="History">
               <PropertyRef Name="ObjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetails_Products">
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="Self.tblOrderDetails" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="ProductId" />
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Customers">
-          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrders" Multiplicity="*" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCustomers">
-              <PropertyRef Name="CustomerId" />
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="CustomerId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="customerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Employees">
-          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrders" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="tblEmployees">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="OrderId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_OrderDetails">
-          <End Role="tblOrders" Type="Self.tblOrders" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="Self.tblOrderDetails" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblOrders">
-              <PropertyRef Name="OrderId" />
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="OrderId" />
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Statues">
-          <End Role="tblOrderStatus" Type="Self.tblOrderStatus" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrders" Multiplicity="*" />
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblOrderStatus">
+            <Principal Role="OrderStatus">
               <PropertyRef Name="StatusId" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="StatusId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="statusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Categories">
-          <End Role="tblCategories" Type="Self.tblCategories" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="*" />
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCategories">
-              <PropertyRef Name="CategoryId" />
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="CategoryId" />
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Employees">
-          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblEmployees">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblProducts">
+            <Dependent Role="Product">
               <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Products_Statues">
-          <End Role="tblProductsStatus" Type="Self.tblProductsStatus" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblProductsStatus">
-              <PropertyRef Name="StatusId" />
-            </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Products_Suppliers">
-          <End Role="tblSuppliers" Type="Self.tblSuppliers" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="*" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblSuppliers">
+            <Principal Role="Supplier">
               <PropertyRef Name="SupplierId" />
             </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="SupplierId" />
+            <Dependent Role="Product">
+              <PropertyRef Name="supplierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblImageStore_Product">
-          <End Role="tblProducts" Type="Self.tblProducts" Multiplicity="1" />
-          <End Role="tblImageStore" Type="Self.tblImageStore" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblImageStore">
-              <PropertyRef Name="ObjectId" />
+            <Dependent Role="ImageStore">
+              <PropertyRef Name="objectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblSuppliers_ImageStore">
-          <End Role="tblImageStore" Type="Self.tblImageStore" Multiplicity="0..1" />
-          <End Role="tblSuppliers" Type="Self.tblSuppliers" Multiplicity="*" />
+          <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblImageStore">
+            <Principal Role="ImageStore">
               <PropertyRef Name="ImageId" />
             </Principal>
-            <Dependent Role="tblSuppliers">
+            <Dependent Role="Supplier">
               <PropertyRef Name="ImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StoreManagementModelStoreContainer">
-          <EntitySet Name="tblCategories" EntityType="Self.tblCategories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblCustomerLevels" EntityType="Self.tblCustomerLevels" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblHistory" EntityType="Self.tblHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblHistoryDetail" EntityType="Self.tblHistoryDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblImageStore" EntityType="Self.tblImageStore" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblOrders" EntityType="Self.tblOrders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblOrderStatus" EntityType="Self.tblOrderStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblProducts" EntityType="Self.tblProducts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblProductsStatus" EntityType="Self.tblProductsStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblSuppliers" EntityType="Self.tblSuppliers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblOrderDetails" EntityType="Self.tblOrderDetails" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerLevel" EntityType="Self.CustomerLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryDetail" EntityType="Self.HistoryDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [tblOrderDetails].[OrderId] AS [OrderId], 
-    [tblOrderDetails].[ProductId] AS [ProductId], 
-    [tblOrderDetails].[UnitPrice] AS [UnitPrice], 
-    [tblOrderDetails].[Quantity] AS [Quantity], 
-    [tblOrderDetails].[Discount] AS [Discount], 
-    [tblOrderDetails].[IsDeleted] AS [IsDeleted], 
-    [tblOrderDetails].[CreatedBy] AS [CreatedBy], 
-    [tblOrderDetails].[ModifiedBy] AS [ModifiedBy], 
-    [tblOrderDetails].[CreatedOn] AS [CreatedOn], 
-    [tblOrderDetails].[ModifiedOn] AS [ModifiedOn]
-    FROM [dbo].[tblOrderDetails] AS [tblOrderDetails]</DefiningQuery>
+    [OrderDetail].[orderId] AS [orderId], 
+    [OrderDetail].[productId] AS [productId], 
+    [OrderDetail].[UnitPrice] AS [UnitPrice], 
+    [OrderDetail].[Quantity] AS [Quantity], 
+    [OrderDetail].[Discount] AS [Discount], 
+    [OrderDetail].[IsDeleted] AS [IsDeleted], 
+    [OrderDetail].[CreatedBy] AS [CreatedBy], 
+    [OrderDetail].[ModifiedBy] AS [ModifiedBy], 
+    [OrderDetail].[CreatedOn] AS [CreatedOn], 
+    [OrderDetail].[ModifiedOn] AS [ModifiedOn]
+    FROM [dbo].[OrderDetail] AS [OrderDetail]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Customers_CustomerLevels" Association="Self.FK_Customers_CustomerLevels">
-            <End Role="tblCustomerLevels" EntitySet="tblCustomerLevels" />
-            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="CustomerLevel" EntitySet="CustomerLevel" />
+            <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Department" Association="Self.FK_Employees_Department">
-            <End Role="tblDepartment" EntitySet="tblDepartment" />
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_History_HistoryDetail" Association="Self.FK_History_HistoryDetail">
-            <End Role="tblHistory" EntitySet="tblHistory" />
-            <End Role="tblHistoryDetail" EntitySet="tblHistoryDetail" />
+            <End Role="History" EntitySet="History" />
+            <End Role="HistoryDetail" EntitySet="HistoryDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_History_Product" Association="Self.FK_History_Product">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblHistory" EntitySet="tblHistory" />
+            <End Role="Product" EntitySet="Product" />
+            <End Role="History" EntitySet="History" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
-            <End Role="tblCustomers" EntitySet="tblCustomers" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
-            <End Role="tblOrders" EntitySet="tblOrders" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Statues" Association="Self.FK_Orders_Statues">
-            <End Role="tblOrderStatus" EntitySet="tblOrderStatus" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
-            <End Role="tblCategories" EntitySet="tblCategories" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Employees" Association="Self.FK_Products_Employees">
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Statues" Association="Self.FK_Products_Statues">
-            <End Role="tblProductsStatus" EntitySet="tblProductsStatus" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
-            <End Role="tblSuppliers" EntitySet="tblSuppliers" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_TblImageStore_Product" Association="Self.FK_TblImageStore_Product">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblImageStore" EntitySet="tblImageStore" />
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ImageStore" EntitySet="ImageStore" />
           </AssociationSet>
           <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="Self.FK_tblSuppliers_ImageStore">
-            <End Role="tblImageStore" EntitySet="tblImageStore" />
-            <End Role="tblSuppliers" EntitySet="tblSuppliers" />
+            <End Role="ImageStore" EntitySet="ImageStore" />
+            <End Role="Supplier" EntitySet="Supplier" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -493,25 +479,43 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StoreManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tblCategory">
+        <EntityType Name="Category">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Categories" FromRole="tblCategories" ToRole="tblProducts" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Category" ToRole="Product" />
         </EntityType>
-        <EntityType Name="tblCustomerLevel">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="LevelId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerLevelId" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="Double" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerLevel" Relationship="Self.FK_Customers_CustomerLevels" FromRole="Customer" ToRole="CustomerLevel" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CustomerLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LevelPoint" Type="Int32" Nullable="false" />
           <Property Name="DisplayOrder" Type="Int32" />
@@ -520,27 +524,9 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblCustomers" Relationship="Self.FK_Customers_CustomerLevels" FromRole="tblCustomerLevels" ToRole="tblCustomers" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_CustomerLevels" FromRole="CustomerLevel" ToRole="Customer" />
         </EntityType>
-        <EntityType Name="tblCustomer">
-          <Key>
-            <PropertyRef Name="CustomerId" />
-          </Key>
-          <Property Name="CustomerId" Type="Guid" Nullable="false" />
-          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LevelId" Type="Int32" Nullable="false" />
-          <Property Name="Point" Type="Double" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblCustomerLevel" Relationship="Self.FK_Customers_CustomerLevels" FromRole="tblCustomers" ToRole="tblCustomerLevels" />
-          <NavigationProperty Name="tblOrders" Relationship="Self.FK_Orders_Customers" FromRole="tblCustomers" ToRole="tblOrders" />
-        </EntityType>
-        <EntityType Name="tblDepartment">
+        <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentId" />
           </Key>
@@ -552,13 +538,13 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblEmployees" Relationship="Self.FK_Employees_Department" FromRole="tblDepartment" ToRole="tblEmployees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Department" FromRole="Department" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="tblEmployee">
+        <EntityType Name="Employee">
           <Key>
-            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="EmployeeId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -567,17 +553,17 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblDepartment" Relationship="Self.FK_Employees_Department" FromRole="tblEmployees" ToRole="tblDepartment" />
-          <NavigationProperty Name="tblOrder" Relationship="Self.FK_Orders_Employees" FromRole="tblEmployees" ToRole="tblOrders" />
-          <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Employees" FromRole="tblEmployees" ToRole="tblProducts" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Employees_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Orders_Employees" FromRole="Employee" ToRole="Order" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Employees" FromRole="Employee" ToRole="Product" />
         </EntityType>
-        <EntityType Name="tblHistory">
+        <EntityType Name="History">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -586,27 +572,27 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblHistoryDetails" Relationship="Self.FK_History_HistoryDetail" FromRole="tblHistory" ToRole="tblHistoryDetail" />
-          <NavigationProperty Name="tblProduct" Relationship="Self.FK_History_Product" FromRole="tblHistory" ToRole="tblProducts" />
+          <NavigationProperty Name="HistoryDetails" Relationship="Self.FK_History_HistoryDetail" FromRole="History" ToRole="HistoryDetail" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_History_Product" FromRole="History" ToRole="Product" />
         </EntityType>
-        <EntityType Name="tblHistoryDetail">
+        <EntityType Name="HistoryDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HistoryId" Type="Int32" Nullable="false" />
+          <Property Name="historyId" Type="Int32" Nullable="false" />
           <Property Name="OldValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="NewValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tblHistory" Relationship="Self.FK_History_HistoryDetail" FromRole="tblHistoryDetail" ToRole="tblHistory" />
+          <NavigationProperty Name="History" Relationship="Self.FK_History_HistoryDetail" FromRole="HistoryDetail" ToRole="History" />
         </EntityType>
-        <EntityType Name="tblImageStore">
+        <EntityType Name="ImageStore">
           <Key>
             <PropertyRef Name="ImageId" />
           </Key>
           <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="objectId" Type="Guid" Nullable="false" />
           <Property Name="ImageName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ImageByte" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -615,28 +601,28 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblProduct" Relationship="Self.FK_TblImageStore_Product" FromRole="tblImageStore" ToRole="tblProducts" />
-          <NavigationProperty Name="tblSuppliers" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="tblImageStore" ToRole="tblSuppliers" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_TblImageStore_Product" FromRole="ImageStore" ToRole="Product" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="ImageStore" ToRole="Supplier" />
         </EntityType>
-        <EntityType Name="tblOrder">
+        <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="CustomerId" Type="Guid" Nullable="false" />
-          <Property Name="EmployeeId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="customerId" Type="Guid" Nullable="false" />
+          <Property Name="employeeId" Type="Guid" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblCustomer" Relationship="Self.FK_Orders_Customers" FromRole="tblOrders" ToRole="tblCustomers" />
-          <NavigationProperty Name="tblEmployee" Relationship="Self.FK_Orders_Employees" FromRole="tblOrders" ToRole="tblEmployees" />
-          <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_Orders_OrderDetails" FromRole="tblOrders" ToRole="tblOrderDetails" />
-          <NavigationProperty Name="tblOrderStatu" Relationship="Self.FK_Orders_Statues" FromRole="tblOrders" ToRole="tblOrderStatus" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_Orders_OrderDetails" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_Statues" FromRole="Order" ToRole="OrderStatus" />
         </EntityType>
-        <EntityType Name="tblOrderStatu">
+        <EntityType Name="OrderStatu">
           <Key>
             <PropertyRef Name="StatusId" />
           </Key>
@@ -648,17 +634,17 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblOrders" Relationship="Self.FK_Orders_Statues" FromRole="tblOrderStatus" ToRole="tblOrders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Statues" FromRole="OrderStatus" ToRole="Order" />
         </EntityType>
-        <EntityType Name="tblProduct">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="SupplierId" Type="Guid" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="supplierId" Type="Guid" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
@@ -670,29 +656,14 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="UnitsInStock" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblCategory" Relationship="Self.FK_Products_Categories" FromRole="tblProducts" ToRole="tblCategories" />
-          <NavigationProperty Name="tblEmployee" Relationship="Self.FK_Products_Employees" FromRole="tblProducts" ToRole="tblEmployees" />
-          <NavigationProperty Name="tblHistories" Relationship="Self.FK_History_Product" FromRole="tblProducts" ToRole="tblHistory" />
-          <NavigationProperty Name="tblImageStores" Relationship="Self.FK_TblImageStore_Product" FromRole="tblProducts" ToRole="tblImageStore" />
-          <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="tblProducts" ToRole="tblOrderDetails" />
-          <NavigationProperty Name="tblProductsStatu" Relationship="Self.FK_Products_Statues" FromRole="tblProducts" ToRole="tblProductsStatus" />
-          <NavigationProperty Name="tblSupplier" Relationship="Self.FK_Products_Suppliers" FromRole="tblProducts" ToRole="tblSuppliers" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Products_Employees" FromRole="Product" ToRole="Employee" />
+          <NavigationProperty Name="Histories" Relationship="Self.FK_History_Product" FromRole="Product" ToRole="History" />
+          <NavigationProperty Name="ImageStores" Relationship="Self.FK_TblImageStore_Product" FromRole="Product" ToRole="ImageStore" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Product" ToRole="Supplier" />
         </EntityType>
-        <EntityType Name="tblProductsStatu">
-          <Key>
-            <PropertyRef Name="StatusId" />
-          </Key>
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DisplayOrder" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Statues" FromRole="tblProductsStatus" ToRole="tblProducts" />
-        </EntityType>
-        <EntityType Name="tblSupplier">
+        <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierId" />
           </Key>
@@ -708,13 +679,28 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="ImageId" Type="Int32" />
-          <NavigationProperty Name="tblImageStore" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="tblSuppliers" ToRole="tblImageStore" />
-          <NavigationProperty Name="tblProducts" Relationship="Self.FK_Products_Suppliers" FromRole="tblSuppliers" ToRole="tblProducts" />
+          <NavigationProperty Name="ImageStore" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="Supplier" ToRole="ImageStore" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Supplier" ToRole="Product" />
         </EntityType>
-        <EntityType Name="tblOrderDetail">
+        <EntityType Name="sysdiagram">
           <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
             <PropertyRef Name="UnitPrice" />
             <PropertyRef Name="Quantity" />
             <PropertyRef Name="Discount" />
@@ -722,8 +708,8 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
             <PropertyRef Name="CreatedBy" />
             <PropertyRef Name="CreatedOn" />
           </Key>
-          <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="ProductId" Type="Guid" Nullable="false" />
+          <Property Name="orderId" Type="Guid" Nullable="false" />
+          <Property Name="productId" Type="Guid" Nullable="false" />
           <Property Name="UnitPrice" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
           <Property Name="Discount" Type="Single" Nullable="false" />
@@ -732,263 +718,247 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblOrder" Relationship="Self.FK_Orders_OrderDetails" FromRole="tblOrderDetails" ToRole="tblOrders" />
-          <NavigationProperty Name="tblProduct" Relationship="Self.FK_OrderDetails_Products" FromRole="tblOrderDetails" ToRole="tblProducts" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Orders_OrderDetails" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Products_Categories">
-          <End Role="tblCategories" Type="Self.tblCategory" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCategories">
-              <PropertyRef Name="CategoryId" />
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="CategoryId" />
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customers_CustomerLevels">
-          <End Role="tblCustomerLevels" Type="Self.tblCustomerLevel" Multiplicity="1" />
-          <End Role="tblCustomers" Type="Self.tblCustomer" Multiplicity="*" />
+          <End Role="CustomerLevel" Type="Self.CustomerLevel" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCustomerLevels">
-              <PropertyRef Name="LevelId" />
+            <Principal Role="CustomerLevel">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblCustomers">
-              <PropertyRef Name="LevelId" />
+            <Dependent Role="Customer">
+              <PropertyRef Name="customerLevelId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Customers">
-          <End Role="tblCustomers" Type="Self.tblCustomer" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="*" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCustomers">
-              <PropertyRef Name="CustomerId" />
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="CustomerId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="customerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Department">
-          <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
-          <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblDepartment">
+            <Principal Role="Department">
               <PropertyRef Name="DepartmentId" />
             </Principal>
-            <Dependent Role="tblEmployees">
-              <PropertyRef Name="DepartmentId" />
+            <Dependent Role="Employee">
+              <PropertyRef Name="departmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Employees">
-          <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="tblEmployees">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="OrderId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Employees">
-          <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblEmployees">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblProducts">
+            <Dependent Role="Product">
               <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_History_HistoryDetail">
-          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="1" />
-          <End Role="tblHistoryDetail" Type="Self.tblHistoryDetail" Multiplicity="*" />
+          <End Role="History" Type="Self.History" Multiplicity="1" />
+          <End Role="HistoryDetail" Type="Self.HistoryDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblHistory">
+            <Principal Role="History">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblHistoryDetail">
-              <PropertyRef Name="HistoryId" />
+            <Dependent Role="HistoryDetail">
+              <PropertyRef Name="historyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_History_Product">
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
-          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblHistory">
+            <Dependent Role="History">
               <PropertyRef Name="ObjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblImageStore_Product">
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
-          <End Role="tblImageStore" Type="Self.tblImageStore" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblImageStore">
-              <PropertyRef Name="ObjectId" />
+            <Dependent Role="ImageStore">
+              <PropertyRef Name="objectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblSuppliers_ImageStore">
-          <End Role="tblImageStore" Type="Self.tblImageStore" Multiplicity="0..1" />
-          <End Role="tblSuppliers" Type="Self.tblSupplier" Multiplicity="*" />
+          <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblImageStore">
+            <Principal Role="ImageStore">
               <PropertyRef Name="ImageId" />
             </Principal>
-            <Dependent Role="tblSuppliers">
+            <Dependent Role="Supplier">
               <PropertyRef Name="ImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_OrderDetails">
-          <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblOrders">
-              <PropertyRef Name="OrderId" />
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="OrderId" />
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Statues">
-          <End Role="tblOrderStatus" Type="Self.tblOrderStatu" Multiplicity="1" />
-          <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="*" />
+          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblOrderStatus">
+            <Principal Role="OrderStatus">
               <PropertyRef Name="StatusId" />
             </Principal>
-            <Dependent Role="tblOrders">
-              <PropertyRef Name="StatusId" />
+            <Dependent Role="Order">
+              <PropertyRef Name="statusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetails_Products">
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblProducts">
+            <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Products_Statues">
-          <End Role="tblProductsStatus" Type="Self.tblProductsStatu" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblProductsStatus">
-              <PropertyRef Name="StatusId" />
-            </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="StatusId" />
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Suppliers">
-          <End Role="tblSuppliers" Type="Self.tblSupplier" Multiplicity="1" />
-          <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblSuppliers">
+            <Principal Role="Supplier">
               <PropertyRef Name="SupplierId" />
             </Principal>
-            <Dependent Role="tblProducts">
-              <PropertyRef Name="SupplierId" />
+            <Dependent Role="Product">
+              <PropertyRef Name="supplierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StoreManagementEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
-          <EntitySet Name="tblCustomerLevels" EntityType="Self.tblCustomerLevel" />
-          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
-          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
-          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
-          <EntitySet Name="tblHistories" EntityType="Self.tblHistory" />
-          <EntitySet Name="tblHistoryDetails" EntityType="Self.tblHistoryDetail" />
-          <EntitySet Name="tblImageStores" EntityType="Self.tblImageStore" />
-          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
-          <EntitySet Name="tblOrderStatus" EntityType="Self.tblOrderStatu" />
-          <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
-          <EntitySet Name="tblProductsStatus" EntityType="Self.tblProductsStatu" />
-          <EntitySet Name="tblSuppliers" EntityType="Self.tblSupplier" />
-          <EntitySet Name="tblOrderDetails" EntityType="Self.tblOrderDetail" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerLevels" EntityType="Self.CustomerLevel" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Histories" EntityType="Self.History" />
+          <EntitySet Name="HistoryDetails" EntityType="Self.HistoryDetail" />
+          <EntitySet Name="ImageStores" EntityType="Self.ImageStore" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
-            <End Role="tblCategories" EntitySet="tblCategories" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Customers_CustomerLevels" Association="Self.FK_Customers_CustomerLevels">
-            <End Role="tblCustomerLevels" EntitySet="tblCustomerLevels" />
-            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="CustomerLevel" EntitySet="CustomerLevels" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
-            <End Role="tblCustomers" EntitySet="tblCustomers" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Department" Association="Self.FK_Employees_Department">
-            <End Role="tblDepartment" EntitySet="tblDepartments" />
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Employees" Association="Self.FK_Products_Employees">
-            <End Role="tblEmployees" EntitySet="tblEmployees" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_History_HistoryDetail" Association="Self.FK_History_HistoryDetail">
-            <End Role="tblHistory" EntitySet="tblHistories" />
-            <End Role="tblHistoryDetail" EntitySet="tblHistoryDetails" />
+            <End Role="History" EntitySet="Histories" />
+            <End Role="HistoryDetail" EntitySet="HistoryDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_History_Product" Association="Self.FK_History_Product">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblHistory" EntitySet="tblHistories" />
+            <End Role="Product" EntitySet="Products" />
+            <End Role="History" EntitySet="Histories" />
           </AssociationSet>
           <AssociationSet Name="FK_TblImageStore_Product" Association="Self.FK_TblImageStore_Product">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblImageStore" EntitySet="tblImageStores" />
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ImageStore" EntitySet="ImageStores" />
           </AssociationSet>
           <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="Self.FK_tblSuppliers_ImageStore">
-            <End Role="tblImageStore" EntitySet="tblImageStores" />
-            <End Role="tblSuppliers" EntitySet="tblSuppliers" />
+            <End Role="ImageStore" EntitySet="ImageStores" />
+            <End Role="Supplier" EntitySet="Suppliers" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
-            <End Role="tblOrders" EntitySet="tblOrders" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Statues" Association="Self.FK_Orders_Statues">
-            <End Role="tblOrderStatus" EntitySet="tblOrderStatus" />
-            <End Role="tblOrders" EntitySet="tblOrders" />
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
-            <End Role="tblProducts" EntitySet="tblProducts" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Statues" Association="Self.FK_Products_Statues">
-            <End Role="tblProductsStatus" EntitySet="tblProductsStatus" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
-            <End Role="tblSuppliers" EntitySet="tblSuppliers" />
-            <End Role="tblProducts" EntitySet="tblProducts" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -997,12 +967,12 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="StoreManagementModelStoreContainer" CdmEntityContainer="StoreManagementEntities">
-          <EntitySetMapping Name="tblCategories">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblCategory">
-              <MappingFragment StoreEntitySet="tblCategories">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="StoreManagementModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1011,10 +981,27 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblCustomerLevels">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblCustomerLevel">
-              <MappingFragment StoreEntitySet="tblCustomerLevels">
-                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="StoreManagementModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="customerLevelId" ColumnName="customerLevelId" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerLevels">
+            <EntityTypeMapping TypeName="StoreManagementModel.CustomerLevel">
+              <MappingFragment StoreEntitySet="CustomerLevel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LevelPoint" ColumnName="LevelPoint" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
@@ -1026,26 +1013,9 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblCustomers">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblCustomer">
-              <MappingFragment StoreEntitySet="tblCustomers">
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblDepartments">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblDepartment">
-              <MappingFragment StoreEntitySet="tblDepartment">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="StoreManagementModel.Department">
+              <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1057,10 +1027,10 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblEmployees">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblEmployee">
-              <MappingFragment StoreEntitySet="tblEmployees">
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="StoreManagementModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -1069,7 +1039,7 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1078,9 +1048,9 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblHistories">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblHistory">
-              <MappingFragment StoreEntitySet="tblHistory">
+          <EntitySetMapping Name="Histories">
+            <EntityTypeMapping TypeName="StoreManagementModel.History">
+              <MappingFragment StoreEntitySet="History">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -1089,11 +1059,11 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblHistoryDetails">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblHistoryDetail">
-              <MappingFragment StoreEntitySet="tblHistoryDetail">
+          <EntitySetMapping Name="HistoryDetails">
+            <EntityTypeMapping TypeName="StoreManagementModel.HistoryDetail">
+              <MappingFragment StoreEntitySet="HistoryDetail">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
+                <ScalarProperty Name="historyId" ColumnName="historyId" />
                 <ScalarProperty Name="OldValue" ColumnName="OldValue" />
                 <ScalarProperty Name="NewValue" ColumnName="NewValue" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -1101,11 +1071,11 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblImageStores">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblImageStore">
-              <MappingFragment StoreEntitySet="tblImageStore">
+          <EntitySetMapping Name="ImageStores">
+            <EntityTypeMapping TypeName="StoreManagementModel.ImageStore">
+              <MappingFragment StoreEntitySet="ImageStore">
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="objectId" ColumnName="objectId" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="ImageByte" ColumnName="ImageByte" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
@@ -1117,14 +1087,14 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblOrders">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblOrder">
-              <MappingFragment StoreEntitySet="tblOrders">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="StoreManagementModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1132,9 +1102,9 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblOrderStatus">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblOrderStatu">
-              <MappingFragment StoreEntitySet="tblOrderStatus">
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="StoreManagementModel.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
@@ -1146,14 +1116,14 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblProducts">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblProduct">
-              <MappingFragment StoreEntitySet="tblProducts">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="StoreManagementModel.Product">
+              <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -1168,23 +1138,9 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblProductsStatus">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblProductsStatu">
-              <MappingFragment StoreEntitySet="tblProductsStatus">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblSuppliers">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblSupplier">
-              <MappingFragment StoreEntitySet="tblSuppliers">
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="StoreManagementModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1200,11 +1156,27 @@ warning 6002: The table/view 'StoreManagement.dbo.tblOrderDetails' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblOrderDetails">
-            <EntityTypeMapping TypeName="StoreManagementModel.tblOrderDetail">
-              <MappingFragment StoreEntitySet="tblOrderDetails">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StoreManagementModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="StoreManagementModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />

@@ -1,13 +1,21 @@
-﻿<div class="modal fade" id="productModal">
+﻿<div class="modal fade" id="categoryModal" data-bind="with: currentViewModel" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">New Product</h3>
+                <div class="col-lg-10">
+                    <h3 class="modal-title">Category "<span data-bind="text : Name"></span>"</h3>
+                </div>
+                <div class="col-lg-2">
+                    <button data-bind="css: { 'disabled-btn': Products().length >0,'title': 'this Category is being used'  } ,click: DeleteCategory.bind($data,Id)" type="button" class="btn btn-custon-rounded-three btn-danger pull-left"><span class="fa fa-times"></span> Delete</button>
+                </div>
+                
+                
             </div>
+
             <div class="modal-body" id="employeeModalBody">
                 <div class="sparkline12-graph">
                     <div class="input-knob-dial-wrap">
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="col-lg-3">
@@ -17,7 +25,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="Name" id="txtName">
+                                        <input type="text" class="form-control" placeholder="Name" data-bind="value: Name">
 
                                     </div>
                                 </div>
@@ -25,17 +33,16 @@
                             <div class="col-lg-6">
                                 <div class="col-lg-3">
                                     <div class="input-mask-title">
-                                        <label>Category</label>
+                                        <label>Status</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
-                                    <div class="floatleft">
+                                    <div class=" mg-b-22">
+                                        <button class="btn btn-xs btn-info floatleft">Active</button>
 
-                                        <select class="select2_Category " id="dropdownCategory"></select>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -46,28 +53,11 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="Description" id="txtDescription">
+                                        <input type="text" class="form-control" placeholder="Description" data-bind="value :Description">
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Supplier</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <div class="floatleft">
-
-                                            <select class="select2_Supplier" id="dropdownSupplier"></select>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -83,43 +73,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Status</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class=" mg-b-22">
-                                        <button class="btn btn-xs floatleft">Active</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-3">
-                                    <div class="input-mask-title">
-                                        <label>Price/Unit</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="input-mark-inner mg-b-22">
-                                        <input type="text" class="form-control" placeholder="" id="txtPrice">
-
-                                    </div>
-                                </div>
-                            </div>
-
+                            
                         </div>
 
                         <div class="row">
                             <div class="col-lg-8">
                             </div>
                             <div class="col-lg-4 txt-align-r">
-                                <a class="btn btn-success mg-5" href="#" onclick="InsertProduct()">Submit</a>
-                                <a class="btn btn-default" href="#" data-dismiss="modal">Cancel</a>
+                                <button class="btn btn-success mg-r-7" data-bind="click: UpdateCategory"><span class="fa fa-save"></span>&nbsp;Save Changes</button>
+                                <button class="btn btn-default" href="#" data-dismiss="modal"><span class="fa fa-times"></span>&nbsp;Cancel</button>
                             </div>
 
                         </div>
@@ -133,3 +95,4 @@
     </div>
 
 </div>
+

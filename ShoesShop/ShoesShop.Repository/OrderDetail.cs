@@ -12,10 +12,10 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOrderDetail
+    public partial class OrderDetail
     {
-        public System.Guid OrderId { get; set; }
-        public System.Guid ProductId { get; set; }
+        public System.Guid orderId { get; set; }
+        public System.Guid productId { get; set; }
         public double UnitPrice { get; set; }
         public short Quantity { get; set; }
         public float Discount { get; set; }
@@ -25,7 +25,7 @@ namespace ShoesShop.Repository
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual tblOrder tblOrder { get; set; }
-        public virtual tblProduct tblProduct { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

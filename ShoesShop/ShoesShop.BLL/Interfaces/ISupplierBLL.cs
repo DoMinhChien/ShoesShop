@@ -9,6 +9,6 @@ namespace ShoesShop.BLL.Interfaces
 {
     public interface ISupplierBLL
     {
-        List<tblSupplier> GetSupplierForMasterData();
+        List<Supplier> GetSupplierForMasterData();
     }
 }

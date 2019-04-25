@@ -1,5 +1,6 @@
 ﻿using ShoesShop.BLL.Interfaces;
 using ShoesShop.Repository;
+using ShoesShop.Repository.Repo;
 using ShoesShop.Repository.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace ShoesShop.BLL
             supplierRepository = new SupplierRepository(unitOfWork);
         }
 
-        public List<tblSupplier> GetSupplierForMasterData()
+        public List<Supplier> GetSupplierForMasterData()
         {
             return supplierRepository.GetAll(r => !r.IsDeleted).ToList();
         }

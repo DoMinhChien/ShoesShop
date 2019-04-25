@@ -63,6 +63,10 @@
     <Compile Include="SupplierBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShoesShop.Core\ShoesShop.Core.csproj">
+      <Project>{87c30a3a-ac78-474b-a9d3-3d2324445a9f}</Project>
+      <Name>ShoesShop.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoesShop.Model\ShoesShop.Model.csproj">
       <Project>{ECBB4871-22B6-4A15-85B8-9BF4FAE01651}</Project>
       <Name>ShoesShop.Model</Name>

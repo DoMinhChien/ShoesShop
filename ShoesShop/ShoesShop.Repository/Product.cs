@@ -12,21 +12,21 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProduct
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblProduct()
+        public Product()
         {
-            this.tblHistories = new HashSet<tblHistory>();
-            this.tblImageStores = new HashSet<tblImageStore>();
-            this.tblOrderDetails = new HashSet<tblOrderDetail>();
+            this.Histories = new HashSet<History>();
+            this.ImageStores = new HashSet<ImageStore>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int CategoryId { get; set; }
-        public System.Guid SupplierId { get; set; }
+        public int categoryId { get; set; }
+        public System.Guid supplierId { get; set; }
         public int Quantity { get; set; }
         public int StatusId { get; set; }
         public System.Guid CreatedBy { get; set; }
@@ -39,15 +39,14 @@ namespace ShoesShop.Repository
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual tblCategory tblCategory { get; set; }
-        public virtual tblEmployee tblEmployee { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblHistory> tblHistories { get; set; }
+        public virtual ICollection<History> Histories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblImageStore> tblImageStores { get; set; }
+        public virtual ICollection<ImageStore> ImageStores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblOrderDetail> tblOrderDetails { get; set; }
-        public virtual tblProductsStatu tblProductsStatu { get; set; }
-        public virtual tblSupplier tblSupplier { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

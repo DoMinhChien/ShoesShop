@@ -12,17 +12,17 @@ namespace ShoesShop.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCategory
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCategory()
+        public Category()
         {
-            this.tblProducts = new HashSet<tblProduct>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public string CategoryDescription { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public bool IsDeleted { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -30,6 +30,6 @@ namespace ShoesShop.Repository
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblProduct> tblProducts { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
