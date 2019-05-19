@@ -58,6 +58,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -166,6 +172,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -173,10 +180,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="Inputs\CategoryInput.cs" />
     <Compile Include="Inputs\ProductInput.cs" />
     <Compile Include="Outputs\CategoryOutput.cs" />
+    <Compile Include="Outputs\HistoryOutput.cs" />
     <Compile Include="Outputs\ProductOutput.cs" />
     <Compile Include="Outputs\SelectedItemOutput.cs" />
     <Compile Include="Outputs\SupplierOutput.cs" />
@@ -198,6 +206,7 @@
     <Content Include="Content\CSS\preloader-style.css" />
     <Content Include="Content\CSS\responsive.css" />
     <Content Include="Content\CSS\select2.min.css" />
+    <Content Include="Content\CSS\shim-ext.css" />
     <Content Include="Content\CSS\style.css" />
     <Content Include="Content\fonts\adminpro-icon.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -222,6 +231,7 @@
     <Content Include="Content\img\notification\6.jpg" />
     <Content Include="Content\img\profile\1.jpg" />
     <Content Include="Content\img\reload.gif" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -254,6 +264,8 @@
     <Content Include="Content\img\profile\Thumbs.db" />
     <Content Include="Content\img\Thumbs.db" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\component\History.js" />
+    <Content Include="Scripts\component\Input.js" />
     <Content Include="Scripts\counterup\counterup-active.js" />
     <Content Include="Scripts\counterup\jquery.counterup.min.js" />
     <Content Include="Scripts\counterup\waypoints.min.js" />
@@ -267,6 +279,7 @@
     <Content Include="Scripts\data-table\colResizable-1.5.source.js" />
     <Content Include="Scripts\data-table\data-table-active.js" />
     <Content Include="Scripts\data-table\tableExport.js" />
+    <Content Include="Scripts\form-core.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
@@ -279,10 +292,44 @@
     <Content Include="Scripts\knockout\koGrid-2.1.1.debug.js" />
     <Content Include="Scripts\knockout\koGrid-2.1.1.js" />
     <Content Include="Scripts\moment\moment.js" />
+    <Content Include="Scripts\money\ko-money.js" />
     <Content Include="Scripts\peity\jquery.peity.min.js" />
     <Content Include="Scripts\jquery.scrollUp.min.js" />
+    <Content Include="Scripts\polyfiller.js" />
     <Content Include="Scripts\select2\select2-active.js" />
     <Content Include="Scripts\select2\select2.full.min.js" />
+    <Content Include="Scripts\shims\combos\1.js" />
+    <Content Include="Scripts\shims\combos\10.js" />
+    <Content Include="Scripts\shims\combos\11.js" />
+    <Content Include="Scripts\shims\combos\12.js" />
+    <Content Include="Scripts\shims\combos\13.js" />
+    <Content Include="Scripts\shims\combos\14.js" />
+    <Content Include="Scripts\shims\combos\15.js" />
+    <Content Include="Scripts\shims\combos\16.js" />
+    <Content Include="Scripts\shims\combos\17.js" />
+    <Content Include="Scripts\shims\combos\18.js" />
+    <Content Include="Scripts\shims\combos\2.js" />
+    <Content Include="Scripts\shims\combos\21.js" />
+    <Content Include="Scripts\shims\combos\22.js" />
+    <Content Include="Scripts\shims\combos\23.js" />
+    <Content Include="Scripts\shims\combos\25.js" />
+    <Content Include="Scripts\shims\combos\27.js" />
+    <Content Include="Scripts\shims\combos\28.js" />
+    <Content Include="Scripts\shims\combos\29.js" />
+    <Content Include="Scripts\shims\combos\3.js" />
+    <Content Include="Scripts\shims\combos\30.js" />
+    <Content Include="Scripts\shims\combos\31.js" />
+    <Content Include="Scripts\shims\combos\33.js" />
+    <Content Include="Scripts\shims\combos\34.js" />
+    <Content Include="Scripts\shims\combos\4.js" />
+    <Content Include="Scripts\shims\combos\5.js" />
+    <Content Include="Scripts\shims\combos\6.js" />
+    <Content Include="Scripts\shims\combos\7.js" />
+    <Content Include="Scripts\shims\combos\8.js" />
+    <Content Include="Scripts\shims\combos\9.js" />
+    <Content Include="Scripts\shims\combos\97.js" />
+    <Content Include="Scripts\shims\combos\98.js" />
+    <Content Include="Scripts\shims\combos\99.js" />
     <Content Include="Scripts\sparkline\jquery.sparkline.min.js" />
     <Content Include="Scripts\jquery.sticky.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -324,10 +371,15 @@
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\_List.cshtml" />
     <Content Include="Views\Category\_Detail.cshtml" />
+    <Content Include="Views\Shared\Controls\_Input.cshtml" />
+    <Content Include="Views\Shared\Controls\_History.cshtml" />
+    <Content Include="Scripts\shims\combos\comboinfo.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Component\" />
     <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>

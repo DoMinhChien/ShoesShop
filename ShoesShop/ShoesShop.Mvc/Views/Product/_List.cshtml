@@ -8,56 +8,51 @@
                             <h1> Products</h1>
                             <div class="sparkline13-outline-icon">
                                 <button data-bind="click: InsertProduct" class="important-btn"><i class="fa big-icon fa-plus"></i> New Product</button>
-                                
+
                             </div>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div>
-                            @*<div id="toolbar">
-                                <select class="form-control">
-                                    <option value="">Export Basic</option>
-                                    <option value="all">Export All</option>
-                                    <option value="selected">Export Selected</option>
-                                </select>
+                        @*<div>
+                                <table id="table" class="table border-table txt-align-l" border="1">
+                                    <thead>
+                                        <tr>
+
+                                            <th data-field="name" data-editable="true">Name</th>
+                                            <th data-field="descriptipon" data-editable="true">Description</th>
+                                            <th data-field="category" data-editable="true">Category</th>
+                                            <th data-field="supplier" data-editable="true">Supplier</th>
+                                            <th data-field="quantity">Quantity</th>
+                                            <th data-field="price">Price/Unit</th>
+                                            <th data-field="views" data-editable="true">Views</th>
+                                            <th data-field="date" data-editable="true">Modified On</th>
+                                            <th data-field="status" data-editable="true">Status</th>
+                                            <th data-field="action">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: products">
+                                        <tr>
+                                            <td data-bind="text: Name"></td>
+                                            <td data-bind="text: Description"></td>
+                                            <td data-bind="text: CategoryName"></td>
+                                            <td data-bind="text: SupplierName"></td>
+                                            <td data-bind="text: Quantity"></td>
+                                            <td><span data-bind="text: UnitPrice"></span> $</td>
+                                            <td data-bind="text: ViewCounts"></td>
+                                            <td data-bind="text: CommonGlobal.convertDateJSToClientDateTime(ModifiedOn,'DD-MMM-YYYY')"></td>
+                                            <td class="datatable-ct txt-align-c" data-bind="html: CommonGlobal.displayStatusInfo(StatusId)"></td>
+                                            <td class="datatable-ct txt-align-c">
+                                                <a href="" data-bind="click: $parent.ViewProduct.bind($parent, $data.Id)" class="standard-btn"><i class="fa big-icon fa-pencil "></i></a>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
                             </div>*@
-                            <table id="table" class="table border-table txt-align-l" border="1">
-                                <thead>
-                                    <tr>
-                                        @*<th data-field="state" data-checkbox="true"></th>*@
-                                        @*<th data-field="id">ID</th>*@
-                                        <th data-field="name" data-editable="true">Name</th>
-                                        <th data-field="descriptipon" data-editable="true">Description</th>
-                                        <th data-field="category" data-editable="true">Category</th>
-                                        <th data-field="supplier" data-editable="true">Supplier</th>
-                                        <th data-field="quantity">Quantity</th>
-                                        <th data-field="price">Price/Unit</th>
-                                        <th data-field="views" data-editable="true">Views</th>
-                                        <th data-field="date" data-editable="true">Modified On</th>
-                                        <th data-field="status" data-editable="true">Status</th>
-                                        <th data-field="action">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: products">
-                                    <tr>
-                                        <td data-bind="text: Name"></td>
-                                        <td data-bind="text: Description"></td>
-                                        <td data-bind="text: CategoryName"></td>
-                                        <td data-bind="text: SupplierName"></td>
-                                        <td data-bind="text: Quantity"></td>
-                                        <td><span data-bind="text: UnitPrice"></span> $</td>
-                                        <td data-bind="text: ViewCounts"></td>
-                                        <td data-bind="text: CommonGlobal.convertDateJSToClientDateTime(ModifiedOn,'DD-MMM-YYYY')"></td>
-                                        <td class="datatable-ct txt-align-c" data-bind="html: CommonGlobal.displayStatusInfo(StatusId)"></td>
-                                        <td class="datatable-ct txt-align-c">
-                                            <a href="" data-bind="click: $parent.ViewProduct.bind($parent, $data.Id)" class="standard-btn"><i class="fa big-icon fa-pencil "></i></a>
-                                            @*<a href="" data-bind="click: $UserViewModel.parent.DeleteProduct.bind($parent, $data.Id)" class="dangerous-btn"><i class="fa big-icon fa-trash "></i></a>*@
-                                        </td>
-                                    </tr>
 
-
-                                </tbody>
-                            </table>
+                        <div class="ko-grid" 
+                             data-bind="koGrid: GridOptions">
                         </div>
                     </div>
                 </div>

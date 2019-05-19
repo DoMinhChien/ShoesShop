@@ -2,35 +2,53 @@
 //    var CommonGlobal = {};
 //}
 var CommonGlobal = {
-    connectServer: function (type, param, url, callbackSuccess) {
-
+    Ajax: function (type, param, url, callbackSuccess,isLoading) {
         $.ajax({
             type: type,
             url: url,
             beforeSend: function () {
-                $('#loader').show();
+                if (isLoading) {
+                    $('#loader').show();
+                }
+                
             },
             data: param,
             success: function (data) {
                 callbackSuccess(data);
             },
             complete: function () {
-                $('#loader').hide();
+                if (isLoading) {
+                    $('#loader').hide();
+                }
+         
             }
         });
     },
-    convertDateJSToClientDateTime: function (dateJs, format) {
+    connectServer: function (type, param, url, callbackSuccess) {
+        CommonGlobal.Ajax(type, param, url, callbackSuccess,true);
+
+
+    },
+    connectServerBackground: function (type, param, url, callbackSuccess) {
+        CommonGlobal.Ajax(type, param, url, callbackSuccess,false);
+    },
+    convertDateJSToClientDateTime: function (dateJs, formatMatch) {
         if (dateJs === null) {
             return '';
         }
-        if (format) {
-            format = "DD-MMM-YYYY hh:mm:ss A";
+        if (!formatMatch) {
+            formatMatch = "DD-MMM-YYYY hh:mm:ss A";
         }
-        return moment(dateJs).format(format);
+        
+        return moment(dateJs).format(formatMatch);
+        
     },
     displayStatusInfo: function (statusId) {
-        if (statusId === 1) {
-            return "<button type='button' class='btn custom-active-stt-btn btn-success'><span><i class='fa fa-check'></i>Active</span> </button>";
+        if (statusId) {
+            return "<button type='button' class='btn custom-active-stt-btn btn-success display-mode'><span><i class='fa fa-check'></i></span> </button>";
+        }
+        else {
+            return "<button type='button' class='btn custom-active-stt-btn btn-default display-mode'><span><i class='fa fa-times'></i></span> </button>";
         }
     },
     showSuccessMessage: function (content, returnUrl) {

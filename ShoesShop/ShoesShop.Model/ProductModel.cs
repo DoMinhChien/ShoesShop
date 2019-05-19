@@ -14,7 +14,6 @@ namespace ShoesShop.Model
         public int CategoryId { get; set; }
         public System.Guid SupplierId { get; set; }
         public int Quantity { get; set; }
-        public int StatusId { get; set; }
         public System.Guid CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -25,6 +24,7 @@ namespace ShoesShop.Model
         public Nullable<double> UnitPrice { get; set; }
         public Nullable<int> UnitsInStock { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

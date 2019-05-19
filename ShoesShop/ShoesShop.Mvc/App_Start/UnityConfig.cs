@@ -18,6 +18,7 @@ namespace ShoesShop.Mvc
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IProductBLL, ProductBLL>();
+            container.RegisterType<IHistoryBLL, HistoryBLL>();
             container.RegisterType<ICategoryBLL, CategoryBLL>();
             container.RegisterType<ISupplierBLL, SupplierBLL>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();

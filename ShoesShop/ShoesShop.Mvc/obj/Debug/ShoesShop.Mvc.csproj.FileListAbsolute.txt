@@ -113,3 +113,9 @@ D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\AutoMapper.pdb
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\AutoMapper.xml
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\EntityFramework.SqlServer.xml
 D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\System.ValueTuple.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\ShoesShop.Core.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\ShoesShop.Core.pdb
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\PagedList.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\PagedList.Mvc.dll
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\PagedList.xml
+D:\Project\ShoesShop\ShoesShop\ShoesShop.Mvc\bin\PagedList.Mvc.xml

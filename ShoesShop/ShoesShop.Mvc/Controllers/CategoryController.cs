@@ -59,5 +59,11 @@ namespace ShoesShop.Mvc.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetCategoryForMasterData()
+        {
+            var ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.Id, Name = cat.Name }).ToList();
+
+            return Json(ListCategory,JsonRequestBehavior.AllowGet);
+        }
     }
 }

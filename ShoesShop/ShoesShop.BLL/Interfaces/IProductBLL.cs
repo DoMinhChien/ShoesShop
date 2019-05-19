@@ -1,4 +1,6 @@
-﻿using ShoesShop.Model;
+﻿using PagedList;
+using ShoesShop.Model;
+using ShoesShop.Model.FilterModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace ShoesShop.BLL.Interfaces
 {
   public  interface IProductBLL
     {
-        List<ProductModel> GetListProduct();
+        List<ProductModel> GetListProduct(ProductFilterModel filterModel);
         bool DeleteProduct(Guid productId);
         bool InsertProduct(ProductModel model);
         ProductModel GetProductDetail(Guid productId);

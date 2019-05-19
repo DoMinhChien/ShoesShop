@@ -1,10 +1,11 @@
 ﻿using ShoesShop.Model;
+using ShoesShop.Mvc.Infrastructure.Extensions;
 using ShoesShop.Mvc.Inputs;
 using ShoesShop.Mvc.Outputs;
 using ShoesShop.Repository;
 using System;
 
-namespace ShoesShop.Mvc.Infrastructure
+namespace ShoesShop.Core.Extensions
 {
     public class AutoMapperConfig : AutoMapper.Profile
     {
@@ -18,7 +19,8 @@ namespace ShoesShop.Mvc.Infrastructure
         }
         private void ConfigureMapperforEntity()
         {
-            CreateMap<ProductModel, Product>().ForMember(dst => dst.StatusId, s => s.MapFrom(src => 1));
+            
+            CreateMap<ProductModel, Product>();
             CreateMap<CategoryModel, Category>()
                                      .ForMember(dst => dst.Products,s=>s.MapFrom(src=>src.Products))
                                      .ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
@@ -36,10 +38,11 @@ namespace ShoesShop.Mvc.Infrastructure
         
         private void ConfigureMapperforModel()
         {
+            CreateMap<HistoryDetail, HistoryDetailModel>().Ignore(r => r.history);
             CreateMap<Product, ProductModel>();
             CreateMap<ProductInput, ProductModel>();
-
-
+            CreateMap<History, HistoryModel>().ForMember(dst=>dst.DisplayName,s=>s.MapFrom(src=>src.Employee.DisplayName));
+           
             CreateMap<Category, CategoryModel>().ForMember(dst=>dst.Products,s=>s.MapFrom(src=>src.Products));
             CreateMap<CategoryInput, CategoryModel>();
 
@@ -50,6 +53,7 @@ namespace ShoesShop.Mvc.Infrastructure
         }
         private void ConfigureMapperforOutput()
         {
+            CreateMap<HistoryModel, HistoryOutput>();
             CreateMap<ProductModel, ProductOutput>();
             CreateMap<CategoryModel, CategoryOutput>()
                 .ForMember(dst => dst.Products, s => s.MapFrom(src => src.Products));

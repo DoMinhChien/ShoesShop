@@ -3,8 +3,12 @@ var ProductModel = function (data, parent) {
     var self = this;
     self.products = ko.observableArray([]);
     self.parentViewModel = parent;
-    self.Name = ko.observable(data && data.Name ? data.Name: '');
-    self.Description = ko.observable(data && data.Description ? data.Description : '');
+    self.Name = ko.observable(data && data.Name ? data.Name : '').extend({
+        required:true
+    });
+    self.Description = ko.observable(data && data.Description ? data.Description : '').extend({
+        required: true
+    });
     self.ListCategory = ko.observableArray(data && data.ListCategory ? data.ListCategory : []);
     self.ListSupplier = ko.observableArray(data && data.ListCategory ? data.ListSupplier : []);
     self.Quantity = ko.observable(data && data.Quantity ? data.Quantity :0);
@@ -13,20 +17,29 @@ var ProductModel = function (data, parent) {
     self.Id = ko.observable(data && data.Id  ? data.Id : null);
     self.StatusId = ko.observable(data && data.StatusId ? data.StatusId :1);
 
-    self.UnitInStock = ko.observable(data && data.UnitInStock ? data.UnitInStock  : 0);
+    self.UnitsInStock = ko.observable(data && data.UnitsInStock ? data.UnitsInStock  : 0);
     self.UnitPrice = ko.observable(data && data.UnitPrice ? data.UnitPrice : 0);
     self.ViewCounts = ko.observable(data && data.ViewCounts ? data.ViewCounts : 0);
+    self.IsActive = ko.observable(data && data.IsActive ? data.IsActive : false);
     self.ReturnToList = function () {
-        //self.parentViewModel.searchProduct();
         self.parentViewModel.parent.isViewDetail(false);
 
 
+    };
+    self.errors = ko.validation.group(self); 
+    var isValid = function () {
+        //self.errors.showAllMessages();
+        return self.errors().length === 0;
     };
     self.ToggleSwitch = function ()
         {
         var a = 0;
         };
     self.UpdateProduct = function () {
+        if (!isValid()) {
+            self.errors.showAllMessages();
+            return;
+        }
         let url = "";
         if (self.Id()) {
             url = CommonEnum.API_URL.UpdateProduct;
@@ -38,7 +51,7 @@ var ProductModel = function (data, parent) {
         var model = self.toJSON();
         CommonGlobal.connectServer("POST", { Input: model }, url,
             function (data) {
-                CommonGlobal.showSuccessMessage('Test Common',  '/Product/Index');
+                CommonGlobal.showSuccessMessage('Success',  '/Product/Index');
             });
 
 
@@ -67,7 +80,9 @@ var ProductModel = function (data, parent) {
             Description: ko.utils.unwrapObservable(self.Description()),
             Quantity: ko.utils.unwrapObservable(self.Quantity()),
             UnitPrice: ko.utils.unwrapObservable(self.UnitPrice()),
-            ViewCounts: ko.utils.unwrapObservable(self.ViewCounts())
+            UnitsInStock: ko.utils.unwrapObservable(self.UnitsInStock()),
+            ViewCounts: ko.utils.unwrapObservable(self.ViewCounts()),
+            IsActive: ko.utils.unwrapObservable(self.IsActive())
         };
 
     };

@@ -17,14 +17,14 @@
                                 <button data-bind="click: UpdateProduct" type="button" class="btn btn-custon-rounded-three btn-success"><span class="fa fa-save"></span> Save</button>
                                 <button type="button" class="btn btn-custon-rounded-three btn-warning"><span class="fa fa-times"></span> Cancel</button>
                                 <button data-bind="click: DeleteProduct.bind($data,Id)" type="button" class="btn btn-custon-rounded-three btn-danger"><span class="fa fa-times"></span> Delete</button>
-                                <button data-bind="click: ReturnToList.bind()" type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-history"></span> History</button>
+                                <history-component params='objectId : Id'></history-component>
                                 <button data-bind="click: ReturnToList.bind()" type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-undo"></span> Return</button>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
-
+                                
                             <div class="project-details-mg">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" placeholder="Name" id="txtName" data-bind="value : Name" />
+                                            <input-component params='name: Name'></input-component>
 
                                         </div>
                                     </div>
@@ -49,8 +49,8 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="text" class="form-control" placeholder="Description" id="txtDescription" data-bind="value : Description">
-
+                                            @*<input type="text" class="form-control" placeholder="Description" id="txtDescription" data-bind="value : Description">*@
+                                            <input-component params='name: Description'></input-component>
                                         </div>
                                     </div>
                                 </div>
@@ -93,12 +93,17 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="input-mark-inner mg-b-22">
-                                            <input type="text" class="form-control" data-mask="$ 999.99" placeholder="" id="txtPrice" data-bind="value : UnitPrice">
-
+                                        @*<form>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+                                            </div>
+                                        </form>*@
+                                        <div class="input-group mg-b-22">
+                                            <input class="form-control" data-bind="currency:UnitPrice,css:{negative:false}" />
+                                            <div class="input-group-addon">$</div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="project-details-mg">
@@ -111,16 +116,13 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="form-group">
-                                            <label class="switch">
-                                                <input type="checkbox" id="togBtn" @*data-bind="click : ToggleSwitch"*@>
-                                                <div class="slider round">
-                                                    <!--ADDED HTML -->
-
-                                                    <span class="off  big-icon">ON</span>
-                                                    <span class="on  big-icon">OFF</span>
-                                                    <!--END-->
-                                                </div>
-                                            </label>
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="statusSwitch" data-bind="checked: IsActive">
+                                                <label class="onoffswitch-label" for="statusSwitch">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +138,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="mg-b-7">
-                                            <select id="dropdownCategory" style="width: 80%;" data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Category...', allowClear: false }"></select>
+                                            <select id="dropdownCategory" class="w-80"  data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Category...', allowClear: false }"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -150,48 +152,62 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="">
-                                            <select id="dropdownSupplier" style="width: 80%;" data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Supplier...', allowClear: false }"></select>
+                                            <select id="dropdownSupplier" class="w-80"  data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Supplier...', allowClear: false }"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-details-mg">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-mask-title">
+                                            <span><strong>Unit In Stock:</strong></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <input type="text" class="form-control w-80" placeholder="" id="txtUnitInStock" data-bind="value : UnitsInStock">
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
-
                             @*<div class="project-details-mg">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <div class="project-details-st">
-                                                <span><strong>Participants:</strong></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                            <div class="project-details-img">
-                                                <a href="#">
-                                                    <img src="img/notification/1.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="img/notification/2.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="img/notification/3.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="img/notification/4.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="img/notification/5.jpg" alt="" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="project-details-st">
+                        <span><strong>Participants:</strong></span>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="project-details-img">
+                        <a href="#">
+                            <img src="img/notification/1.jpg" alt="" />
+                        </a>
+                        <a href="#">
+                            <img src="img/notification/2.jpg" alt="" />
+                        </a>
+                        <a href="#">
+                            <img src="img/notification/3.jpg" alt="" />
+                        </a>
+                        <a href="#">
+                            <img src="img/notification/4.jpg" alt="" />
+                        </a>
+                        <a href="#">
+                            <img src="img/notification/5.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="project-pregress-details">
-                                <span><strong>Completed:</strong></span>
+                                <span><strong>Rating:</strong></span>
                             </div>
                         </div>
                         <div class="col-lg-10">
@@ -535,11 +551,11 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                <div class="project-details-descri project-details-mg-t-30 shadow-reset">
-                    <h2>Project Description</h2>
+                <div class="project-details-descri project-details-mg-t-30 shadow-reset" style="width:96%">
+                    <h2>Workflow</h2>
                     <p>There are many variations of the passages of Lorem on the Ipsum available, but the majority have suffered alteration in some form, by injected humour, or one of randomised words.</p>
                 </div>
-                <div class="sparkline7-list shadow-reset mg-t-30">
+                @*<div class="sparkline7-list shadow-reset mg-t-30">
                     <div class="sparkline7-hd">
                         <div class="main-spark7-hd">
                             <h1>Budgets</h1>
@@ -561,8 +577,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="sparkline8-list shadow-reset mg-t-30">
+                </div>*@
+                @*<div class="sparkline8-list shadow-reset mg-t-30">
                     <div class="sparkline8-hd">
                         <div class="main-spark7-hd">
                             <h1>Files</h1>
@@ -586,7 +602,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>

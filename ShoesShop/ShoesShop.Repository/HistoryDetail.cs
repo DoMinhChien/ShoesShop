@@ -20,6 +20,7 @@ namespace ShoesShop.Repository
         public string NewValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public bool IsDeleted { get; set; }
+        public string Field { get; set; }
     
         public virtual History History { get; set; }
     }

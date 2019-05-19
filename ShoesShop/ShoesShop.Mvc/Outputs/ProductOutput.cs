@@ -13,7 +13,6 @@ namespace ShoesShop.Mvc.Outputs
         public int CategoryId { get; set; }
         public System.Guid SupplierId { get; set; }
         public int Quantity { get; set; }
-        public int StatusId { get; set; }
         public System.Guid CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -28,5 +27,6 @@ namespace ShoesShop.Mvc.Outputs
 
         public List<SelectedItemOutput> ListCategory { get; set; }
         public List<SelectedItemOutput> ListSupplier { get; set; }
+        public bool IsActive { get; set; }
     }
 }

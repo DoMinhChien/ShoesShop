@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Repository;
+using ShoesShop.Mvc.Infrastructure.Extensions;
 
 namespace ShoesShop.BLL
 {
@@ -49,7 +50,7 @@ namespace ShoesShop.BLL
                 
             }
             var entity = new Category();
-            entity = AutoMapper.Mapper.Map<Category>(model);
+            entity = model.MapTo<Category>();
 
             _categoryRepository.Insert(entity);
             _unitOfWork.SaveChanges();
@@ -70,7 +71,7 @@ namespace ShoesShop.BLL
         public CategoryModel GetCategoryDetail(int Id)
         {
             var entity = _categoryRepository.GetById(Id);
-            var model = AutoMapper.Mapper.Map<CategoryModel>(entity);
+            var model = entity.MapTo<CategoryModel>();
             return model;
         }
         public bool DeleteCategory(int Id)

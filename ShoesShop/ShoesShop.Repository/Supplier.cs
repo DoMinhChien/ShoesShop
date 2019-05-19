@@ -20,7 +20,7 @@ namespace ShoesShop.Repository
             this.Products = new HashSet<Product>();
         }
     
-        public System.Guid SupplierId { get; set; }
+        public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }

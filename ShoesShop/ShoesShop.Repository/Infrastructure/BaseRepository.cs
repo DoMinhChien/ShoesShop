@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -21,6 +23,7 @@ namespace ShoesShop.Repository.Infrastructure
         private readonly string ModifiedBy = "ModifiedBy";
         private readonly string DefaultId = "6E2B9DE4-B456-4263-A0F7-CE0432556726";
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IObjectContextAdapter dataContext;
         internal DbSet<T> dbSet;
 
         public BaseRepository(IUnitOfWork unitOfWork)

@@ -16,5 +16,9 @@ namespace ShoesShop.Mvc.Inputs
         public int Quantity { get; set; }
         public int? ViewCounts { get; set; }
         public long UnitPrice { get; set; }
+
+        public int? UnitsInStock { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

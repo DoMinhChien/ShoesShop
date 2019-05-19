@@ -54,7 +54,6 @@
     <Compile Include="Category.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repo\CategoryRepository.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -76,10 +75,6 @@
     <Compile Include="ImageStore.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BaseRepository.cs" />
-    <Compile Include="Infrastructure\Interfaces\IBaseRepository.cs" />
-    <Compile Include="Infrastructure\Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,12 +102,18 @@
     <Compile Include="Product.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repo\CategoryRepository.cs" />
+    <Compile Include="Infrastructure\BaseRepository.cs" />
+    <Compile Include="Infrastructure\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Infrastructure\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Repo\HistoryRepository.cs" />
     <Compile Include="Repo\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repo\SupplierRepository.cs" />
     <Compile Include="Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repo\SupplierRepository.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -26,9 +26,15 @@ namespace ShoesShop.Mvc.Controllers
 
         public JsonResult GetSuppliers()
         {
-            var result = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { Id = r.SupplierId, Name = r.Name }).ToList();
+            var result = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { Id = r.Id, Name = r.Name }).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSupplierForMasterData()
+        {
+            var ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup => new SelectedItemOutput { Id = sup.Id, Name = sup.Name }).ToList();
+
+            return Json(ListSupplier, JsonRequestBehavior.AllowGet);
         }
     }
 }

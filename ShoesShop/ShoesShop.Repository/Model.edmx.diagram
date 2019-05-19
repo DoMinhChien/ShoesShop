@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ff0e76f73f14b67a0b63bdb74a0247b" Name="Diagram1">
+      <Diagram DiagramId="1e1a508ac720424886bca32f3f7a365d" Name="Diagram1">
         <EntityTypeShape EntityType="StoreManagementModel.Category" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.Customer" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.CustomerLevel" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="StoreManagementModel.Order" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.OrderStatu" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.Product" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreManagementModel.Supplier" Width="1.5" PointX="12.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.sysdiagram" Width="1.5" PointX="5.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreManagementModel.OrderDetail" Width="1.5" PointX="15.5" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="StoreManagementModel.FK_Products_Categories" ManuallyRouted="false" />
@@ -28,11 +27,13 @@
         <AssociationConnector Association="StoreManagementModel.FK_History_HistoryDetail" ManuallyRouted="false" />
         <AssociationConnector Association="StoreManagementModel.FK_History_Product" ManuallyRouted="false" />
         <AssociationConnector Association="StoreManagementModel.FK_TblImageStore_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreManagementModel.FK_tblSuppliers_ImageStore" ManuallyRouted="false" />
         <AssociationConnector Association="StoreManagementModel.FK_Orders_OrderDetails" ManuallyRouted="false" />
         <AssociationConnector Association="StoreManagementModel.FK_Orders_Statues" ManuallyRouted="false" />
         <AssociationConnector Association="StoreManagementModel.FK_OrderDetails_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreManagementModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StoreManagementModel.Supplier" Width="1.5" PointX="12.75" PointY="7.875" />
+        <AssociationConnector Association="StoreManagementModel.FK_tblSuppliers_ImageStore" />
+        <AssociationConnector Association="StoreManagementModel.FK_Products_Suppliers" />
+        <AssociationConnector Association="StoreManagementModel.FK_History_Employees" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

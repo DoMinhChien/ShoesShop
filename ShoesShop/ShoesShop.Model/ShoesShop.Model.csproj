@@ -48,9 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeModel.cs" />
+    <Compile Include="FilterModel\BasePagingModel.cs" />
+    <Compile Include="FilterModel\ProductFilterModel.cs" />
+    <Compile Include="HistoryDetailModel.cs" />
+    <Compile Include="HistoryModel.cs" />
     <Compile Include="CategoryModel.cs" />
+    <Compile Include="JsonPagedDataResult.cs" />
+    <Compile Include="ProductHistoryDetailModel.cs" />
     <Compile Include="ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectedItemModel.cs" />
     <Compile Include="SupplierModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +70,9 @@
       <Project>{87c30a3a-ac78-474b-a9d3-3d2324445a9f}</Project>
       <Name>ShoesShop.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="History\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

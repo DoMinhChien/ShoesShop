@@ -7,43 +7,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Core.Constants;
+using ShoesShop.Mvc.Infrastructure.Extensions;
+using PagedList;
+using ShoesShop.Model.FilterModel;
+
 namespace ShoesShop.BLL
 {
     public class ProductBLL : IProductBLL
     {
         private readonly IUnitOfWork _unitOfWork;
+
         private readonly ProductRepository _productRepository;
+        private readonly IHistoryBLL _historyBLL;
+        
         CommonConstant commonConstant = new CommonConstant();
 
-        public ProductBLL(IUnitOfWork unitOfWork)
+        public ProductBLL(IUnitOfWork unitOfWork,
+                          IHistoryBLL historyBLL)
         {
-
+            _historyBLL = historyBLL;
             _unitOfWork = unitOfWork;
 
             _productRepository = new ProductRepository(_unitOfWork);
         }
 
-        public List<ProductModel> GetListProduct()
+        public List<ProductModel> GetListProduct(ProductFilterModel filterModel)
         {
-            List<ProductModel> list = _productRepository.GetAll(r=>!r.IsDeleted).OrderByDescending(c=>c.CreatedOn).Select(m =>  new ProductModel
-            {
-                Id= m.Id,
-                Name = m.Name,
-                Description = m.Description,
-                Quantity = m.Quantity,
-                CategoryId = m.categoryId,
-                SupplierId = m.supplierId,
-                StatusId = m.StatusId,
-                UnitPrice = m.UnitPrice,
-                UnitsInStock = m.UnitsInStock,
-                ViewCounts = m.ViewCounts,
-                ModifiedOn = m.ModifiedOn.HasValue ? m.ModifiedOn.Value : (DateTime?)null,
-                ImageUrl = m.ImageStores.Select(r => r.ImagePath).ToList(),
-                CategoryName = m.Category.Name,
-                SupplierName = m.Supplier.Name
-            }).ToList();
 
-            return list;
+            var list = _productRepository.GetAll(r => !r.IsDeleted).OrderByDescending(c => c.CreatedOn).ToList();
+            var result = list.MapTo<List<ProductModel>>();
+            return result;
         }
         public bool DeleteProduct(Guid Id)
         {
@@ -63,13 +56,13 @@ namespace ShoesShop.BLL
         public ProductModel GetProductDetail(Guid productId)
         {
             var entity = _productRepository.GetById(productId);
-            var model = AutoMapper.Mapper.Map<ProductModel>(entity);
+            var model = entity.MapTo<ProductModel>();
             return model;
         }
         public bool InsertProduct(ProductModel model)
         {
             var entity = new Product();
-            entity = AutoMapper.Mapper.Map<Product>(model);
+            entity = model.MapTo<Product>();
 
             _productRepository.Insert(entity);
             _unitOfWork.SaveChanges();
@@ -81,15 +74,17 @@ namespace ShoesShop.BLL
         {
 
             var entity = _productRepository.GetById(productModel.Id);
-            //entity = AutoMapper.Mapper.Map<Product>(productModel);
+
+            var oldEntity = entity.MapTo<ProductModel>();
+
+            entity.IsActive = productModel.IsActive;
             entity.Name = productModel.Name;
             entity.Description = productModel.Description;
             entity.categoryId = productModel.CategoryId;
             entity.supplierId = productModel.SupplierId;
             entity.Quantity = productModel.Quantity;
             entity.UnitPrice = productModel.UnitPrice;
-
-            //entity.ModifiedOn = DateTime.UtcNow;
+            _historyBLL.SaveHistory(oldEntity, productModel, "Has updated this Product");
             _productRepository.Update(entity);
             _unitOfWork.SaveChanges();
             return true;

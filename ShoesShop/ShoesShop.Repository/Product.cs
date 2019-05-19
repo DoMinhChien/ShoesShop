@@ -28,7 +28,6 @@ namespace ShoesShop.Repository
         public int categoryId { get; set; }
         public System.Guid supplierId { get; set; }
         public int Quantity { get; set; }
-        public int StatusId { get; set; }
         public System.Guid CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -38,6 +37,7 @@ namespace ShoesShop.Repository
         public Nullable<int> UnitsInStock { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Employee Employee { get; set; }

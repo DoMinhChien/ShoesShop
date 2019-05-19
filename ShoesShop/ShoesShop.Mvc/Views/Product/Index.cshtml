@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <script src="~/Scripts/jquery-2.2.4.js"></script>
 <script src="~/Scripts/jquery-2.2.4.min.js"></script>
 <script src="~/Scripts/knockout/knockout-3.2.0.js"></script>
@@ -52,11 +53,15 @@
                 UpdateProduct: '@Url.Action("UpdateProduct", "Product")',
                 InsertProduct: '@Url.Action("InsertProduct", "Product")',
                 DeleteProduct: '@Url.Action("DeleteProduct", "Product")',
+                    
+                GetHistory: '@Url.Action("GetHistory", "Home")',
+                GetCategoryForMasterData: '@Url.Action("GetCategoryForMasterData", "Category")',
+                GetSupplierForMasterData:'@Url.Action("GetSupplierForMasterData", "Supplier")',
             });
 
         var form =
         {
-           
+
         };
         var builder = new ProductListFormViewModel(form);
         ko.applyBindings(builder, document.getElementById('product-form'));

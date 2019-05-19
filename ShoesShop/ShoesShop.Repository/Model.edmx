@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StoreManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StoreManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,6 +97,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="historyId" Type="int" Nullable="false" />
+          <Property Name="Field" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="OldValue" Type="nvarchar" MaxLength="500" />
           <Property Name="NewValue" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
@@ -178,7 +179,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="categoryId" Type="int" Nullable="false" />
           <Property Name="supplierId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
@@ -191,9 +192,9 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
-            <PropertyRef Name="SupplierId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
@@ -242,6 +243,18 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Employees">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,7 +371,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
-              <PropertyRef Name="SupplierId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="supplierId" />
@@ -425,6 +438,10 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             <End Role="Department" EntitySet="Department" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_History_Employees" Association="Self.FK_History_Employees">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
           <AssociationSet Name="FK_History_HistoryDetail" Association="Self.FK_History_HistoryDetail">
             <End Role="History" EntitySet="History" />
             <End Role="HistoryDetail" EntitySet="HistoryDetail" />
@@ -474,8 +491,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             <End Role="Supplier" EntitySet="Supplier" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StoreManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -562,6 +578,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <NavigationProperty Name="Department" Relationship="Self.FK_Employees_Department" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Orders_Employees" FromRole="Employee" ToRole="Order" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Employees" FromRole="Employee" ToRole="Product" />
+          <NavigationProperty Name="Histories" Relationship="StoreManagementModel.FK_History_Employees" FromRole="Employee" ToRole="History" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -574,6 +591,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HistoryDetails" Relationship="Self.FK_History_HistoryDetail" FromRole="History" ToRole="HistoryDetail" />
           <NavigationProperty Name="Product" Relationship="Self.FK_History_Product" FromRole="History" ToRole="Product" />
+          <NavigationProperty Name="Employee" Relationship="StoreManagementModel.FK_History_Employees" FromRole="History" ToRole="Employee" />
         </EntityType>
         <EntityType Name="HistoryDetail">
           <Key>
@@ -586,6 +604,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="History" Relationship="Self.FK_History_HistoryDetail" FromRole="HistoryDetail" ToRole="History" />
+          <Property Name="Field" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ImageStore">
           <Key>
@@ -602,7 +621,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Product" Relationship="Self.FK_TblImageStore_Product" FromRole="ImageStore" ToRole="Product" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="ImageStore" ToRole="Supplier" />
+          <NavigationProperty Name="Suppliers" Relationship="StoreManagementModel.FK_tblSuppliers_ImageStore" FromRole="ImageStore" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -646,7 +665,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="categoryId" Type="Int32" Nullable="false" />
           <Property Name="supplierId" Type="Guid" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Guid" />
@@ -661,26 +679,8 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <NavigationProperty Name="Histories" Relationship="Self.FK_History_Product" FromRole="Product" ToRole="History" />
           <NavigationProperty Name="ImageStores" Relationship="Self.FK_TblImageStore_Product" FromRole="Product" ToRole="ImageStore" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Product" ToRole="Supplier" />
-        </EntityType>
-        <EntityType Name="Supplier">
-          <Key>
-            <PropertyRef Name="SupplierId" />
-          </Key>
-          <Property Name="SupplierId" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedBy" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <Property Name="ImageId" Type="Int32" />
-          <NavigationProperty Name="ImageStore" Relationship="Self.FK_tblSuppliers_ImageStore" FromRole="Supplier" ToRole="ImageStore" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Supplier" ToRole="Product" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Supplier" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Product" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -829,18 +829,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblSuppliers_ImageStore">
-          <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="0..1" />
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImageStore">
-              <PropertyRef Name="ImageId" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="ImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Orders_OrderDetails">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -877,18 +865,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Products_Suppliers">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="SupplierId" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="supplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="StoreManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -901,7 +877,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
           <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
@@ -940,10 +915,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             <End Role="Product" EntitySet="Products" />
             <End Role="ImageStore" EntitySet="ImageStores" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="Self.FK_tblSuppliers_ImageStore">
-            <End Role="ImageStore" EntitySet="ImageStores" />
-            <End Role="Supplier" EntitySet="Suppliers" />
-          </AssociationSet>
           <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
@@ -956,11 +927,75 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+          <EntitySet Name="Suppliers" EntityType="StoreManagementModel.Supplier" />
+          <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="StoreManagementModel.FK_tblSuppliers_ImageStore">
+            <End Role="ImageStore" EntitySet="ImageStores" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Suppliers" Association="StoreManagementModel.FK_Products_Suppliers">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_History_Employees" Association="StoreManagementModel.FK_History_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="History" EntitySet="Histories" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ImageId" Type="Int32" />
+          <NavigationProperty Name="ImageStore" Relationship="StoreManagementModel.FK_tblSuppliers_ImageStore" FromRole="Supplier" ToRole="ImageStore" />
+          <NavigationProperty Name="Products" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Supplier" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_tblSuppliers_ImageStore">
+          <End Type="StoreManagementModel.ImageStore" Role="ImageStore" Multiplicity="0..1" />
+          <End Type="StoreManagementModel.Supplier" Role="Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageStore">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Suppliers">
+          <End Type="StoreManagementModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Employees">
+          <End Type="StoreManagementModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="StoreManagementModel.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1062,6 +1097,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <EntitySetMapping Name="HistoryDetails">
             <EntityTypeMapping TypeName="StoreManagementModel.HistoryDetail">
               <MappingFragment StoreEntitySet="HistoryDetail">
+                <ScalarProperty Name="Field" ColumnName="Field" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="historyId" ColumnName="historyId" />
                 <ScalarProperty Name="OldValue" ColumnName="OldValue" />
@@ -1119,13 +1155,13 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="StoreManagementModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="categoryId" ColumnName="categoryId" />
                 <ScalarProperty Name="supplierId" ColumnName="supplierId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1135,24 +1171,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
                 <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="StoreManagementModel.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1185,6 +1203,24 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="StoreManagementModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
