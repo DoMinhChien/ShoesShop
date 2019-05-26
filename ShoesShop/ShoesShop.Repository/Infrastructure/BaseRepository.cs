@@ -20,6 +20,7 @@ namespace ShoesShop.Repository.Infrastructure
         private readonly string CreatedOn = "CreatedOn";
         private readonly string ModifiedOn = "ModifiedOn";
         private readonly string CreatedBy = "CreatedBy";
+        private readonly string IsDeleted = "IsDeleted";
         private readonly string ModifiedBy = "ModifiedBy";
         private readonly string DefaultId = "6E2B9DE4-B456-4263-A0F7-CE0432556726";
         private readonly IUnitOfWork _unitOfWork;
@@ -42,6 +43,7 @@ namespace ShoesShop.Repository.Infrastructure
         public IEnumerable<T> GetAll()
         {
             return dbSet.AsEnumerable();
+            
         }
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> whereCondition)
@@ -58,10 +60,19 @@ namespace ShoesShop.Repository.Infrastructure
 
         }
 
-
+        private bool CheckIsDetached(T entity)
+        {
+            var result = _unitOfWork.Db.Entry(entity).State == EntityState.Added;
+            if (result)
+            {
+                return true;
+            }
+            return false;
+        }
         public virtual void Update(T entity)
         {
             entity = GetUpdatedInfor(entity);
+
             dbSet.Attach(entity);
             _unitOfWork.Db.Entry(entity).State = EntityState.Modified;
 
@@ -130,7 +141,7 @@ namespace ShoesShop.Repository.Infrastructure
             }
 
         }
-        public virtual bool Delete(T entity)
+        public virtual bool HardDelete(T entity)
         {
             if (_unitOfWork.Db.Entry(entity).State == EntityState.Detached)
             {
@@ -139,16 +150,30 @@ namespace ShoesShop.Repository.Infrastructure
             dbSet.Remove(entity);
             return true;
         }
+        public bool SoftDelete(T entity)
+        {
+            var result = false;
+            var IsDeletedProp = typeof(T).GetProperty(IsDeleted);
+            if (IsDeletedProp != null)
+            {
+                result = true;
+                IsDeletedProp.SetValue(entity, result);
+            }
+            return result;
+        }
 
         public bool Exists(Expression<Func<T, bool>> whereCondition)
         {
             return dbSet.Any(whereCondition);
         }
 
-        public T GetById(dynamic entity)
+        public T GetById(dynamic Id)
         {
+            var entity = dbSet.Find(Id);
+            _unitOfWork.Db.Entry(entity).State = EntityState.Detached;
+            return entity;
 
-            return dbSet.Find(entity);
+
         }
         
         //--------------Exra generic methods--------------------------------
@@ -185,5 +210,6 @@ namespace ShoesShop.Repository.Infrastructure
         {
             return dbSet.SqlQuery(query, parameters);
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Repository;
-using ShoesShop.Mvc.Infrastructure.Extensions;
+
 
 namespace ShoesShop.BLL
 {
@@ -29,16 +29,9 @@ namespace ShoesShop.BLL
 
         public List<CategoryModel> GetCategories()
         {
-            var list = _categoryRepository.GetAll().Where(r => !r.IsDeleted).Select(r => new CategoryModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Description = r.Description,
-                ModifiedOn = r.ModifiedOn
-
-            }).ToList();
-
-            return list;
+            var list = _categoryRepository.GetAll().Where(r => !r.IsDeleted).ToList();
+            var result = list.MapToList<CategoryModel>();
+            return result;
         }
         public bool InsertCategory(CategoryModel model)
         {
@@ -56,16 +49,22 @@ namespace ShoesShop.BLL
             _unitOfWork.SaveChanges();
             return true;
         }
-        public bool UpdateCategory(CategoryModel Model)
+        public bool UpdateCategory(CategoryModel model)
         {
+            bool result = false;
+            var entity = _categoryRepository.GetById(model.Id);
+            if (entity != null)
+            {
+                entity.Name = model.Name;
+                entity.IsActive = model.IsActive;
+                entity.Description = model.Description;
+                entity.ModifiedOn = DateTime.UtcNow;
+                _categoryRepository.Update(entity);
+                _unitOfWork.SaveChanges();
+                result = true;
+            }
 
-            var entity = _categoryRepository.GetById(Model.Id);
-            entity.Name = Model.Name;
-            entity.Description = Model.Description;
-            entity.ModifiedOn = DateTime.UtcNow;
-            _categoryRepository.Update(entity);
-            _unitOfWork.SaveChanges();
-            return true;
+            return result ;
 
         }
         public CategoryModel GetCategoryDetail(int Id)
@@ -80,10 +79,8 @@ namespace ShoesShop.BLL
             var entity = _categoryRepository.GetById(Id);
             if (entity != null)
             {
-                entity.IsDeleted = true;
-                result = true;
+                result= _categoryRepository.SoftDelete(entity);
             }
-            _categoryRepository.Update(entity);
             _unitOfWork.SaveChanges();
 
             return result;

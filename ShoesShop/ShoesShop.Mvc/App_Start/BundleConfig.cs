@@ -55,6 +55,15 @@ namespace ShoesShop.Mvc
                       "~/Scripts/apps/Common/CommonGlobal.js",
                        "~/Scripts/apps/Common/CommonEnum.js",
                        "~/Scripts/moment/moment.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/component").Include(
+                  "~/Scripts/apps/component/DropDown.js",
+                   "~/Scripts/apps/component/History.js",
+                   "~/Scripts/apps/component/Input.js",
+                   "~/Scripts/apps/component/NumberInput.js",
+                   "~/Scripts/apps/component/SwitchStatus.js"));
+
         }
     }
 }

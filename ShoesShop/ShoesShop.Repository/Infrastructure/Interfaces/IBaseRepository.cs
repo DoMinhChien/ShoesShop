@@ -65,6 +65,9 @@ namespace ShoesShop.Repository.Infrastructure
             /// <param name="primaryKey"></param>
             /// <returns></returns>
             bool Exists(Expression<Func<T, bool>> whereCondition);
-        
+
+        bool SoftDelete(T entity);
+
+
     }
 }

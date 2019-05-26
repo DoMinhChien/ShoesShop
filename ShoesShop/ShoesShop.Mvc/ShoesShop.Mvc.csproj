@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.2.0\lib\net45\CommonServiceLocator.dll</HintPath>
@@ -57,7 +57,31 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FF.Entity.Exchange.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\FF.Entity.Exchange.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FF.Infrastructure.Mapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\FF.Infrastructure.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FF.Repository.Database, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\FF.Repository.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="FF.Repository.Database.Extension, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\FF.Repository.Database.Extension.dll</HintPath>
+    </Reference>
+    <Reference Include="FF.Repository.IDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\FF.Repository.IDatabase.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\FF.Repository.Database.Extension.1.0.0\lib\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -120,9 +144,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Abstractions.dll</HintPath>
     </Reference>
@@ -183,6 +204,7 @@
     <Compile Include="Infrastructure\AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="Inputs\CategoryInput.cs" />
     <Compile Include="Inputs\ProductInput.cs" />
+    <Compile Include="Inputs\SupplierInput.cs" />
     <Compile Include="Outputs\CategoryOutput.cs" />
     <Compile Include="Outputs\HistoryOutput.cs" />
     <Compile Include="Outputs\ProductOutput.cs" />
@@ -241,6 +263,8 @@
     <Content Include="Scripts\apps\Common\CommonGlobal.js" />
     <Content Include="Scripts\apps\Product\ko-product.js" />
     <Content Include="Scripts\apps\Product\ProductModel.js" />
+    <Content Include="Scripts\apps\Supplier\ko-Supplier.js" />
+    <Content Include="Scripts\apps\Supplier\SupplierModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\adminpro-icon.ttf" />
@@ -264,8 +288,11 @@
     <Content Include="Content\img\profile\Thumbs.db" />
     <Content Include="Content\img\Thumbs.db" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\component\DropDown.js" />
     <Content Include="Scripts\component\History.js" />
     <Content Include="Scripts\component\Input.js" />
+    <Content Include="Scripts\component\NumberInput.js" />
+    <Content Include="Scripts\component\SwitchStatus.js" />
     <Content Include="Scripts\counterup\counterup-active.js" />
     <Content Include="Scripts\counterup\jquery.counterup.min.js" />
     <Content Include="Scripts\counterup\waypoints.min.js" />
@@ -298,38 +325,6 @@
     <Content Include="Scripts\polyfiller.js" />
     <Content Include="Scripts\select2\select2-active.js" />
     <Content Include="Scripts\select2\select2.full.min.js" />
-    <Content Include="Scripts\shims\combos\1.js" />
-    <Content Include="Scripts\shims\combos\10.js" />
-    <Content Include="Scripts\shims\combos\11.js" />
-    <Content Include="Scripts\shims\combos\12.js" />
-    <Content Include="Scripts\shims\combos\13.js" />
-    <Content Include="Scripts\shims\combos\14.js" />
-    <Content Include="Scripts\shims\combos\15.js" />
-    <Content Include="Scripts\shims\combos\16.js" />
-    <Content Include="Scripts\shims\combos\17.js" />
-    <Content Include="Scripts\shims\combos\18.js" />
-    <Content Include="Scripts\shims\combos\2.js" />
-    <Content Include="Scripts\shims\combos\21.js" />
-    <Content Include="Scripts\shims\combos\22.js" />
-    <Content Include="Scripts\shims\combos\23.js" />
-    <Content Include="Scripts\shims\combos\25.js" />
-    <Content Include="Scripts\shims\combos\27.js" />
-    <Content Include="Scripts\shims\combos\28.js" />
-    <Content Include="Scripts\shims\combos\29.js" />
-    <Content Include="Scripts\shims\combos\3.js" />
-    <Content Include="Scripts\shims\combos\30.js" />
-    <Content Include="Scripts\shims\combos\31.js" />
-    <Content Include="Scripts\shims\combos\33.js" />
-    <Content Include="Scripts\shims\combos\34.js" />
-    <Content Include="Scripts\shims\combos\4.js" />
-    <Content Include="Scripts\shims\combos\5.js" />
-    <Content Include="Scripts\shims\combos\6.js" />
-    <Content Include="Scripts\shims\combos\7.js" />
-    <Content Include="Scripts\shims\combos\8.js" />
-    <Content Include="Scripts\shims\combos\9.js" />
-    <Content Include="Scripts\shims\combos\97.js" />
-    <Content Include="Scripts\shims\combos\98.js" />
-    <Content Include="Scripts\shims\combos\99.js" />
     <Content Include="Scripts\sparkline\jquery.sparkline.min.js" />
     <Content Include="Scripts\jquery.sticky.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -373,14 +368,18 @@
     <Content Include="Views\Category\_Detail.cshtml" />
     <Content Include="Views\Shared\Controls\_Input.cshtml" />
     <Content Include="Views\Shared\Controls\_History.cshtml" />
-    <Content Include="Scripts\shims\combos\comboinfo.json" />
+    <Content Include="Views\Shared\Controls\_SwitchStatus.cshtml" />
+    <Content Include="Views\Shared\Controls\_Dropdown.cshtml" />
+    <Content Include="Views\Shared\Controls\_NumberInput.cshtml" />
+    <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Supplier\_Detail.cshtml" />
+    <Content Include="Views\Supplier\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Component\" />
-    <Folder Include="Views\Supplier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

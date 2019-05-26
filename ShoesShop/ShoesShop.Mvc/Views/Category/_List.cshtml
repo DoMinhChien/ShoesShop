@@ -14,22 +14,25 @@
                     <div class="sparkline13-graph">
                         <div>
                           
-                            <table id="table" class="table border-table txt-align-l" border="1">
+                            <table id="table" class="table border-table txt-align-c" border="1">
                                 <thead>
                                     <tr>
 
-                                        <th data-field="name" data-editable="true">Name</th>
-                                        <th data-editable="true">Description</th>
-                                        <th data-field="date" data-editable="true">Modified On</th>
+                                        <th class="txt-align-c">Name</th>
+                                        <th class="txt-align-c">Description</th>
+                                        <th class="txt-align-c">Status</th>
+                                        <th class="txt-align-c">Modified On</th>
 
-                                        <th data-field="action">Action</th>
+                                        <th class="txt-align-c">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: categories">
                                     <tr>
                                         <td data-bind="text: Name"></td>
                                         <td data-bind="text: Description"></td>
+                                        <td data-bind="html: CommonGlobal.displayStatusInfo(IsActive)"></td>
                                         <td data-bind="text: CommonGlobal.convertDateJSToClientDateTime(ModifiedOn,'DD-MMM-YYYY')"></td>
+
                                         <td class="datatable-ct txt-align-c">
                                             <a href="" data-bind="click: $parent.ViewCategory.bind($parent, $data.Id)" class="standard-btn"><i class="fa big-icon fa-pencil "></i></a>
                                         </td>

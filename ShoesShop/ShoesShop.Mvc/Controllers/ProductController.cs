@@ -2,7 +2,6 @@
 using ShoesShop.BLL.Interfaces;
 using ShoesShop.Model;
 using ShoesShop.Model.FilterModel;
-using ShoesShop.Mvc.Infrastructure.Extensions;
 using ShoesShop.Mvc.Inputs;
 using ShoesShop.Mvc.Outputs;
 using System;
@@ -75,7 +74,7 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult GetProducts(ProductFilterModel filterModel)
         {
             var model = _productBLL.GetListProduct(filterModel);
-            var result = model.MapTo<List<ProductOutput>>();
+            var result = model.MapToList<ProductOutput>();
             var pagedListData = result.ToPagedList(filterModel.PageIndex, filterModel.PageSize);
             var ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.Id, Name = cat.Name }).ToList();
             var ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup => new SelectedItemOutput { Id = sup.Id, Name = sup.Name }).ToList();

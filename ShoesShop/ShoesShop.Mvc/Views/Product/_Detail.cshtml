@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8">
                             <div class="project-details-title">
-                                <h2>Product Detail  "<span class="profile-details-name-nn" data-bind="text : Name()"></span>"</h2>
+                                <h2>Product Detail  "<span class="profile-details-name-nn" data-bind="text : Name()" style="font-style:italic"></span>"</h2>
                             </div>
 
                         </div>
@@ -15,7 +15,7 @@
                             <div class="admin-comment-month project-details-action">
                                 <button type="button" class="btn btn-custon-rounded-three btn-primary"><span class="fa fa-pencil"></span> Edit</button>
                                 <button data-bind="click: UpdateProduct" type="button" class="btn btn-custon-rounded-three btn-success"><span class="fa fa-save"></span> Save</button>
-                                <button type="button" class="btn btn-custon-rounded-three btn-warning"><span class="fa fa-times"></span> Cancel</button>
+                                @*<button type="button" class="btn btn-custon-rounded-three btn-warning"><span class="fa fa-times"></span> Cancel</button>*@
                                 <button data-bind="click: DeleteProduct.bind($data,Id)" type="button" class="btn btn-custon-rounded-three btn-danger"><span class="fa fa-times"></span> Delete</button>
                                 <history-component params='objectId : Id'></history-component>
                                 <button data-bind="click: ReturnToList.bind()" type="button" class="btn btn-custon-rounded-three btn-default"><span class="fa fa-undo"></span> Return</button>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
-                                
+
                             <div class="project-details-mg">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input-component params='name: Name'></input-component>
+                                            <input-component params='name: Name,maxLength:100'></input-component>
 
                                         </div>
                                     </div>
@@ -49,7 +49,6 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            @*<input type="text" class="form-control" placeholder="Description" id="txtDescription" data-bind="value : Description">*@
                                             <input-component params='name: Description'></input-component>
                                         </div>
                                     </div>
@@ -64,27 +63,60 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="input-mark-inner ">
-                                            <input type="number" class="form-control" id="txtQuantity" data-bind="value : Quantity" min="0">
-
+                                            @*<input type="number" class="form-control" id="txtQuantity" data-bind="value : Quantity" min="0">*@
+                                            <number-input-component params="value : Quantity"></number-input-component>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @*<div class="project-details-mg">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <div class="input-mask-title">
-                                                <span><strong>Views:</strong></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                            <div class="input-mark-inner ">
-                                                <input type="text" class="form-control" id="txtViewCount" data-bind="value : ViewCounts" disabled>
-
-                                            </div>
+                            <div class="project-details-mg">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-mask-title">
+                                            <span><strong>Unit In Stock:</strong></span>
                                         </div>
                                     </div>
-                                </div>*@
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <number-input-component params="value : UnitsInStock"></number-input-component>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                            <div class="project-details-mg">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-mask-title">
+                                            <span><strong>Category:</strong></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="mg-b-7">
+                                            <select id="dropdownCategory" class="w-80" data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Category...', allowClear: true }"></select>
+                                            @*<dropdown-component params="value:CategoryId,options:ListCategory, optionsText: Name, optionsValue: Id"></dropdown-component>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-details-mg">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="input-mask-title">
+                                            <span><strong>Supplier:</strong></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="">
+                                            <select id="dropdownSupplier" class="w-80" data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Supplier...', allowClear: true }"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="project-details-mg">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -93,13 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        @*<form>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">$</span>
-                                                <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
-                                            </div>
-                                        </form>*@
-                                        <div class="input-group mg-b-22">
+                                        <div class="input-group mg-b-22" style="width:80%;">
                                             <input class="form-control" data-bind="currency:UnitPrice,css:{negative:false}" />
                                             <div class="input-group-addon">$</div>
                                         </div>
@@ -116,58 +142,7 @@
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                         <div class="form-group">
-                                            <div class="onoffswitch">
-                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="statusSwitch" data-bind="checked: IsActive">
-                                                <label class="onoffswitch-label" for="statusSwitch">
-                                                    <span class="onoffswitch-inner"></span>
-                                                    <span class="onoffswitch-switch"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
-                            <div class="project-details-mg">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="input-mask-title">
-                                            <span><strong>Category:</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="mg-b-7">
-                                            <select id="dropdownCategory" class="w-80"  data-bind="value: CategoryId, valueAllowUnset: true, options: ListCategory, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Category...', allowClear: false }"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-details-mg">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="input-mask-title">
-                                            <span><strong>Supplier:</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="">
-                                            <select id="dropdownSupplier" class="w-80"  data-bind="value: SupplierId, valueAllowUnset: true, options: ListSupplier, optionsText: 'Name', optionsValue: 'Id', select2: { placeholder: 'Select an Supplier...', allowClear: false }"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="project-details-mg">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <div class="input-mask-title">
-                                            <span><strong>Unit In Stock:</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="input-mark-inner mg-b-22">
-                                            <input type="text" class="form-control w-80" placeholder="" id="txtUnitInStock" data-bind="value : UnitsInStock">
-
+                                            <switch-component params='IsActive:IsActive'></switch-component>
                                         </div>
                                     </div>
                                 </div>
@@ -175,33 +150,33 @@
 
 
                             @*<div class="project-details-mg">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="project-details-st">
-                        <span><strong>Participants:</strong></span>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                    <div class="project-details-img">
-                        <a href="#">
-                            <img src="img/notification/1.jpg" alt="" />
-                        </a>
-                        <a href="#">
-                            <img src="img/notification/2.jpg" alt="" />
-                        </a>
-                        <a href="#">
-                            <img src="img/notification/3.jpg" alt="" />
-                        </a>
-                        <a href="#">
-                            <img src="img/notification/4.jpg" alt="" />
-                        </a>
-                        <a href="#">
-                            <img src="img/notification/5.jpg" alt="" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Participants:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-img">
+                                                <a href="#">
+                                                    <img src="img/notification/1.jpg" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="img/notification/2.jpg" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="img/notification/3.jpg" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="img/notification/4.jpg" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="img/notification/5.jpg" alt="" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
                         </div>
                     </div>
                     <div class="row">
@@ -556,53 +531,53 @@
                     <p>There are many variations of the passages of Lorem on the Ipsum available, but the majority have suffered alteration in some form, by injected humour, or one of randomised words.</p>
                 </div>
                 @*<div class="sparkline7-list shadow-reset mg-t-30">
-                    <div class="sparkline7-hd">
-                        <div class="main-spark7-hd">
-                            <h1>Budgets</h1>
-                            <div class="sparkline7-outline-icon">
-                                <span class="sparkline7-collapse-link"><i class="fa fa-chevron-up"></i></span>
-                                <span><i class="fa fa-wrench"></i></span>
-                                <span class="sparkline7-collapse-close"><i class="fa fa-times"></i></span>
+                        <div class="sparkline7-hd">
+                            <div class="main-spark7-hd">
+                                <h1>Budgets</h1>
+                                <div class="sparkline7-outline-icon">
+                                    <span class="sparkline7-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline7-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sparkline7-graph project-details-price-hd">
-                        <div class="single-skill">
-                            <div class="progress-circular">
-                                <input type="text" class="knob" value="0" data-rel="85" data-linecap="round" data-width="90" data-bgcolor="#999" data-fgcolor="#03a9f4" data-thickness=".10" data-readonly="true" disabled>
-                            </div>
-                            <div class="progress-circular1 project-details-price">
-                                <h2>$566</h2>
-                                <p>Price</p>
+                        <div class="sparkline7-graph project-details-price-hd">
+                            <div class="single-skill">
+                                <div class="progress-circular">
+                                    <input type="text" class="knob" value="0" data-rel="85" data-linecap="round" data-width="90" data-bgcolor="#999" data-fgcolor="#03a9f4" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="progress-circular1 project-details-price">
+                                    <h2>$566</h2>
+                                    <p>Price</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
                 @*<div class="sparkline8-list shadow-reset mg-t-30">
-                    <div class="sparkline8-hd">
-                        <div class="main-spark7-hd">
-                            <h1>Files</h1>
-                            <div class="sparkline8-outline-icon">
-                                <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
-                                <span><i class="fa fa-wrench"></i></span>
-                                <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sparkline8-graph project-details-price-hd">
-                        <div class="project-details-files">
-                            <div class="view-mail-file-list">
-                                <div class="view-file-in">
-                                    <i class="fa fa-file"></i>
-                                </div>
-                                <div class="file-type-view">
-                                    <h5><a href="#">Document-file.zip</a></h5>
-                                    <p>Added: jun 18, 2018</p>
+                        <div class="sparkline8-hd">
+                            <div class="main-spark7-hd">
+                                <h1>Files</h1>
+                                <div class="sparkline8-outline-icon">
+                                    <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>*@
+                        <div class="sparkline8-graph project-details-price-hd">
+                            <div class="project-details-files">
+                                <div class="view-mail-file-list">
+                                    <div class="view-file-in">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-type-view">
+                                        <h5><a href="#">Document-file.zip</a></h5>
+                                        <p>Added: jun 18, 2018</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
             </div>
         </div>
     </div>

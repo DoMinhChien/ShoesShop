@@ -7,6 +7,7 @@ var CategoryModel = function (data, parent) {
     self.Name = ko.observable(data && data.Name ? data.Name: '');
     self.Description = ko.observable(data && data.Description ? data.Description : '');
     self.Products = ko.observableArray(data && data.Products ? data.Products : []);
+    self.IsActive = ko.observable(data && data.IsActive ? data.IsActive : false);
     self.ToggleSwitch = function ()
         {
         var a = 0;
@@ -43,7 +44,8 @@ var CategoryModel = function (data, parent) {
         return {
             Id: ko.utils.unwrapObservable(self.Id()),
             Name: ko.utils.unwrapObservable(self.Name()),
-            Description: ko.utils.unwrapObservable(self.Description())
+            Description: ko.utils.unwrapObservable(self.Description()),
+            IsActive: ko.utils.unwrapObservable(self.IsActive())
         };
 
     };

@@ -2,6 +2,10 @@
     var self = this;
     self.isEditting = ko.observable(params.isEditting || true);
     self.name = params.name;
+    self.maxLength = params.maxLength;
+    self.CheckValidInput = function (value, e) {
+
+    };
 };
 var elemInstance = document.getElementById('input-component');
 
@@ -10,5 +14,5 @@ var elemInstance = document.getElementById('input-component');
 ko.components.register('input-component', {
     viewModel: InputComponent,
     template: { element: elemInstance }
-    
-});
+
+})

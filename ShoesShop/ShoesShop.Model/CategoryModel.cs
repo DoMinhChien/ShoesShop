@@ -11,5 +11,7 @@ namespace ShoesShop.Model
 
         public DateTime? ModifiedOn { get; set; }
         public List<ProductModel> Products { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

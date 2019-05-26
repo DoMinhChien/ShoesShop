@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Core.Constants;
-using ShoesShop.Mvc.Infrastructure.Extensions;
 using PagedList;
 using ShoesShop.Model.FilterModel;
 
@@ -35,7 +34,7 @@ namespace ShoesShop.BLL
         {
 
             var list = _productRepository.GetAll(r => !r.IsDeleted).OrderByDescending(c => c.CreatedOn).ToList();
-            var result = list.MapTo<List<ProductModel>>();
+            var result = list.MapToList<ProductModel>();
             return result;
         }
         public bool DeleteProduct(Guid Id)

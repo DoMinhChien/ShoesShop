@@ -1,5 +1,4 @@
 ﻿using ShoesShop.Core.Extensions;
-using ShoesShop.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;

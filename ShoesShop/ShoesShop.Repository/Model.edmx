@@ -17,6 +17,7 @@
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -206,6 +207,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="ImageId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -508,6 +510,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -959,6 +962,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <Property Name="ImageId" Type="Int32" />
           <NavigationProperty Name="ImageStore" Relationship="StoreManagementModel.FK_tblSuppliers_ImageStore" FromRole="Supplier" ToRole="ImageStore" />
           <NavigationProperty Name="Products" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Supplier" ToRole="Product" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_tblSuppliers_ImageStore">
           <End Type="StoreManagementModel.ImageStore" Role="ImageStore" Multiplicity="0..1" />
@@ -1005,6 +1009,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="StoreManagementModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1209,6 +1214,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="StoreManagementModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

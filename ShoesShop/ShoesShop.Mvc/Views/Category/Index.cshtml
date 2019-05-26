@@ -3,40 +3,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<script src="~/Scripts/jquery-2.2.4.js"></script>
 <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-<script src="~/Scripts/knockout/knockout-3.2.0.js"></script>
-<script src="~/Scripts/knockout/knockout.validation.js"></script>
-<script src="~/Scripts/knockout/koGrid-2.1.1.debug.js"></script>
-<script src="~/Scripts/knockout/koGrid-2.1.1.js"></script>
+
 <script src="~/Scripts/apps/Category/ko-Category.js"></script>
 <script src="~/Scripts/apps/Category/CategoryModel.js"></script>
 
-<div class="row " id="category-form">
-    <div data-bind="if: !isViewDetail()">
-        <!--ko template: viewListTemplate -->
-        <!-- /ko-->
-    </div>
 
-    <div>
-        <!--ko template: viewDetailTemplate -->
-        <!-- /ko-->
-    </div>
-
-
-</div>
-
-
-<script type="text/html" id="category-List">
-    @Html.Partial("_List")
-
-</script>
-
-<script type="text/html" id="category-Detail">
-    @Html.Partial("_Detail")
-</script>
 <script type="text/javascript">
     var builder = null;
 
@@ -66,3 +38,24 @@
 
 </script>
 
+<div class="row " id="category-form">
+    <div data-bind="if: !isViewDetail()">
+        <!--ko template: viewListTemplate -->
+        <!-- /ko-->
+    </div>
+
+    <div>
+        <!--ko template: viewDetailTemplate -->
+        <!-- /ko-->
+    </div>
+</div>
+
+
+<script type="text/html" id="category-List">
+    @Html.Partial("_List")
+
+</script>
+
+<script type="text/html" id="category-Detail">
+    @Html.Partial("_Detail")
+</script>

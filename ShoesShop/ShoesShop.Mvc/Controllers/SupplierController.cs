@@ -1,4 +1,6 @@
 ﻿using ShoesShop.BLL.Interfaces;
+using ShoesShop.Model;
+using ShoesShop.Mvc.Inputs;
 using ShoesShop.Mvc.Outputs;
 using ShoesShop.Repository;
 using System;
@@ -26,8 +28,39 @@ namespace ShoesShop.Mvc.Controllers
 
         public JsonResult GetSuppliers()
         {
-            var result = _supplierBLL.GetSupplierForMasterData().Select(r => new SelectedItemOutput { Id = r.Id, Name = r.Name }).ToList();
+            var model = _supplierBLL.GetSuppliers();
+            var result = model.MapToList<SupplierOutput>();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpPost]
+        public JsonResult InsertSupplier(SupplierInput Input)
+        {
+            var model = Input.MapTo<SupplierModel>();
+            var result = _supplierBLL.InsertSupplier(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSupplier(SupplierInput Input)
+        {
+            var model = Input.MapTo<SupplierModel>();
+            bool result = _supplierBLL.UpdateSupplier(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetSupplierDetail(Guid SupplierId)
+        {
+            var data = _supplierBLL.GetSupplierDetail(SupplierId);
+            var result = data.MapTo<SupplierOutput>();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteSupplier(Guid SupplierId)
+        {
+            bool result = _supplierBLL.DeleteSupplier(SupplierId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetSupplierForMasterData()
@@ -36,5 +69,6 @@ namespace ShoesShop.Mvc.Controllers
 
             return Json(ListSupplier, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

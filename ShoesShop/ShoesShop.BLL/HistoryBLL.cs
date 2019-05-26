@@ -1,7 +1,6 @@
 ﻿using ShoesShop.BLL.Interfaces;
 using ShoesShop.Model;
 using ShoesShop.Model.History;
-using ShoesShop.Mvc.Infrastructure.Extensions;
 using ShoesShop.Repository;
 using ShoesShop.Repository.Infrastructure;
 using ShoesShop.Repository.Repo;

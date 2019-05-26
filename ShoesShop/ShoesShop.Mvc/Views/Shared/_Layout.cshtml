@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @Styles.Render("~/Content/css")
     <link href="~/Content/CSS/preloader-style.css" rel="stylesheet" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
     <link href="~/Content/CSS/KoGrid.css" rel="stylesheet" />
 </head>
 <body class="materialdesign">
@@ -98,9 +98,12 @@
 
             @Html.Partial("~/Views/Shared/Controls/_Input.cshtml")
             @Html.Partial("~/Views/Shared/Controls/_History.cshtml")
+            @Html.Partial("~/Views/Shared/Controls/_SwitchStatus.cshtml")
+            @Html.Partial("~/Views/Shared/Controls/_NumberInput.cshtml")
+            @Html.Partial("~/Views/Shared/Controls/_Dropdown.cshtml")
             @RenderBody()
             <!-- Static Table End -->
-            <div id="loader">
+            <div id="loader" style="display:none">
                 <div class="ts_preloading_box">
                     <div id="ts-preloader-absolute05">
                         <div class="tsperloader5" id="tsperloader5_one"></div>
@@ -127,10 +130,20 @@
     <!-- Chat Box End-->
     <!-- jquery
         ============================================ -->
-    @Scripts.Render("~/Scripts/jquery")
+
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/knockout/knockout-3.2.0.js"></script>
+    <script src="~/Scripts/knockout/knockout.validation.js"></script>
+    <script src="~/Scripts/knockout/knockout-custom.binding.js"></script>
+
+    <script src="~/Scripts/knockout/koGrid-2.1.1.debug.js"></script>
+    <script src="~/Scripts/knockout/koGrid-2.1.1.js"></script>
+
     <script src="~/Scripts/jquery.meanmenu.js"></script>
     <!-- mCustomScrollbar JS
-        ============================================ -->
+    ============================================ -->
     <script src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- sticky JS
         ============================================ -->
@@ -147,36 +160,22 @@
     <script src="~/Scripts/peity/jquery.peity.min.js"></script>
     <script src="~/Scripts/peity/peity-active.js"></script>
 
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
 
-    <script src="~/Scripts/knockout/knockout-custom.binding.js"></script>
-    @*<script src="~/Scripts/knockout/knockout.validation.js"></script>*@
-
-
-
-    @Scripts.Render("~/Scripts/bootstrap-table")
     @Scripts.Render("~/Scripts/select2")
     @Scripts.Render("~/Scripts/sweetalert2")
     <!-- main JS
         ============================================ -->
     <script src="~/Scripts/main.js"></script>
     @Scripts.Render("~/Scripts/common")
+    <script src="~/Scripts/component/DropDown.js"></script>
     <script src="~/Scripts/component/Input.js"></script>
+    <script src="~/Scripts/component/NumberInput.js"></script>
+    <script src="~/Scripts/component/SwitchStatus.js"></script>
     <script src="~/Scripts/component/History.js"></script>
-
     <script src="~/Scripts/money/ko-money.js"></script>
     <script>
-        $(document).ready(function () {
-            ko.validation.init({
 
-                registerExtenders: true,
-                //messagesOnModified: true,
-               // insertMessages: true,
-                //parseInputAttributes: true,
-               // errorClass: 'errorStyle',
-               // messageTemplate: null
-
-            }, true);
-        });
 
     </script>
 </body>

@@ -14,5 +14,6 @@ namespace ShoesShop.Mvc.Outputs
         public DateTime? ModifiedOn { get; set; }
 
         public List<ProductOutput> Products { get; set; }
+        public bool IsActive { get; set; }
     }
 }
