@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Repository;
-
+using ShoesShop.Core.Extensions;
 
 namespace ShoesShop.BLL
 {
@@ -30,7 +30,7 @@ namespace ShoesShop.BLL
         public List<CategoryModel> GetCategories()
         {
             var list = _categoryRepository.GetAll().Where(r => !r.IsDeleted).ToList();
-            var result = list.MapToList<CategoryModel>();
+            var result = list.MapTo<List<CategoryModel>>();
             return result;
         }
         public bool InsertCategory(CategoryModel model)

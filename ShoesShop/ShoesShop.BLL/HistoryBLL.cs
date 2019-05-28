@@ -1,4 +1,5 @@
 ﻿using ShoesShop.BLL.Interfaces;
+using ShoesShop.Core.Extensions;
 using ShoesShop.Model;
 using ShoesShop.Model.History;
 using ShoesShop.Repository;
@@ -89,8 +90,8 @@ namespace ShoesShop.BLL
         }
         public List<HistoryModel> GetHistories(Guid objectId)
         {
-            var histories = _historyRepository.GetAll(r => r.ObjectId == objectId).OrderByDescending(c=>c.CreatedOn);
-            var result = histories.MapTo<List<HistoryModel>>();
+            var list = _historyRepository.GetAll().ToList();
+            var result = list.MapTo<List<HistoryModel>>();
             return result;
         }
 

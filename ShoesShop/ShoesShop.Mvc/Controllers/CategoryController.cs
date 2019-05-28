@@ -1,4 +1,5 @@
 ﻿using ShoesShop.BLL.Interfaces;
+using ShoesShop.Core.Extensions;
 using ShoesShop.Model;
 
 using ShoesShop.Mvc.Inputs;
@@ -26,7 +27,7 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult GetCategories()
         {
             var model = _categoryBLL.GetCategories();
-            var result = model.MapToList<CategoryOutput>();
+            var result = model.MapTo<List<CategoryOutput>>();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

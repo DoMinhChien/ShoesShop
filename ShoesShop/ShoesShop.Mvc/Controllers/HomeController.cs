@@ -1,5 +1,6 @@
 ﻿using ShoesShop.BLL;
 using ShoesShop.BLL.Interfaces;
+using ShoesShop.Core.Extensions;
 using ShoesShop.Mvc.Outputs;
 using System;
 using System.Collections.Generic;

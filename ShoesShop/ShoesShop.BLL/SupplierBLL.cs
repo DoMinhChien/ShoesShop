@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShoesShop.Model;
-
+using ShoesShop.Core.Extensions;
 
 namespace ShoesShop.BLL
 {
@@ -26,7 +26,7 @@ namespace ShoesShop.BLL
         public List<SupplierModel> GetSuppliers()
         {
             var list = _supplierRepository.GetAll().Where(r => !r.IsDeleted).ToList();
-            var result = list.MapToList<SupplierModel>();
+            var result = list.MapTo<List<SupplierModel>>();
             return result;
         }
         public SupplierModel GetSupplierDetail(Guid Id)
@@ -58,7 +58,12 @@ namespace ShoesShop.BLL
             var entity = _supplierRepository.GetById(model.Id);
             if (entity != null)
             {
-                entity = model.MapTo<Supplier>();
+                entity.Name = model.Name;
+                entity.Description = model.Description;
+                entity.Address = model.Address;
+                entity.Phone = model.Phone;
+                entity.Country = model.Country;
+                entity.IsActive = model.IsActive;    
                 _supplierRepository.Update(entity);
                 _unitOfWork.SaveChanges();
                 result = true;

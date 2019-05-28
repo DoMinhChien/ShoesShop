@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
+using ShoesShop.Core.Extensions;
 
 namespace ShoesShop.Mvc.Controllers
 {
@@ -74,7 +74,7 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult GetProducts(ProductFilterModel filterModel)
         {
             var model = _productBLL.GetListProduct(filterModel);
-            var result = model.MapToList<ProductOutput>();
+            var result = model.MapTo<List<ProductOutput>>();
             var pagedListData = result.ToPagedList(filterModel.PageIndex, filterModel.PageSize);
             var ListCategory = _categoryBLL.GetCategoryForMasterData().Select(cat => new SelectedItemOutput { Id = cat.Id, Name = cat.Name }).ToList();
             var ListSupplier = _supplierBLL.GetSupplierForMasterData().Select(sup => new SelectedItemOutput { Id = sup.Id, Name = sup.Name }).ToList();

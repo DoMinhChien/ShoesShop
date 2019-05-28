@@ -28,8 +28,9 @@ namespace ShoesShop.Core.Extensions
                                      .ForMember(dst => dst.Id,s=>s.MapFrom(src=> CheckExistId(src.Id)))
                                      .ForMember(dst => dst.Products, s => s.MapFrom(src => src.Products))
                                      .ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
-                                     .ForMember(dst => dst.CreatedOn, s => s.MapFrom(src => DateTime.Now))
-                                     .ForMember(dst => dst.IsDeleted , s=>s.Ignore());
+                                     .ForMember(dst => dst.IsDeleted , s=>s.Ignore())
+                                     .ForMember(dst => dst.CreatedOn , s=>s.Ignore())
+                                     .ForMember(dst => dst.ModifiedOn, s => s.Ignore());
         }
         private Guid CheckExistId (Guid Id)
         {
@@ -46,7 +47,8 @@ namespace ShoesShop.Core.Extensions
                                                         
             CreateMap<Product, ProductModel>();
             CreateMap<ProductInput, ProductModel>();
-            CreateMap<History, HistoryModel>().ForMember(dst=>dst.DisplayName,s=>s.MapFrom(src=>src.Employee.DisplayName));
+            CreateMap<History, HistoryModel>().ForMember(dst=>dst.HistoryDetails,s=>s.MapFrom(src=>src.HistoryDetails))
+                                              .ForMember(dst=>dst.Employee,s=>s.MapFrom(src=>src.Employee));
            
             CreateMap<Category, CategoryModel>().ForMember(dst=>dst.Products,s=>s.MapFrom(src=>src.Products));
             CreateMap<Supplier, SupplierModel>().ForMember(dst => dst.Products, s => s.MapFrom(src => src.Products));

@@ -1,7 +1,7 @@
 ﻿
 var CategoryModel = function (data, parent) {
     var self = this;
-
+    
     self.parentViewModel = parent;
     self.Id = ko.observable(data && data.Id ? data.Id : 0); 
     self.Name = ko.observable(data && data.Name ? data.Name: '');

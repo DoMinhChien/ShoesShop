@@ -1,4 +1,5 @@
 ﻿using ShoesShop.BLL.Interfaces;
+using ShoesShop.Core.Extensions;
 using ShoesShop.Model;
 using ShoesShop.Mvc.Inputs;
 using ShoesShop.Mvc.Outputs;
@@ -29,7 +30,7 @@ namespace ShoesShop.Mvc.Controllers
         public JsonResult GetSuppliers()
         {
             var model = _supplierBLL.GetSuppliers();
-            var result = model.MapToList<SupplierOutput>();
+            var result = model.MapTo<List<SupplierOutput>>();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
