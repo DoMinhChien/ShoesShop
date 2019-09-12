@@ -18,33 +18,24 @@ namespace ShoesShop.Core.Extensions
         }
         private void ConfigureMapperforEntity()
         {
-            
+            CreateMap<EmployeeModel, Employee>();
             CreateMap<ProductModel, Product>();
             CreateMap<CategoryModel, Category>()
                                      .ForMember(dst => dst.Products,s=>s.MapFrom(src=>src.Products))
                                      .ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
                                      .ForMember(dst => dst.CreatedOn, s => s.MapFrom(src => DateTime.Now));
             CreateMap<SupplierModel, Supplier>()
-                                     .ForMember(dst => dst.Id,s=>s.MapFrom(src=> CheckExistId(src.Id)))
                                      .ForMember(dst => dst.Products, s => s.MapFrom(src => src.Products))
                                      .ForMember(dst => dst.CreatedBy, s => s.MapFrom(src => Guid.Parse("6E2B9DE4-B456-4263-A0F7-CE0432556726")))
                                      .ForMember(dst => dst.IsDeleted , s=>s.Ignore())
                                      .ForMember(dst => dst.CreatedOn , s=>s.Ignore())
                                      .ForMember(dst => dst.ModifiedOn, s => s.Ignore());
         }
-        private Guid CheckExistId (Guid Id)
-        {
-            if (Id == Guid.Empty)
-            {
-                Id = Guid.NewGuid();
-            }
-            return Id;  
-        }
         
         private void ConfigureMapperforModel()
         {
             CreateMap<HistoryDetail, HistoryDetailModel>().ForMember(r => r.history, s => s.Ignore());
-                                                        
+            CreateMap<Employee, EmployeeModel>().ForMember(dst=>dst.DepartmentName,s=>s.MapFrom(src=>src.Department.DepartmentName));                           
             CreateMap<Product, ProductModel>();
             CreateMap<ProductInput, ProductModel>();
             CreateMap<History, HistoryModel>().ForMember(dst=>dst.HistoryDetails,s=>s.MapFrom(src=>src.HistoryDetails))
@@ -63,6 +54,7 @@ namespace ShoesShop.Core.Extensions
         }
         private void ConfigureMapperforOutput()
         {
+            CreateMap<EmployeeModel, EmployeeOutput>();
             CreateMap<SupplierModel, SupplierOutput>();
             CreateMap<HistoryModel, HistoryOutput>();
             CreateMap<ProductModel, ProductOutput>();

@@ -115,8 +115,8 @@ var ProductListViewModel = function (_parent) {
     };
     function _getProducts() {
         var filterModel = pagingFilter();
-
-        CommonGlobal.connectServer("Get",filterModel, CommonEnum.API_URL.GetProduct,
+       
+        CommonGlobal.connectServer("Get", filterModel, CommonEnum.API_URL.GetProduct,
             function (data) {
                 self.setPagingData(data);
             });
@@ -124,6 +124,7 @@ var ProductListViewModel = function (_parent) {
 
     self.InsertProduct = function () {
         var model = new ProductModel({
+            IsNewMode: true,
             ListCategory: self.ListCategory(),
             ListSupplier: self.ListSupplier(),
             ViewCounts: 0

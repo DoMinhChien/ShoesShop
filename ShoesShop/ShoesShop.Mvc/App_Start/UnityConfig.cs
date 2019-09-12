@@ -17,6 +17,7 @@ namespace ShoesShop.Mvc
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<IEmployeeBLL, EmployeeBLL>();
             container.RegisterType<IProductBLL, ProductBLL>();
             container.RegisterType<IHistoryBLL, HistoryBLL>();
             container.RegisterType<ICategoryBLL, CategoryBLL>();

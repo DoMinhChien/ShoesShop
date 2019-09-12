@@ -65,7 +65,7 @@ namespace ShoesShop.BLL
             var result = new ProductHistoryDetailModel();
             result.Name = model.Name;
             result.Description = model.Description;
-            result.Quantity = model.Quantity;
+            //result.Quantity = model.Quantity;
             result.UnitPrice = model.UnitPrice;
             result.UnitsInStock = model.UnitsInStock;
             result.CategoryName = BindingCategory(model.CategoryId, listCategory);

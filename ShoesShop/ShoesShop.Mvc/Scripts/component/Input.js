@@ -3,6 +3,7 @@
     self.isEditting = ko.observable(params.isEditting || true);
     self.name = params.name;
     self.maxLength = params.maxLength;
+    self.placeholder = params.placeholder;
     self.CheckValidInput = function (value, e) {
 
     };

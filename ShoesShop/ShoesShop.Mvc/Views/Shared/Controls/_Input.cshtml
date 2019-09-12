@@ -1,4 +1,4 @@
 ﻿<template id="input-component">
-    <input type="text" class="form-control" placeholder="Name" data-bind="attr{disabled: !isEditting(),'maxlength': maxLength}, value: name, valueUpdate: 'afterkeydown',event: {'keyup': CheckValidInput}">
+    <input type="text" class="form-control" data-bind="attr{disabled: !isEditting(),'maxlength': maxLength, placeholder: placeholder}, value: name, valueUpdate: 'afterkeydown',event: {'keyup': CheckValidInput}">
     
 </template>

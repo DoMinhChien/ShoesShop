@@ -4,7 +4,6 @@ var ProductModel = function (data, parent) {
     self.products = ko.observableArray([]);
     self.parentViewModel = parent;
     self.Name = ko.observable(data && data.Name ? data.Name : '');
-
     self.Description = ko.observable(data && data.Description ? data.Description : '');
     self.ListCategory = ko.observableArray(data && data.ListCategory ? data.ListCategory : []);
     self.ListSupplier = ko.observableArray(data && data.ListCategory ? data.ListSupplier : []);
@@ -17,6 +16,24 @@ var ProductModel = function (data, parent) {
     self.UnitPrice = ko.observable(data && data.UnitPrice ? data.UnitPrice : 0);
     self.ViewCounts = ko.observable(data && data.ViewCounts ? data.ViewCounts : 0);
     self.IsActive = ko.observable(data && data.IsActive ? data.IsActive : false);
+    self.IsNewMode = ko.observable(data && data.IsNewMode ? data.IsNewMode :false);
+    self.selectedQuantiy = ko.observable(1);
+    self.increase = function (object) {
+        object.selectedQuantiy(object.selectedQuantiy() + 1);
+    };
+
+    self.decrease = function (object) {
+        if (object.selectedQuantiy() >0) {
+            object.selectedQuantiy(object.selectedQuantiy() - 1);
+        }
+        
+    };
+    self.sizeId = ko.observable();
+    self.listSize = ko.observableArray([]);
+    CommonGlobal.connectServerBackground("Get", null, CommonEnum.API_URL.GetSupplierForMasterData,
+        function (data) {
+            self.listSize(data);
+        });
     self.ReturnToList = function () {
         self.parentViewModel.parent.isViewDetail(false);
     };
@@ -25,15 +42,14 @@ var ProductModel = function (data, parent) {
     //    self.errors.showAllMessages();
     //    return self.errors().length === 0;
     //};
+    self.closeDialog = function () {
+        $('.js-modal1').removeClass('show-modal1');
+    };
     self.ToggleSwitch = function ()
         {
         var a = 0;
         };
     self.UpdateProduct = function () {
-        //if (!isValid()) {
-        //    self.errors.showAllMessages();
-        //    return;
-        //}
         let url = "";
         if (self.Id()) {
             url = CommonEnum.API_URL.UpdateProduct;
@@ -44,7 +60,7 @@ var ProductModel = function (data, parent) {
         var model = self.toJSON();
         CommonGlobal.connectServer("POST", { Input: model }, url,
             function (data) {
-                CommonGlobal.showSuccessMessage('Success',  '/Product/Index');
+                CommonGlobal.showSuccessMessage('Success', CommonEnum.API_URL.Index);
             });
     };
     self.DeleteProduct = function (productId) {
@@ -52,7 +68,7 @@ var ProductModel = function (data, parent) {
             function () {
                 CommonGlobal.connectServer("POST", { ProductId: productId }, CommonEnum.API_URL.DeleteProduct,
                     function (data) {
-                        CommonGlobal.showSuccessMessage('Deleted', '/Product/Index');
+                        CommonGlobal.showSuccessMessage('Deleted', CommonEnum.API_URL.Index);
                     });
             });        
     };
@@ -63,8 +79,6 @@ var ProductModel = function (data, parent) {
             SupplierId: $('#dropdownSupplier').val(),
             Id: ko.utils.unwrapObservable(self.Id()),
             Name: ko.utils.unwrapObservable(self.Name()),
-            //CategoryId: ko.utils.unwrapObservable(self.CategoryId()),
-            //SupplierId: ko.utils.unwrapObservable(self.SupplierId()),
             Description: ko.utils.unwrapObservable(self.Description()),
             Quantity: ko.utils.unwrapObservable(self.Quantity()),
             UnitPrice: ko.utils.unwrapObservable(self.UnitPrice()),

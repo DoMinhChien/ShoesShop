@@ -16,5 +16,6 @@ namespace ShoesShop.BLL.Interfaces
         bool InsertProduct(ProductModel model);
         ProductModel GetProductDetail(Guid productId);
         bool UpdateProduct(ProductModel productModel);
+        List<ProductModel> GetListProduct();
     }
 }

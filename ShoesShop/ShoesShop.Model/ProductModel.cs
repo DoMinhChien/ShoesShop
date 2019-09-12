@@ -13,7 +13,6 @@ namespace ShoesShop.Model
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public System.Guid SupplierId { get; set; }
-        public int Quantity { get; set; }
         public System.Guid CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }

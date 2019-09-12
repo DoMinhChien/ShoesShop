@@ -12,7 +12,8 @@
     <Property Name="ModifiedBy" Type="Guid" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="StoreManagementModel.FK_Products_Categories" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -30,7 +31,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CustomerLevel" Relationship="Self.FK_Customers_CustomerLevels" FromRole="Customer" ToRole="CustomerLevel" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customer" ToRole="Order" />
+    <NavigationProperty Name="Orders" Relationship="StoreManagementModel.FK_Orders_Customers" FromRole="Customer" ToRole="Order" />
   </EntityType>
   <EntityType Name="CustomerLevel">
     <Key>
@@ -81,9 +82,9 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Department" Relationship="Self.FK_Employees_Department" FromRole="Employee" ToRole="Department" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_Orders_Employees" FromRole="Employee" ToRole="Order" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Employees" FromRole="Employee" ToRole="Product" />
     <NavigationProperty Name="Histories" Relationship="StoreManagementModel.FK_History_Employees" FromRole="Employee" ToRole="History" />
+    <NavigationProperty Name="Products" Relationship="StoreManagementModel.FK_Products_Employees" FromRole="Employee" ToRole="Product" />
+    <NavigationProperty Name="Order" Relationship="StoreManagementModel.FK_Orders_Employees" FromRole="Employee" ToRole="Order" />
   </EntityType>
   <EntityType Name="History">
     <Key>
@@ -95,8 +96,8 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="HistoryDetails" Relationship="Self.FK_History_HistoryDetail" FromRole="History" ToRole="HistoryDetail" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_History_Product" FromRole="History" ToRole="Product" />
     <NavigationProperty Name="Employee" Relationship="StoreManagementModel.FK_History_Employees" FromRole="History" ToRole="Employee" />
+    <NavigationProperty Name="Product" Relationship="StoreManagementModel.FK_History_Product" FromRole="History" ToRole="Product" />
   </EntityType>
   <EntityType Name="HistoryDetail">
     <Key>
@@ -125,67 +126,8 @@
     <Property Name="ModifiedBy" Type="Guid" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_TblImageStore_Product" FromRole="ImageStore" ToRole="Product" />
     <NavigationProperty Name="Suppliers" Relationship="StoreManagementModel.FK_tblSuppliers_ImageStore" FromRole="ImageStore" ToRole="Supplier" />
-  </EntityType>
-  <EntityType Name="Order">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="customerId" Type="Guid" Nullable="false" />
-    <Property Name="employeeId" Type="Guid" Nullable="false" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="statusId" Type="Int32" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-    <Property Name="ModifiedBy" Type="Guid" />
-    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Order" ToRole="Customer" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Order" ToRole="Employee" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_Orders_OrderDetails" FromRole="Order" ToRole="OrderDetail" />
-    <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_Statues" FromRole="Order" ToRole="OrderStatus" />
-  </EntityType>
-  <EntityType Name="OrderStatu">
-    <Key>
-      <PropertyRef Name="StatusId" />
-    </Key>
-    <Property Name="StatusId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DisplayOrder" Type="Int32" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-    <Property Name="ModifiedBy" Type="Guid" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Statues" FromRole="OrderStatus" ToRole="Order" />
-  </EntityType>
-  <EntityType Name="Product">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="categoryId" Type="Int32" Nullable="false" />
-    <Property Name="supplierId" Type="Guid" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedBy" Type="Guid" />
-    <Property Name="ViewCounts" Type="Int32" />
-    <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="UnitPrice" Type="Double" />
-    <Property Name="UnitsInStock" Type="Int32" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_Products_Employees" FromRole="Product" ToRole="Employee" />
-    <NavigationProperty Name="Histories" Relationship="Self.FK_History_Product" FromRole="Product" ToRole="History" />
-    <NavigationProperty Name="ImageStores" Relationship="Self.FK_TblImageStore_Product" FromRole="Product" ToRole="ImageStore" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Product" ToRole="OrderDetail" />
-    <Property Name="IsActive" Type="Boolean" />
-    <NavigationProperty Name="Supplier" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Product" ToRole="Supplier" />
+    <NavigationProperty Name="Product" Relationship="StoreManagementModel.FK_TblImageStore_Product" FromRole="ImageStore" ToRole="Product" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -202,42 +144,6 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="OrderDetail">
-    <Key>
-      <PropertyRef Name="orderId" />
-      <PropertyRef Name="productId" />
-      <PropertyRef Name="UnitPrice" />
-      <PropertyRef Name="Quantity" />
-      <PropertyRef Name="Discount" />
-      <PropertyRef Name="IsDeleted" />
-      <PropertyRef Name="CreatedBy" />
-      <PropertyRef Name="CreatedOn" />
-    </Key>
-    <Property Name="orderId" Type="Guid" Nullable="false" />
-    <Property Name="productId" Type="Guid" Nullable="false" />
-    <Property Name="UnitPrice" Type="Double" Nullable="false" />
-    <Property Name="Quantity" Type="Int16" Nullable="false" />
-    <Property Name="Discount" Type="Single" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-    <Property Name="ModifiedBy" Type="Guid" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_Orders_OrderDetails" FromRole="OrderDetail" ToRole="Order" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetail" ToRole="Product" />
-  </EntityType>
-  <Association Name="FK_Products_Categories">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="categoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Customers_CustomerLevels">
     <End Role="CustomerLevel" Type="Self.CustomerLevel" Multiplicity="1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
@@ -247,18 +153,6 @@
       </Principal>
       <Dependent Role="Customer">
         <PropertyRef Name="customerLevelId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Orders_Customers">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="customerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -274,30 +168,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Orders_Employees">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Products_Employees">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_History_HistoryDetail">
     <End Role="History" Type="Self.History" Multiplicity="1" />
     <End Role="HistoryDetail" Type="Self.HistoryDetail" Multiplicity="*" />
@@ -310,66 +180,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_History_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="History" Type="Self.History" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="ObjectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TblImageStore_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="ImageStore" Type="Self.ImageStore" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ImageStore">
-        <PropertyRef Name="objectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Orders_OrderDetails">
-    <End Role="Order" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="orderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Orders_Statues">
-    <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderStatus">
-        <PropertyRef Name="StatusId" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetails_Products">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="productId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="StoreManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -379,71 +189,81 @@
     <EntitySet Name="Histories" EntityType="Self.History" />
     <EntitySet Name="HistoryDetails" EntityType="Self.HistoryDetail" />
     <EntitySet Name="ImageStores" EntityType="Self.ImageStore" />
-    <EntitySet Name="Orders" EntityType="Self.Order" />
-    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
-    <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-    <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
-      <End Role="Category" EntitySet="Categories" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
     <AssociationSet Name="FK_Customers_CustomerLevels" Association="Self.FK_Customers_CustomerLevels">
       <End Role="CustomerLevel" EntitySet="CustomerLevels" />
       <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Employees_Department" Association="Self.FK_Employees_Department">
       <End Role="Department" EntitySet="Departments" />
       <End Role="Employee" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Products_Employees" Association="Self.FK_Products_Employees">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
     <AssociationSet Name="FK_History_HistoryDetail" Association="Self.FK_History_HistoryDetail">
       <End Role="History" EntitySet="Histories" />
       <End Role="HistoryDetail" EntitySet="HistoryDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_History_Product" Association="Self.FK_History_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="History" EntitySet="Histories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TblImageStore_Product" Association="Self.FK_TblImageStore_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="ImageStore" EntitySet="ImageStores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
-      <End Role="Order" EntitySet="Orders" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Orders_Statues" Association="Self.FK_Orders_Statues">
-      <End Role="OrderStatus" EntitySet="OrderStatus" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
     <EntitySet Name="Suppliers" EntityType="StoreManagementModel.Supplier" />
     <AssociationSet Name="FK_tblSuppliers_ImageStore" Association="StoreManagementModel.FK_tblSuppliers_ImageStore">
       <End Role="ImageStore" EntitySet="ImageStores" />
       <End Role="Supplier" EntitySet="Suppliers" />
     </AssociationSet>
+    <AssociationSet Name="FK_History_Employees" Association="StoreManagementModel.FK_History_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="History" EntitySet="Histories" />
+    </AssociationSet>
+    <EntitySet Name="Product_Size" EntityType="StoreManagementModel.Product_Size" />
+    <EntitySet Name="Sizes" EntityType="StoreManagementModel.Size" />
+    <AssociationSet Name="FK__Size_Products_Size" Association="StoreManagementModel.FK__Size_Products_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="Product_Size" EntitySet="Product_Size" />
+    </AssociationSet>
+    <EntitySet Name="Products" EntityType="StoreManagementModel.Product" />
+    <AssociationSet Name="FK_Products_Categories" Association="StoreManagementModel.FK_Products_Categories">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Employees" Association="StoreManagementModel.FK_Products_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_History_Product" Association="StoreManagementModel.FK_History_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="History" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblImageStore_Product" Association="StoreManagementModel.FK_TblImageStore_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ImageStore" EntitySet="ImageStores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product_Products_Size" Association="StoreManagementModel.FK__Product_Products_Size">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Product_Size" EntitySet="Product_Size" />
+    </AssociationSet>
     <AssociationSet Name="FK_Products_Suppliers" Association="StoreManagementModel.FK_Products_Suppliers">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK_History_Employees" Association="StoreManagementModel.FK_History_Employees">
+    <EntitySet Name="Orders" EntityType="StoreManagementModel.Order" />
+    <EntitySet Name="Order_Details" EntityType="StoreManagementModel.Order_Details" />
+    <EntitySet Name="Order_Status" EntityType="StoreManagementModel.Order_Status" />
+    <AssociationSet Name="FK_Orders_Customers" Association="StoreManagementModel.FK_Orders_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees" Association="StoreManagementModel.FK_Orders_Employees">
       <End Role="Employee" EntitySet="Employees" />
-      <End Role="History" EntitySet="Histories" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Orders" Association="StoreManagementModel.FK_Order_Details_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Statues" Association="StoreManagementModel.FK_Orders_Statues">
+      <End Role="Order_Status" EntitySet="Order_Status" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Products" Association="StoreManagementModel.FK_Order_Details_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Supplier">
@@ -463,6 +283,7 @@
     <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
     <Property Name="ImageId" Type="Int32" />
     <NavigationProperty Name="ImageStore" Relationship="StoreManagementModel.FK_tblSuppliers_ImageStore" FromRole="Supplier" ToRole="ImageStore" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Products" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Supplier" ToRole="Product" />
   </EntityType>
   <Association Name="FK_tblSuppliers_ImageStore">
@@ -474,6 +295,141 @@
       </Principal>
       <Dependent Role="Supplier">
         <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_History_Employees">
+    <End Type="StoreManagementModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="StoreManagementModel.History" Role="History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product_Size">
+    <Key>
+      <PropertyRef Name="productId" />
+      <PropertyRef Name="sizeId" />
+    </Key>
+    <Property Name="productId" Type="Guid" Nullable="false" />
+    <Property Name="sizeId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Size" Relationship="StoreManagementModel.FK__Size_Products_Size" FromRole="Product_Size" ToRole="Size" />
+    <NavigationProperty Name="Product" Relationship="StoreManagementModel.FK__Product_Products_Size" FromRole="Product_Size" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Product_Size" Relationship="StoreManagementModel.FK__Size_Products_Size" FromRole="Size" ToRole="Product_Size" />
+  </EntityType>
+  <Association Name="FK__Size_Products_Size">
+    <End Type="StoreManagementModel.Size" Role="Size" Multiplicity="1" />
+    <End Type="StoreManagementModel.Product_Size" Role="Product_Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_Size">
+        <PropertyRef Name="sizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
+    <Property Name="supplierId" Type="Guid" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="ViewCounts" Type="Int32" />
+    <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="UnitsInStock" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Category" Relationship="StoreManagementModel.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Employee" Relationship="StoreManagementModel.FK_Products_Employees" FromRole="Product" ToRole="Employee" />
+    <NavigationProperty Name="Histories" Relationship="StoreManagementModel.FK_History_Product" FromRole="Product" ToRole="History" />
+    <NavigationProperty Name="ImageStores" Relationship="StoreManagementModel.FK_TblImageStore_Product" FromRole="Product" ToRole="ImageStore" />
+    <NavigationProperty Name="Product_Size" Relationship="StoreManagementModel.FK__Product_Products_Size" FromRole="Product" ToRole="Product_Size" />
+    <NavigationProperty Name="Supplier" Relationship="StoreManagementModel.FK_Products_Suppliers" FromRole="Product" ToRole="Supplier" />
+    <NavigationProperty Name="Order_Details" Relationship="StoreManagementModel.FK_Order_Details_Products" FromRole="Product" ToRole="Order_Details" />
+  </EntityType>
+  <Association Name="FK_Products_Categories">
+    <End Type="StoreManagementModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Employees">
+    <End Type="StoreManagementModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_History_Product">
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="StoreManagementModel.History" Role="History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="ObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblImageStore_Product">
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="StoreManagementModel.ImageStore" Role="ImageStore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ImageStore">
+        <PropertyRef Name="objectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product_Products_Size">
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="StoreManagementModel.Product_Size" Role="Product_Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_Size">
+        <PropertyRef Name="productId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -489,15 +445,113 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_History_Employees">
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="customerId" Type="Guid" Nullable="false" />
+    <Property Name="employeeId" Type="Guid" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="statusId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="StoreManagementModel.FK_Orders_Customers" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="Employee" Relationship="StoreManagementModel.FK_Orders_Employees" FromRole="Order" ToRole="Employee" />
+    <NavigationProperty Name="Order_Details" Relationship="StoreManagementModel.FK_Order_Details_Orders" FromRole="Order" ToRole="Order_Details" />
+    <NavigationProperty Name="Order_Status" Relationship="StoreManagementModel.FK_Orders_Statues" FromRole="Order" ToRole="Order_Status" />
+  </EntityType>
+  <EntityType Name="Order_Details">
+    <Key>
+      <PropertyRef Name="orderId" />
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="orderId" Type="Guid" Nullable="false" />
+    <Property Name="productId" Type="Guid" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int16" Nullable="false" />
+    <Property Name="Discount" Type="Single" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="StoreManagementModel.FK_Order_Details_Orders" FromRole="Order_Details" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="StoreManagementModel.FK_Order_Details_Products" FromRole="Order_Details" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order_Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+    <Property Name="ModifiedBy" Type="Guid" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Orders" Relationship="StoreManagementModel.FK_Orders_Statues" FromRole="Order_Status" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Orders_Customers">
+    <End Type="StoreManagementModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="StoreManagementModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees">
     <End Type="StoreManagementModel.Employee" Role="Employee" Multiplicity="1" />
-    <End Type="StoreManagementModel.History" Role="History" Multiplicity="*" />
+    <End Type="StoreManagementModel.Order" Role="Order" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="CreatedBy" />
+      <Dependent Role="Order">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Orders">
+    <End Type="StoreManagementModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="StoreManagementModel.Order_Details" Role="Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Statues">
+    <End Type="StoreManagementModel.Order_Status" Role="Order_Status" Multiplicity="1" />
+    <End Type="StoreManagementModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order_Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="statusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Products">
+    <End Type="StoreManagementModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="StoreManagementModel.Order_Details" Role="Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="productId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

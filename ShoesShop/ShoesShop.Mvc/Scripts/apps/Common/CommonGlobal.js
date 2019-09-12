@@ -21,6 +21,9 @@ var CommonGlobal = {
                     $('#loader').hide();
                 }
          
+            },
+            error: function () {
+
             }
         });
     },

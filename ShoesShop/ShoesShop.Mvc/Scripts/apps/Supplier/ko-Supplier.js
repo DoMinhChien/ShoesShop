@@ -37,7 +37,7 @@ var SupplierListViewModel = function (_parent) {
 
     };
 
-    self.InsertCategory = function () {
+    self.InsertSupplier = function () {
         var model = new SupplierModel(self);
         self.parent.currentViewModel(model);
         $('#supplierModal').modal('show');

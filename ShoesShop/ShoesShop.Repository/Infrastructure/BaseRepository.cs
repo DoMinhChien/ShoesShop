@@ -170,7 +170,7 @@ namespace ShoesShop.Repository.Infrastructure
         public T GetById(dynamic Id)
         {
             var entity = dbSet.Find(Id);
-            _unitOfWork.Db.Entry(entity).State = EntityState.Detached;
+
             return entity;
 
 

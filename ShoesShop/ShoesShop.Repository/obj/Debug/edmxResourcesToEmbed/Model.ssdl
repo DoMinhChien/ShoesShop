@@ -12,6 +12,7 @@
     <Property Name="ModifiedBy" Type="uniqueidentifier" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -127,18 +128,10 @@
     <Property Name="ModifiedBy" Type="uniqueidentifier" />
     <Property Name="ModifiedOn" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="OrderDetail">
+  <EntityType Name="Order_Details">
     <Key>
       <PropertyRef Name="orderId" />
       <PropertyRef Name="productId" />
-      <PropertyRef Name="UnitPrice" />
-      <PropertyRef Name="Quantity" />
-      <PropertyRef Name="Discount" />
-      <PropertyRef Name="IsDeleted" />
-      <PropertyRef Name="CreatedBy" />
-      <PropertyRef Name="CreatedOn" />
     </Key>
     <Property Name="orderId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="productId" Type="uniqueidentifier" Nullable="false" />
@@ -151,7 +144,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
   </EntityType>
-  <EntityType Name="OrderStatus">
+  <EntityType Name="Order_Status">
     <Key>
       <PropertyRef Name="StatusId" />
     </Key>
@@ -173,7 +166,6 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <Property Name="Description" Type="nvarchar" MaxLength="100" />
     <Property Name="categoryId" Type="int" Nullable="false" />
     <Property Name="supplierId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
@@ -184,6 +176,27 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <Property Name="UnitsInStock" Type="int" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Product_Size">
+    <Key>
+      <PropertyRef Name="productId" />
+      <PropertyRef Name="sizeId" />
+    </Key>
+    <Property Name="productId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="sizeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="uniqueidentifier" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="ModifiedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -201,6 +214,7 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
     <Property Name="ImageId" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -217,6 +231,30 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
   </EntityType>
+  <Association Name="FK__Product_Products_Size">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_Size">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Size_Products_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="1" />
+    <End Role="Product_Size" Type="Self.Product_Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_Size">
+        <PropertyRef Name="sizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Customers_CustomerLevels">
     <End Role="CustomerLevel" Type="Self.CustomerLevel" Multiplicity="1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
@@ -277,14 +315,26 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrderDetails_Products">
+  <Association Name="FK_Order_Details_Orders">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Products">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="OrderDetail">
+      <Dependent Role="Order_Details">
         <PropertyRef Name="productId" />
       </Dependent>
     </ReferentialConstraint>
@@ -313,23 +363,11 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Orders_OrderDetails">
-    <End Role="Order" Type="Self.Order" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="orderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Orders_Statues">
-    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+    <End Role="Order_Status" Type="Self.Order_Status" Multiplicity="1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrderStatus">
+      <Principal Role="Order_Status">
         <PropertyRef Name="StatusId" />
       </Principal>
       <Dependent Role="Order">
@@ -407,24 +445,21 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
     <EntitySet Name="HistoryDetail" EntityType="Self.HistoryDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageStore" EntityType="Self.ImageStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Status" EntityType="Self.Order_Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Size" EntityType="Self.Product_Size" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [OrderDetail].[orderId] AS [orderId], 
-    [OrderDetail].[productId] AS [productId], 
-    [OrderDetail].[UnitPrice] AS [UnitPrice], 
-    [OrderDetail].[Quantity] AS [Quantity], 
-    [OrderDetail].[Discount] AS [Discount], 
-    [OrderDetail].[IsDeleted] AS [IsDeleted], 
-    [OrderDetail].[CreatedBy] AS [CreatedBy], 
-    [OrderDetail].[ModifiedBy] AS [ModifiedBy], 
-    [OrderDetail].[CreatedOn] AS [CreatedOn], 
-    [OrderDetail].[ModifiedOn] AS [ModifiedOn]
-    FROM [dbo].[OrderDetail] AS [OrderDetail]</DefiningQuery>
-    </EntitySet>
+    <AssociationSet Name="FK__Product_Products_Size" Association="Self.FK__Product_Products_Size">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Product_Size" EntitySet="Product_Size" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Size_Products_Size" Association="Self.FK__Size_Products_Size">
+      <End Role="Size" EntitySet="Size" />
+      <End Role="Product_Size" EntitySet="Product_Size" />
+    </AssociationSet>
     <AssociationSet Name="FK_Customers_CustomerLevels" Association="Self.FK_Customers_CustomerLevels">
       <End Role="CustomerLevel" EntitySet="CustomerLevel" />
       <End Role="Customer" EntitySet="Customer" />
@@ -445,9 +480,13 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
       <End Role="Product" EntitySet="Product" />
       <End Role="History" EntitySet="History" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+    <AssociationSet Name="FK_Order_Details_Orders" Association="Self.FK_Order_Details_Orders">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Products" Association="Self.FK_Order_Details_Products">
       <End Role="Product" EntitySet="Product" />
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
     </AssociationSet>
     <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
       <End Role="Customer" EntitySet="Customer" />
@@ -457,12 +496,8 @@ warning 6002: The table/view 'StoreManagement.dbo.OrderDetail' does not have a p
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Orders_OrderDetails" Association="Self.FK_Orders_OrderDetails">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="OrderDetail" EntitySet="OrderDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_Orders_Statues" Association="Self.FK_Orders_Statues">
-      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Order_Status" EntitySet="Order_Status" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
     <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">

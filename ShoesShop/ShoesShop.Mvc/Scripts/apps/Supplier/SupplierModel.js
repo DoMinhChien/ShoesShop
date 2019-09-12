@@ -26,7 +26,7 @@
         CommonGlobal.connectServer("POST", { Input: model }, url,
             function (data) {
 
-                CommonGlobal.showSuccessMessage('Sucessfully', '/Supplier/Index');
+                CommonGlobal.showSuccessMessage('Sucessfully', CommonEnum.API_URL.Index);
             });
 
 
@@ -36,7 +36,7 @@
             function () {
                 CommonGlobal.connectServer("POST", { SupplierId: categoryId }, CommonEnum.API_URL.DeleteSupplier,
                     function (data) {
-                        CommonGlobal.showSuccessMessage('Deleted', '/Supplier/Index');
+                        CommonGlobal.showSuccessMessage('Deleted', CommonEnum.API_URL.Index);
                     });
             });
     };

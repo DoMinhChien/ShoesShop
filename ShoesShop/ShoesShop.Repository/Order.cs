@@ -17,7 +17,7 @@ namespace ShoesShop.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Order_Details = new HashSet<Order_Details>();
         }
     
         public System.Guid Id { get; set; }
@@ -33,7 +33,7 @@ namespace ShoesShop.Repository
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual OrderStatu OrderStatu { get; set; }
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
+        public virtual Order_Status Order_Status { get; set; }
     }
 }

@@ -79,6 +79,7 @@ namespace ShoesShop.BLL
             {
              result =   _supplierRepository.SoftDelete(entity);
             }
+            _unitOfWork.SaveChanges();
             return result;
         }
         public List<Supplier> GetSupplierForMasterData()

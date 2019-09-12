@@ -28,7 +28,7 @@ namespace ShoesShop.Repository
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HistoryDetail> HistoryDetails { get; set; }
-        public virtual Product Product { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

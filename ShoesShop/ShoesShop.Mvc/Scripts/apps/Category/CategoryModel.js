@@ -25,7 +25,7 @@ var CategoryModel = function (data, parent) {
         CommonGlobal.connectServer("POST", { Input: model }, url,
             function (data) {
 
-                CommonGlobal.showSuccessMessage('Sucessfully', '/Category/Index');
+                CommonGlobal.showSuccessMessage('Sucessfully', CommonEnum.API_URL.Index);
             });
 
 
@@ -35,7 +35,7 @@ var CategoryModel = function (data, parent) {
             function () {
                 CommonGlobal.connectServer("POST", { CategoryId: categoryId }, CommonEnum.API_URL.DeleteCategory,
                     function (data) {
-                        CommonGlobal.showSuccessMessage('Deleted', '/Category/Index');
+                        CommonGlobal.showSuccessMessage('Deleted', CommonEnum.API_URL.Index);
                     });
             });
     };

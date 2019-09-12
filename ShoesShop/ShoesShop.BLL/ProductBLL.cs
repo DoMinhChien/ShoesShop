@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShoesShop.Core.Constants;
-using PagedList;
 using ShoesShop.Model.FilterModel;
 using ShoesShop.Core.Extensions;
 
@@ -38,14 +37,20 @@ namespace ShoesShop.BLL
             var result = list.MapTo<List<ProductModel>>();
             return result;
         }
+        public List<ProductModel> GetListProduct()
+        {
+
+            var list = _productRepository.GetAll(r => !r.IsDeleted).OrderByDescending(c => c.CreatedOn).Take(16).ToList();
+            var result = list.MapTo<List<ProductModel>>();
+            return result;
+        }
         public bool DeleteProduct(Guid Id)
         {
             bool result = false;
             var entity = _productRepository.GetById(Id);
             if (entity != null)
             {
-                entity.IsDeleted = true;
-                result = true;  
+                result = _productRepository.SoftDelete(entity);
             }
             _productRepository.Update(entity);
             _unitOfWork.SaveChanges();
@@ -82,7 +87,7 @@ namespace ShoesShop.BLL
             entity.Description = productModel.Description;
             entity.categoryId = productModel.CategoryId;
             entity.supplierId = productModel.SupplierId;
-            entity.Quantity = productModel.Quantity;
+            //entity.Quantity = productModel.Quantity;
             entity.UnitPrice = productModel.UnitPrice;
             _historyBLL.SaveHistory(oldEntity, productModel, "Has updated this Product");
             _productRepository.Update(entity);

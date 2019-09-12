@@ -19,7 +19,8 @@ namespace ShoesShop.Repository
         {
             this.Histories = new HashSet<History>();
             this.ImageStores = new HashSet<ImageStore>();
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Product_Size = new HashSet<Product_Size>();
+            this.Order_Details = new HashSet<Order_Details>();
         }
     
         public System.Guid Id { get; set; }
@@ -27,7 +28,7 @@ namespace ShoesShop.Repository
         public string Description { get; set; }
         public int categoryId { get; set; }
         public System.Guid supplierId { get; set; }
-        public int Quantity { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public System.Guid CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<System.Guid> ModifiedBy { get; set; }
@@ -37,7 +38,6 @@ namespace ShoesShop.Repository
         public Nullable<int> UnitsInStock { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public Nullable<bool> IsActive { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Employee Employee { get; set; }
@@ -46,7 +46,9 @@ namespace ShoesShop.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImageStore> ImageStores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Product_Size> Product_Size { get; set; }
         public virtual Supplier Supplier { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
     }
 }
